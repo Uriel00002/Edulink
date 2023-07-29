@@ -1,0 +1,1 @@
+export const Apiurl = "https://edulink-vmob.onrender.com/" ;
