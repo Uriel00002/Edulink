@@ -8,12 +8,12 @@ class Login extends React.Component{
 
 
     state={
-        from:{
+        form:{
             "username":"",
             "password":""
         },
         error : false,
-        errorMsg:""
+        errorMsg:"do babes"
     }
 
     manejadorSubmit = e=>{
@@ -29,8 +29,8 @@ class Login extends React.Component{
         })
     }
 
-    manejadorBoton = ()=>{
-        let url = Apiurl + "auth";
+    manejadorBoton = () =>{
+        let url = Apiurl + "users/login/";
         axios.post(url, this.state.form)
         .then( response =>{
             console.log(response);

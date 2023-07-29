@@ -1,1 +1,1 @@
-export const Apiurl = "https://edulink-vmob.onrender.com/" ;
+export const Apiurl = "https://edulink-vmob.onrender.com/api/" ;
