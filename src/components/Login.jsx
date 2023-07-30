@@ -7,13 +7,17 @@ import axios from "axios";
 class Login extends React.Component{
 
 
+    constructor (props){
+        super(props);
+    }
+
     state={
         form:{
             "username":"",
             "password":""
         },
         error : false,
-        errorMsg:"do babes"
+        errorMsg:""
     }
 
     manejadorSubmit = e=>{
@@ -33,8 +37,18 @@ class Login extends React.Component{
         let url = Apiurl + "users/login/";
         axios.post(url, this.state.form)
         .then( response =>{
-            console.log(response);
-        })    }
+            if(response.status === 200){
+                localStorage.setItem("token",response.data.token);
+                this.props.history.push("/dashboard");
+            }else{
+                this.setState({
+                    error: true,
+                    errorMsg : response.error
+                })
+                console.log(state);
+            }
+        })    
+    }
 
 
     render(){
@@ -44,23 +58,26 @@ class Login extends React.Component{
                <React.Fragment>
 
                     <div className="wrapper fadeInDown">
-                    <div id="formContent">
+                            <br/><br/><br/><br/>
+                        <div id="formContent">
 
-                    <div className="fadeIn first">
-                        <img src={Logo} width="200px" alt="User Icon" />
-                    </div>
+                        <div className="fadeIn first">
+                            <img src={Logo} width="200px" alt="User Icon" />
+                        </div>
 
-                    <form onSubmit={this.manejadorSubmit}>
-                        <input type="text" id="login" className="fadeIn second" name="username" placeholder="Usuario" onChange={this.manejadorChange}/>
-                        <input type="password" id="password" className="fadeIn third" name="password" placeholder="Contraseña" onChange={this.manejadorChange}/>
-                        <input type="submit" className="fadeIn fourth" value="Log In" onClick={this.manejadorBoton}/>
-                    </form>
+                        <form onSubmit={this.manejadorSubmit}>
+                            <input type="text" id="login" className="fadeIn second" name="username" placeholder="Usuario" onChange={this.manejadorChange}/>
+                            <input type="password" id="password" className="fadeIn third" name="password" placeholder="Contraseña" onChange={this.manejadorChange}/>
+                            <input type="submit" className="fadeIn fourth" value="Log In" onClick={this.manejadorBoton}/>
+                        </form>
 
-                    <div id="formFooter">
-                        <a className="underlineHover" href="#">Forgot Password?</a>
-                    </div>
+                        {this.state.error === true &&
+                            <div className="alert alert-danger" role="alert">
+                                {this.state.errorMsg}
+                            </div>
+                        }
 
-                </div>
+                        </div>
                     </div>
 
                </React.Fragment>

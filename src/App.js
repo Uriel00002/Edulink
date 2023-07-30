@@ -16,10 +16,10 @@ function App() {
     <React.Fragment>
       <Router>
         <Switch>
-          <Route path="/" exact render  = {props => (<Login{...props}/>)}></Route>
-          <Route path="/dashboard" exact render  = {props => (<Dashboard{...props}/>)}></Route>
-          <Route path="/new" exact render  = {props => (<New{...props}/>)}></Route>
-          <Route path="/edit" exact render  = {props => (<Edit{...props}/>)}></Route>
+          <Route path="/" exact render  = { props => (<Login{...props}/>)}></Route>
+          <Route path="/dashboard" exact render  = { props => (<Dashboard{...props}/>)}></Route>
+          <Route path="/new" exact render  = { props => (<New{...props}/>)}></Route>
+          <Route path="/edit" exact render  = { props => (<Edit{...props}/>)}></Route>
         </Switch>
       </Router>
     </React.Fragment>

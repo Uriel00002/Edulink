@@ -1,4 +1,7 @@
-
+:root{
+  --primary :#10A472;
+  --secondary :#E89923;
+}
 /* BASIC */
 
 html {
@@ -82,7 +85,7 @@ html {
   /* FORM TYPOGRAPHY*/
   
   input[type=button], input[type=submit], input[type=reset]  {
-    background-color: #56baed;
+    background-color: var(--primary);
     border: none;
     color: white;
     padding: 15px 80px;
@@ -104,7 +107,7 @@ html {
   }
   
   input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
-    background-color: #39ace7;
+    background-color: var(--secondary);
   }
   
   input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {

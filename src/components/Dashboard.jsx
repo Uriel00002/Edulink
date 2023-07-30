@@ -6,7 +6,11 @@ class Dashboard extends React.Component{
 
         return(
 
-            <div>Hola desde Dashboard</div>
+            <React.Fragment>
+
+                
+
+            </React.Fragment>
 
         );
 
