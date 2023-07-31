@@ -1,0 +1,53 @@
+:root{
+    --primary :#10A472;
+    --secondary :#E89923;
+}
+
+*{
+    margin: 0;
+}
+
+body{
+    background-color: var(--secondary);
+    width: 100vw;
+    height: 100vh;
+}
+
+.header{
+    margin-top: -30px;
+    width: 100vw;
+    height: 10vh;
+}
+
+.carrousel{
+    position: absolute;
+    background-color: var(--primary);
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 7px;
+    width: 90%;
+    height: 80%;
+    margin-left: 5%;
+    margin-top: 8.5%;
+}
+
+.carousel{
+    width: 60px;
+    height: 80%;
+    margin-top: 11px;
+    margin-left: 10%;
+    background-color: black;
+    border-radius: 5px;
+}   
+
+.carousel-item{
+    height: 30vh;
+    text-align: center;
+    margin-top: -8%;
+    background-color: black;
+}
+
+.carousel-item img{
+    width: 100%;
+    height: 150%;
+}
+

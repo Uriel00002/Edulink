@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import Edit from './components/Edit';
 import New from './components/New';
+import Profile from './components/Profile';
 
 import { BrowserRouter as Router , Switch , Route } from 'react-router-dom';
 
@@ -20,6 +21,8 @@ function App() {
           <Route path="/dashboard" exact render  = { props => (<Dashboard{...props}/>)}></Route>
           <Route path="/new" exact render  = { props => (<New{...props}/>)}></Route>
           <Route path="/edit" exact render  = { props => (<Edit{...props}/>)}></Route>
+          <Route path="/profile" exact render  = { props => (<Profile{...props}/>)}></Route>
+          <Route path="/footer" exact render  = { props => (<Footer{...props}/>)}></Route>
         </Switch>
       </Router>
     </React.Fragment>

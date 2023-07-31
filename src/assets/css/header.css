@@ -1,0 +1,43 @@
+:root{
+    --primary :#10A472;
+    --secondary :#E89923;
+}
+
+*{
+    margin: 0;
+}
+
+.header{
+    position: absolute;
+    background-color:whitesmoke;
+    width: 100%;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.icon-out{
+    float: left;
+    width: 25%;
+}
+
+.icon-out img{
+    float: left;
+    width: 60%;
+    margin-left: 15px;
+}
+
+.info-page{
+    width: 50%;
+    font-size: 50px;
+    color: #10A472;
+}
+
+.logo{
+    float: right;
+    width: 25%;
+}
+
+.logo img{
+    float: right;
+    width: 60%;
+    margin-right: 15px;
+}
