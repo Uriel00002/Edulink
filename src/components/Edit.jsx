@@ -1,5 +1,4 @@
 import React from "react";
-import '../assets/css/footer.css'
 import bootstrap from "bootstrap";
 
 

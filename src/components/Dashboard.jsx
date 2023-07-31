@@ -1,6 +1,5 @@
 import React from "react";
-import Header from "../stemplates/Header"
-import Footer from "../stemplates/Footer"
+import Header from "../templates/Header"
 import '../assets/css/dashboard.css'
 import Logo from '../assets/img/logo.png'
 

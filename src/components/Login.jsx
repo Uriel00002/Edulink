@@ -1,91 +1,85 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { Apiurl } from "../services/apirest";
 import Logo from '../assets/img/logo.png'
 import '../assets/css/login.css'
-import { Apiurl } from "../services/apirest";
-import axios from "axios";
-
-class Login extends React.Component{
+import { useNavigate } from 'react-router-dom';
 
 
-    constructor (props){
-        super(props);
-    }
+// Resto del código...
 
-    state={
+export const Login = () => {
+    const history = useNavigate();
+    const [data, setData] = useState({
         form:{
             "username":"",
             "password":""
         },
         error : false,
         errorMsg:""
+    })
+
+  const manejadorSubmit = e=>{
+    e.preventDefault();
+}
+
+const manejadorChange = async e=>{
+    await setData({
+        ...data,
+        form:{
+            ...data.form,
+            [e.target.name]: e.target.value
+        }
+    })
+}
+
+  const manejadorBoton = async() => {
+    let url = Apiurl + "users/login/";
+    try {
+        const response = await axios.post(url, data.form);
+        localStorage.setItem("token", response.data.token);
+        history("/dashboard");
+        console.log(response);
+    } catch (error) {
+        console.log(error);
+        // setData({
+        //     ...data,
+        //     error: true,
+        //     errorMsg: error.response.data.error
+        // });
     }
+  }
 
-    manejadorSubmit = e=>{
-        e.preventDefault();
-    }
+    return(
 
-    manejadorChange = async e=>{
-        await this.setState({
-            form:{
-                ...this.state.form,
-                [e.target.name]:e.target.value
-            }
-        })
-    }
+        <React.Fragment>
 
-    manejadorBoton = () =>{
-        let url = Apiurl + "users/login/";
-        axios.post(url, this.state.form)
-        .then( response =>{
-            if(response.status === 200){
-                localStorage.setItem("token",response.data.token);
-                this.props.history.push("/dashboard");
-            }else{
-                this.setState({
-                    error: true,
-                    errorMsg : response.error
-                })
-                console.log(state);
-            }
-        })    
-    }
+             <div className="wrapper fadeInDown">
+                     <br/><br/><br/><br/>
+                 <div id="formContent">
 
+                 <div className="fadeIn first">
+                     <img src={Logo} width="200px" alt="User Icon" />
+                 </div>
 
-    render(){
+                 <form onSubmit={manejadorSubmit}>
+                     <input type="text" id="login" className="fadeIn second" name="username" placeholder="Usuario" onChange={manejadorChange}/>
+                     <input type="password" id="password" className="fadeIn third" name="password" placeholder="Contraseña" onChange={manejadorChange}/>
+                     <input type="submit" className="fadeIn fourth" value="Log In" onClick={manejadorBoton}/>
+                 </form>
 
-        return(
+                 {data.error === true &&
+                     <div className="alert alert-danger" role="alert">
+                         {data.errorMsg}
+                     </div>
+                 }
 
-               <React.Fragment>
+                 </div>
+             </div>
 
-                    <div className="wrapper fadeInDown">
-                            <br/><br/><br/><br/>
-                        <div id="formContent">
+        </React.Fragment>
 
-                        <div className="fadeIn first">
-                            <img src={Logo} width="200px" alt="User Icon" />
-                        </div>
+ );
+}
 
-                        <form onSubmit={this.manejadorSubmit}>
-                            <input type="text" id="login" className="fadeIn second" name="username" placeholder="Usuario" onChange={this.manejadorChange}/>
-                            <input type="password" id="password" className="fadeIn third" name="password" placeholder="Contraseña" onChange={this.manejadorChange}/>
-                            <input type="submit" className="fadeIn fourth" value="Log In" onClick={this.manejadorBoton}/>
-                        </form>
-
-                        {this.state.error === true &&
-                            <div className="alert alert-danger" role="alert">
-                                {this.state.errorMsg}
-                            </div>
-                        }
-
-                        </div>
-                    </div>
-
-               </React.Fragment>
-
-        );
-
-    }
-
-}   
-
-export default Login
+// export default withRouter(Login); // Utiliza withRouter para acceder a props.history

@@ -8,25 +8,25 @@
 }
 
 .header{
-    position: absolute;
     background-color:whitesmoke;
     width: 100%;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .icon-out{
-    float: left;
-    width: 25%;
 }
 
-.icon-out img{
+img{
     float: left;
-    width: 60%;
+    width: 21%;
     margin-left: 15px;
 }
 
 .info-page{
-    width: 50%;
+    /* width: 50%; */
     font-size: 50px;
     color: #10A472;
 }
