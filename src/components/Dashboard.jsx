@@ -1,40 +1,41 @@
 import React from "react";
 import Header from "../templates/Header"
 import '../assets/css/dashboard.css'
-import Logo from '../assets/img/logo.png'
+import Img from '../assets/img/wallpaper.png'
+import { useNavigate } from 'react-router-dom';
 
 
-class Dashboard extends React.Component{
+export const Dashboard = () => {
+    const history = useNavigate();
 
-    render(){
 
-        return(
+    return(
 
-            <React.Fragment>
+        <React.Fragment>
 
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+
+
+            <section className="dashboard">
 
 
                 <Header></Header>
 
 
-                <section className="carrousel">
-                <div class="carousel center-aling">
-                <div class="carousel-item">
-                        <img src={Logo}/>
+                <div className="dashboard_content">
+
+                    <div className="carrousel">
+                            <div class="carousel-item">
+                                    <img src={Img}/>
+                            </div>
+                    </div>
+
                 </div>
-              
-               
-                </div>
-                </section>
+
                 
+            </section>
 
-            </React.Fragment>
+        </React.Fragment>
 
-        );
-
-    }
-
-}   
-
-export default Dashboard
+ );
+}

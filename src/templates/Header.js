@@ -9,14 +9,13 @@ class Header extends React.Component{
         return(
 
            <section id="header" className="header">
-
-                <img src={Logo}/>
-                {/* <div className="icon-out">
-                </div> */}
+                <div className="header_logo">
+                    <img src={Logo}/>
+                </div>
                 <a className="info-page">INICIO</a>
-                <i className="fas fa-bars" />
-                {/* <div className="logo">
-                </div> */}
+                <div className="header_icon">
+                    <i className="fas fa-bars" />
+                </div>
            </section>
 
         );

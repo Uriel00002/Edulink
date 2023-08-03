@@ -54,28 +54,29 @@ const manejadorChange = async e=>{
 
         <React.Fragment>
 
-             <div className="wrapper fadeInDown">
-                     <br/><br/><br/><br/>
-                 <div id="formContent">
+            <section className="login_body">
+                <div className="wrapper fadeInDown">
+                    <div id="formContent">
 
-                 <div className="fadeIn first">
-                     <img src={Logo} width="200px" alt="User Icon" />
-                 </div>
+                    <div className="fadeIn first">
+                        <img src={Logo} />
+                    </div>
 
-                 <form onSubmit={manejadorSubmit}>
-                     <input type="text" id="login" className="fadeIn second" name="username" placeholder="Usuario" onChange={manejadorChange}/>
-                     <input type="password" id="password" className="fadeIn third" name="password" placeholder="Contraseña" onChange={manejadorChange}/>
-                     <input type="submit" className="fadeIn fourth" value="Log In" onClick={manejadorBoton}/>
-                 </form>
+                    <form onSubmit={manejadorSubmit}>
+                        <input type="text" id="login" className="fadeIn second" name="username" placeholder="Usuario" onChange={manejadorChange}/>
+                        <input type="password" id="password" className="fadeIn third" name="password" placeholder="Contraseña" onChange={manejadorChange}/>
+                        <input type="submit" className="fadeIn fourth" value="Log In" onClick={manejadorBoton}/>
+                    </form>
 
-                 {data.error === true &&
-                     <div className="alert alert-danger" role="alert">
-                         {data.errorMsg}
-                     </div>
-                 }
+                    {data.error === true &&
+                        <div className="alert alert-danger" role="alert">
+                            {data.errorMsg}
+                        </div>
+                    }
 
-                 </div>
-             </div>
+                    </div>
+                </div>
+            </section>
 
         </React.Fragment>
 

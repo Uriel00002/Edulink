@@ -11,33 +11,29 @@
     background-color:whitesmoke;
     width: 100%;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: space-around;
     align-items: center;
+    justify-items: center;
 }
 
-.icon-out{
-}
-
-img{
+.header_logo{
     float: left;
-    width: 21%;
-    margin-left: 15px;
+    width: 30%;
+}
+
+.header_logo img{
+    width: 55%;
+    margin-top: 2%;
+    margin-left: 20px;
 }
 
 .info-page{
-    /* width: 50%; */
     font-size: 50px;
-    color: #10A472;
-}
-
-.logo{
-    float: right;
-    width: 25%;
-}
-
-.logo img{
-    float: right;
     width: 60%;
-    margin-right: 15px;
+    color: var(--secondary);
+}
+
+.header_icon{
+    float: right;
+    width: 10%;
+    height: 100%;
 }

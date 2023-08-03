@@ -1,15 +1,6 @@
-:root{
-    --primary :#10A472;
-    --secondary :#E89923;
-}
-
-*{
-    margin: 0;
-}
-
-body{
-    background-color: var(--secondary);
-    width: 100%;
+.dashboard{
+    background-color: var(--primary);
+    width: 100vw;
     height: 100vh;
 }
 
@@ -18,17 +9,21 @@ body{
     height: 10vh;
 } */
 
-.carrousel{
-    position: absolute;
-    background-color: var(--primary);
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    border-radius: 7px;
-    width: 90%;
-    height: 80%;
-    margin-left: 5%;
-    margin-top: 8.5%;
+.dashboard_content{
+    width: 100vw;
+    height: 80vh;
 }
 
+.dashboard_content .carrousel{
+    background-color: white;
+    width: 80vw;
+    height: 72vh;
+    margin-top: 7vh;
+    margin-left: 10vw;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+/*
 .carousel{
     width: 60px;
     height: 80%;
@@ -36,9 +31,11 @@ body{
     margin-left: 10%;
     background-color: black;
     border-radius: 5px;
-}   
+} 
+*/  
 
 .carousel-item{
+    width: 2000px;
     height: 30vh;
     text-align: center;
     margin-top: -8%;

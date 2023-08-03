@@ -1,16 +1,11 @@
-:root{
-  --primary :#10A472;
-  --secondary :#E89923;
-}
+
 /* BASIC */
 
-html {
-    background-color: #56baed;
-  }
-  
-  body {
-    font-family: "Poppins", sans-serif;
+  .login_body {
+    width: auto;
     height: 100vh;
+    background-color: var(--secondary);
+    font-family: "Poppins", sans-serif;
   }
   
   a {
@@ -141,7 +136,7 @@ html {
   
   input[type=text]:focus {
     background-color: #fff;
-    border-bottom: 2px solid #5fbae9;
+    border-bottom: 2px solid var(--primary);
   }
   
   input[type=text]:placeholder {
@@ -171,7 +166,7 @@ html {
   
   input[type=password]:focus {
     background-color: #fff;
-    border-bottom: 2px solid #5fbae9;
+    border-bottom: 2px solid var(--primary);
   }
   
   input[type=password]:placeholder {
@@ -241,6 +236,13 @@ html {
     -moz-animation-delay: 0.4s;
     animation-delay: 0.4s;
   }
+
+  .fadeIn.first img{
+    margin-top: 10px;
+    margin-left: 120px;
+    margin-bottom: 10px;
+    width: 45%;
+  }
   
   .fadeIn.second {
     -webkit-animation-delay: 0.6s;
@@ -267,7 +269,7 @@ html {
     bottom: -10px;
     width: 0;
     height: 2px;
-    background-color: #56baed;
+    background-color: var(--secondary);
     content: "";
     transition: width 0.2s;
   }
