@@ -24,9 +24,9 @@ export const Dashboard = () => {
 
                 <div className="dashboard_content">
 
-                    <div className="carrousel">
-                            <div class="carousel-item">
-                                    <img src={Img}/>
+                    <div className="carrousel d-flex align-items-center">
+                            <div class="carousel-item d-block w-100">
+                                    <img src={Img} alt="..." />
                             </div>
                     </div>
 
