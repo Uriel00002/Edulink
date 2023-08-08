@@ -7,10 +7,9 @@ import './assets/icons/css/all.css';
 
 import {Login} from './components/Login';
 import {Dashboard} from './components/Dashboard';
-import Edit from './components/Edit';
 import New from './components/New';
 import {Profile} from './components/Profile';
-
+import {Calif} from './components/Calif';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -21,8 +20,8 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/new" element={<New />} />
-          {/* <Route path="/edit" element={<Edit />} /> */}
           <Route path="/profile" element={<Profile />} />
+          <Route path="/calif" element={<Calif />} />
         </Routes>
       </BrowserRouter>
     </React.Fragment>
