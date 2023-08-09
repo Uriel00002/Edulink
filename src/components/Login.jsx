@@ -39,14 +39,14 @@ const manejadorChange = async e=>{
         const response = await axios.post(url, data.form);
         localStorage.setItem("token", response.data.token);
         history("/dashboard");
-        console.log(response);
+        console.log(response.data);
     } catch (error) {
         console.log(error);
-        // setData({
-        //     ...data,
-        //     error: true,
-        //     errorMsg: error.response.data.error
-        // });
+        setData({
+            ...data,
+            error: true,
+            errorMsg: error.response.data.error
+        });
     }
   }
 
