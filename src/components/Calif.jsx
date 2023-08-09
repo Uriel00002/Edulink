@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Header from "../templates/Header"
 import { Apiurl } from "../services/apirest";
-import Img from '../assets/img/wallpaper.png'
+import Img from '../assets/img/profile_img.png'
 import '../assets/css/calif.css'
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
@@ -29,7 +29,7 @@ export const Calif = () => {
 
             <section className="calif">
                  
-                <Header></Header>
+                <Header />
 
                 <div className="calif_content">
 
@@ -45,7 +45,7 @@ export const Calif = () => {
                     </div>
 
                     <div className="tables_info table-responsive">
-                        <table className="table_cuatri table w-100">
+                        <table className="table_cuatri ">
                             <tr>
                                 <td className="t_subject">Materia</td>
                                 <td className="t_profesor_name">Profesor</td>

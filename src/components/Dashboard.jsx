@@ -19,15 +19,13 @@ export const Dashboard = () => {
             <section className="dashboard">
 
 
-                <Header></Header>
+                <Header />
 
 
                 <div className="dashboard_content">
 
-                    <div className="carrousel d-flex align-items-center">
-                            <div class="carousel-item d-block w-100">
-                                    <img src={Img} alt="..." />
-                            </div>
+                    <div className="dash_menu">
+                        
                     </div>
 
                 </div>

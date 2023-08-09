@@ -1,5 +1,5 @@
 .calif{
-    background-color: var(--primary);
+    background-color: whitesmoke;
     width: 100vw;
     height: 100vh;
 }
@@ -7,7 +7,8 @@
 .calif_content{
     background-color: whitesmoke ;
     width: 100%;
-    height: 88%;
+    margin-top: .1%;
+    height: 87.75%;
 }
 
 
@@ -78,11 +79,16 @@
     }
 
     .user_info .user_image{
-        background-color: violet;
         width: 70%;
-        height: 20rem;
+        height: 18rem;
         margin-left: 15%;
         margin-top: 20px;
+    }
+
+    .user_info img{
+        width: 70%;
+        margin-top: 2rem;
+        margin-left: 15%;
     }
 
     .tables_info{
@@ -90,6 +96,13 @@
         margin-top: 5%;
         margin-left: 5%;
         float: left;
+    }
+
+    .table_cuatri{
+        width: 90%;
+        font-size: smaller;
+        margin-left: 5%;
+        margin-top: 2rem;
     }
 
 }
