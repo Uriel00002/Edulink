@@ -1,8 +1,8 @@
 import React from "react";
-import Header from "../templates/Header"
 import '../assets/css/dashboard.css'
 import Img from '../assets/img/wallpaper.png'
 import { useNavigate } from 'react-router-dom';
+import Header from "../templates/Header";
 
 
 export const Dashboard = () => {
@@ -18,9 +18,7 @@ export const Dashboard = () => {
 
             <section className="dashboard">
 
-
-                <Header />
-
+                <Header name={"Inicio"} />
 
                 <div className="dashboard_content d-flex align-items-center">
 

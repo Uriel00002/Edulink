@@ -36,7 +36,7 @@ export const Profile = () => {
 
                 <section className="profile">
 
-                <Header></Header>
+                <Header name={"Perfil"} />
 
                 <hr/>
                 
