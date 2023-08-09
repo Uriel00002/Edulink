@@ -17,29 +17,27 @@
     height: 92%;
     background-color: var(--primary);
     float: left;
-    margin-top: 2rem;
-    margin-left: 3%;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
 }
 
 .user_info .user_image{
+    
+    display: flex;
+    justify-content: center;
     width: 100%;
-    height: 25rem;
+    height: 50%;
 }
 
 .user_info img{
     width: 75%;
-    margin-top: 3rem;
-    margin-left: 12.5%;
+    margin-top: 2rem;
     border-radius: 50%;
 }
 
 .tables_info{
     width: 65.5%;
     height: 92%;
-    margin-top: 2rem;
-    margin-right: 3%;
     background-color: var(--secondary);
     float: right;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
@@ -47,9 +45,9 @@
 }
 
 .table_cuatri{
-    width: 80%;
-    margin-left: 10%;
-    margin-top: 4rem;
+    margin: 0 auto;
+    width: 90%;
+    margin-top: 2rem;
     background-color: white;
     border-radius: 3px;
     font-size: larger;
@@ -69,18 +67,18 @@
 
     .calif_content{
         height: 200vh;
+        flex-direction: column;
     }
 
     .user_info{
         width: 90%;
         height: 35%;
         margin-top: 5%;
-        margin-left: 5%;
     }
 
     .user_info .user_image{
         width: 70%;
-        height: 18rem;
+        height: 50%;
         margin-left: 15%;
         margin-top: 20px;
     }
@@ -93,15 +91,12 @@
 
     .tables_info{
         width: 90%;
-        margin-top: 5%;
-        margin-left: 5%;
-        float: left;
+        
     }
 
     .table_cuatri{
         width: 90%;
         font-size: smaller;
-        margin-left: 5%;
         margin-top: 2rem;
     }
 

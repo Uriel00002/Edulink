@@ -22,7 +22,7 @@ export const Dashboard = () => {
                 <Header />
 
 
-                <div className="dashboard_content">
+                <div className="dashboard_content d-flex align-items-center">
 
                     <div className="dash_menu">
                         

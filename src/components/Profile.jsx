@@ -12,7 +12,6 @@ import { useNavigate } from 'react-router-dom';
 export const Profile = () => {
     const history = useNavigate();
 
-
     return(
 
         <React.Fragment>
@@ -73,10 +72,20 @@ export const Profile = () => {
                                         <div className="tab-pane active" id="home">
                                             <hr/>
                                             <form className="form" action="##" method="post" id="registrationForm">
+                                                {
+                                                    [].map((item, index) => (
+                                                        <div className="form-group">
+                                                                <div className="col-xs-6">
+                                                                    <label><h4>{item.etiqueta}</h4></label>
+                                                                    <input type="text"  className="form-control" id={item.nombre} placeholder="Nombre(s)"/>
+                                                                </div>
+                                                        </div>
+                                                    ))
+                                                }
                                                 <div className="form-group">
                                                         <div className="col-xs-6">
                                                             <label><h4>Nombre</h4></label>
-                                                            <input type="text" className="form-control" id="first_name" placeholder="Nombre(s)"/>
+                                                            <input type="text"  className="form-control" id="first_name" placeholder="Nombre(s)"/>
                                                         </div>
                                                 </div>
                                                 <div className="form-group">

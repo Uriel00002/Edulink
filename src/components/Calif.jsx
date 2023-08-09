@@ -31,7 +31,7 @@ export const Calif = () => {
                  
                 <Header />
 
-                <div className="calif_content">
+                <div className="calif_content d-flex align-items-center gap-5 w-100 justify-content-center">
 
                     <div className="user_info">
                         <div className="user_image">
