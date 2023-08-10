@@ -38,7 +38,9 @@ const manejadorChange = async e=>{
     try {
         const response = await axios.post(url, data.form);
         localStorage.setItem("token", response.data.token);
-        history("/dashboard");
+        setTimeout(() => {
+            history("/");
+        }, 1000);
         console.log(response.data);
     } catch (error) {
         console.log(error);
