@@ -10,6 +10,8 @@ import {Login} from './components/Login';
 import {Dashboard} from './components/Dashboard';
 import {Profile} from './components/Profile';
 import {Calif} from './components/Calif';
+import {New} from './components/New';
+
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { Apiurl } from './services/apirest';
@@ -67,6 +69,7 @@ function AuthenticatedRoutes() {
     <Routes>
       <Route path="/" element={<Dashboard />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/new" element={<New />} />
       <Route path="/calif" element={<Calif />} />
       <Route path="/career/*" element={<Routes>
         <Route path="/" element={<Index_career />} />

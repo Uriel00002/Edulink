@@ -16,46 +16,122 @@
     height: 90%;
     margin-left: 2.5%;
     border-radius: 5px;
+    align-items: center;
+}
+
+.dash_menu h4, h1, small, a{
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
 }
 
 .carousel{
-    width: 80%;
-    height: 80%;
-    margin-top: 6%;
-    background-color: white;
-    border-radius: 5px;
-    margin: 0 auto;
-    display: flex;
-}   
+    width: 100%;
+    margin: 0px 0px;
+}
 
-.carousel_item{
-    width: 20%;
-    height: 60%;
-    margin: auto;
+.carousel h2{
+    font-size: 45px;
+    line-height: 38px;
     text-align: center;
-    background-color: var(--secondary);
-    color: white;
-    border-radius: 5px;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    color: red;
 }
 
-.carousel_item a{
-    width: 90%;
-    height: 50%;
-    margin-top: 10px;
-    font-size: 25px;
-    font-weight: bolder;
+.carrusel-list{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: 304px;
+    padding: 10px 0px;
+    margin: 0px auto;
+    max-width: 90%;
+    overflow: hidden;
 }
 
-.carousel_item button{
-    background-color: var(--primary);
-    font-size: 70%;
-    font-weight: bolder;
-    color: white;
-    border-radius: 5px;
+.carrusel-track{
+    position: relative;
+    top:0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    transition: .5s ease-in-out; 
 }
 
-.carousel-item img{
-    width: 90%;
-    height: 150%;
+.carrusel{
+    position: relative;
+    width: 210px;
+    padding: 0 18px;
+    float: left;
+    box-sizing: border-box;
+    display: flex;
+    height: 100%;
+}
+
+.carrusel h4{
+    position: absolute;
+    z-index: 1;
+    font-size: 22px;
+    line-height: 23px;
+    color: red;
+    padding: 15px;
+}
+
+.carrusel h4 small{
+    font-size: 15px;
+    display: block;
+}
+
+.carrusel a img{
+    object-fit: cover;
+    height: 300px;
+    width: 200px;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .5);
+    transition: .3s ease-in-out;
+}
+
+@media(min-width:720px){
+
+    .carrusel{
+        width: 275px;
+    }
+
+    .carrusel a  img{
+        width: 250px;
+    }
+
+}
+
+.carrusel-arrow{
+    border-radius: 30px;
+    background-color: #ffffff;
+    position: absolute;
+    z-index: 4;
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    border: 0;
+    cursor: pointer;
+}
+
+.carrusel-arrow:focus{
+    outline: 0;
+}
+
+.carrusel-arrow svg{
+    width: 12px;
+    height: 100%;
+    color: rgba(0, 0, 0, .7);
+}
+
+.carrusel-prev{
+    left: 0px;
+}
+
+.carrusel-next{
+    right: 0px;
 }
