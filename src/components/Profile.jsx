@@ -69,7 +69,7 @@ export const Profile = () => {
                                     
                                     <div className="tab-content">
 
-                                        <div className="tab-pane active" id="home">
+                                        <div className="tab-pane " id="home">
                                             <hr/>
                                             <form className="form" action="##" method="post" id="registrationForm">
                                                 {
@@ -211,7 +211,7 @@ export const Profile = () => {
                                             </form>
                                         </div>
 
-                                        <div className="tab-pane " id="fam_data">
+                                        <div className="tab-pane active" id="fam_data">
                                             <hr/>
                                             <form className="form" action="##" method="post" id="registrationForm">                                                                                                  
                                                 <div className="form-group">

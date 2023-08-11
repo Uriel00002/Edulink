@@ -29,7 +29,7 @@ export const Calif = () => {
 
             <section className="calif">
                  
-                <Header />
+                <Header name={"Calificaciones"} />
 
                 <div className="calif_content d-flex align-items-center gap-5 w-100 justify-content-center">
 
