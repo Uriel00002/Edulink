@@ -4,12 +4,13 @@ import { Apiurl } from "../services/apirest";
 import Logo from '../assets/img/logo.png'
 import '../assets/css/login.css'
 import { useNavigate } from 'react-router-dom';
+import { storeEdulink } from "../store/EdulinkStore";
 
 
 // Resto del código...
 
 export const Login = () => {
-    const history = useNavigate();
+    const setAuth = storeEdulink(state => state.setAuth);
     const [data, setData] = useState({
         form:{
             "username":"",
@@ -37,10 +38,12 @@ const manejadorChange = async e=>{
     let url = Apiurl + "users/login/";
     try {
         const response = await axios.post(url, data.form);
-        localStorage.setItem("token", response.data.token);
-        setTimeout(() => {
-            history("/");
-        }, 1000);
+        setAuth({
+            token: response.data.token,
+            user: response.data.user,
+            isAuth: true,
+            isTokenActive: true
+        });
         console.log(response.data);
     } catch (error) {
         console.log(error);
