@@ -21,9 +21,9 @@ import { storeEdulink } from './store/EdulinkStore';
 
 function App() {
   const authStatus = storeEdulink(state => state.auth.isAuth)
+  const token = storeEdulink(state => state.auth.token)
+  const logout = storeEdulink(state => state.logout)
   const [intervalId, setIntervalId] = useState(null);
-
-  const token = localStorage.getItem("token");
   
 
   useEffect(() => {
@@ -35,6 +35,7 @@ function App() {
           .then((res) => {
             if(res.data.isExpired){ // Si está expirado
               //cerrar sesión
+              logout()
               clearInterval(newIntervalId);
             }
           })
@@ -57,6 +58,7 @@ function App() {
           {
             authStatus ? (<Navigate to="/" />) 
             : (
+              //rutas para no logueados
               <Routes>
                 <Route path="/login" element={<Login />} />
 
@@ -71,6 +73,7 @@ function App() {
               {
                 !authStatus ? (<Navigate to="/auth" />)
                 : (
+                  //rutas para logueados
                   <Routes>
                     <Route path="/" element={<Dashboard />} />
                     <Route path="/profile" element={<Profile />} />
