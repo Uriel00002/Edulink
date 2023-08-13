@@ -31,13 +31,18 @@ a{
 .carousel{
     width: 100%;
     margin: 0px 0px;
+    justify-content: center;
+    text-align: center;
 }
 
 .carousel h2{
     font-size: 45px;
     line-height: 38px;
-    text-align: center;
-    color: red;
+    background-color: white;
+    padding:10px 10px;
+    color: var(--primary);
+    border-radius: 15px;
+    margin-bottom: 30px;
 }
 
 .carrusel-list{
