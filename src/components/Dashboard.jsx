@@ -1,6 +1,6 @@
 import React from "react";
 import '../assets/css/dashboard.css';
-import Img from '../assets/img/wallpaper.png';
+import Img from '../assets/img/wallpaper.PNG';
 import { useNavigate } from 'react-router-dom';
 import Header from "../templates/Header";
 import { Link } from 'react-router-dom'; // Importa el componente Link

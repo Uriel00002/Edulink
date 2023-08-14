@@ -52,6 +52,22 @@ export const Register_career = () => {
         }
     }
 
+    const handleDelete = async(careerId) => {
+        try {
+            const response = await axios.delete(Apiurl + `careers/${careerId}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Token ' + token
+                }
+            });
+            console.log(response.data);
+            // refrescar la lista de carreras
+            getFields();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
   return (
     <div>
        
@@ -78,6 +94,13 @@ export const Register_career = () => {
 
             <button type='submit'>Enviar</button>
        </form>
+       <ul>
+        {fields?.map((field) => (
+        <li key={field.id}>
+            {field.verbose}
+            <button onClick={() => handleDelete(field.id)}>Eliminar</button>
+        </li>))}
+       </ul>
        
     </div>
   )
