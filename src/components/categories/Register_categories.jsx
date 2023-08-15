@@ -46,7 +46,7 @@ export const Register_categories = () =>{
                 { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } })
             console.log(response.data);
         } catch (error) {
-
+            console.log(error);
         }
     }
 

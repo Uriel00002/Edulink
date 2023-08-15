@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 
 import React, { useEffect, useState } from 'react';
 import './assets/css/App.css';
@@ -95,18 +96,22 @@ function App() {
                     <Route path="/position/*" element ={<Routes>
                       <Route path="/" element={<Index_position />} />
                       <Route path="/register" element={<Register_position />} />
+                      <Route path="*" element={<Navigate to="/" />} />
                     </Routes>}/>
                     <Route path="/categories/*" element={<Routes>
                       <Route path="/" element={<Index_categories />} />
                       <Route path="/register" element={<Register_categories />} />
+                      <Route path="*" element={<Navigate to="/" />} />
                     </Routes>}/>
                     <Route path="/buildings/*" element ={<Routes>
                       <Route path="/" element={<Index_buildings />} />
                       <Route path="/register" element={<Register_buildings />} />
+                      <Route path="*" element={<Navigate to="/" />} />
                     </Routes>}/>
                     <Route path="/career/*" element={<Routes>
                       <Route path="/" element={<Index_career />} />
                       <Route path="/register" element={<Register_career />} />
+                      <Route path="*" element={<Navigate to="/" />} />
                     </Routes>} />
 
                     <Route path="*" element={ <Navigate to="/" /> }/>
