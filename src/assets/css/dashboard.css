@@ -58,7 +58,10 @@ a{
 } 
 .carousel .control-next.control-arrow:before{
     border-left: 8px solid #ff0000 !important;
-  }
+}
+.slider{
+    gap: 20px;
+}  
 .carrusel-track{
 }
 

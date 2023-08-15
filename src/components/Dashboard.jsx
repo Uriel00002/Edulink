@@ -22,20 +22,20 @@ export const Dashboard = () => {
 
                         <div className="carousel-div">
 
-                                <Carousel className="carrusel-list" infiniteLoop autoPlay showArrows={true} showThumbs={false} showStatus={false} showIndicators={true} transitionTime={1000} >
+                                <Carousel className="carrusel-list" centerMode infiniteLoop autoPlay showArrows={true} showThumbs={false} showStatus={false} showIndicators={true} transitionTime={1000} >
 
-                                    <div className="carrusel-track">
+                                    <Link className="carrusel-track" to="/">
                                         <img src={Img} alt="imagen" />
                                         <p className="legend">Legend 1</p>
-                                    </div>
-                                    <div className="carrusel-track">
+                                    </Link>
+                                    <Link className="carrusel-track" to="/">
                                         <img src={Img} alt="imagen" />
                                         <p className="legend">Legend 1</p>
-                                    </div>
-                                    <div className="carrusel-track">
+                                    </Link>
+                                    <Link className="carrusel-track" to="/">
                                         <img src={Img} alt="imagen" />
                                         <p className="legend">Legend 1</p>
-                                    </div>
+                                    </Link>
                                 </Carousel>
 
 
