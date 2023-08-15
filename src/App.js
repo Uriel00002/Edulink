@@ -13,6 +13,10 @@ import {Calif} from './components/Calif';
 import {New} from './components/New';
 import {Index_buildings} from './components/buildings/Index_buildings';
 import {Register_buildings} from './components/buildings/Register_buildings';
+import {Index_categories} from './components/categories/Index_categories';
+import {Register_categories} from './components/categories/Register_categories';
+import {Index_position} from './components/positions/Index_position';
+import {Register_position} from './components/positions/Register_position';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { Apiurl } from './services/apirest';
@@ -88,6 +92,14 @@ function App() {
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/new" element={<New />} />
                     <Route path="/calif" element={<Calif />} />
+                    <Route path="/position/*" element ={<Routes>
+                      <Route path="/" element={<Index_position />} />
+                      <Route path="/register" element={<Register_position />} />
+                    </Routes>}/>
+                    <Route path="/categories/*" element={<Routes>
+                      <Route path="/" element={<Index_categories />} />
+                      <Route path="/register" element={<Register_categories />} />
+                    </Routes>}/>
                     <Route path="/buildings/*" element ={<Routes>
                       <Route path="/" element={<Index_buildings />} />
                       <Route path="/register" element={<Register_buildings />} />
