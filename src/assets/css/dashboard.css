@@ -16,6 +16,7 @@
     height: 90%;
     margin-left: 2.5%;
     border-radius: 5px;
+    display: flex;
     align-items: center;
 }
 
@@ -28,14 +29,18 @@ a{
     text-decoration: none;
 }
 
-.carousel{
+.carousel-div{
     width: 100%;
     margin: 0px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     text-align: center;
+    overflow: hidden;
 }
 
-.carousel h2{
+.carousel-div h2{
     font-size: 45px;
     line-height: 38px;
     background-color: white;
@@ -46,24 +51,15 @@ a{
 }
 
 .carrusel-list{
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: fit-content;
-    height: 304px;
-    padding: 10px 0px;
-    margin: 0px auto;
-    max-width: 90%;
-    overflow: hidden;
+    width: 90%;
 }
-
+.carousel .control-prev.control-arrow:before{
+    border-right: 8px solid #ff0000 !important;
+} 
+.carousel .control-next.control-arrow:before{
+    border-left: 8px solid #ff0000 !important;
+  }
 .carrusel-track{
-    position: relative;
-    top:0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    transition: .5s ease-in-out; 
 }
 
 .carrusel{
@@ -109,6 +105,22 @@ a{
         width: 250px;
     }
 
+}
+
+@media screen and (max-width: 720px){
+    .dashboard_content{
+        height: 100%;
+    }
+}
+@media screen and (max-width: 720px){
+    .dashboard_content{
+        height: 85%;
+    }
+}
+@media screen and (max-width: 375px){
+    .dashboard_content{
+        height: 65%;
+    }
 }
 
 .carrusel-arrow{
