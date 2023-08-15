@@ -27,6 +27,7 @@ function App() {
   const authStatus = storeEdulink(state => state.auth.isAuth)
   const token = storeEdulink(state => state.auth.token)
   const logout = storeEdulink(state => state.logout)
+  const setAuth = storeEdulink(state => state.setAuth)
   const [intervalId, setIntervalId] = useState(null);
   
 
@@ -40,6 +41,12 @@ function App() {
             if(res.data.isExpired){ // Si está expirado
               //cerrar sesión
               logout()
+              setAuth({
+                token: null,
+                user: null,
+                isAuth: false,
+                isTokenActive: false
+              })
               clearInterval(newIntervalId);
             }
           })
