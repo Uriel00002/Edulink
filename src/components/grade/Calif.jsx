@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import Header from "../templates/Header"
-import { Apiurl } from "../services/apirest";
-import Img from '../assets/img/profile_img.png'
-import '../assets/css/calif.css'
+import Header from "../../templates/Header"
+import { Apiurl } from "../../services/apirest";
+import Img from '../../assets/img/profile_img.png'
+import '../../assets/css/calif.css'
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 

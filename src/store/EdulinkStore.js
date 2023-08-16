@@ -3,7 +3,6 @@ import {create} from 'zustand';
 import { persist } from 'zustand/middleware';
 import { Apiurl } from '../services/apirest';
 
-
 export const storeEdulink = create(persist((set, get) => ({
     auth:{
         token: null,
@@ -12,12 +11,25 @@ export const storeEdulink = create(persist((set, get) => ({
         isTokenActive: false,
     },
 
+    ui: {
+        loading: false,
+        error: null,
+    },
+
     setAuth: (auth) => set(state => ({
-        auth: auth
+        ...state,
+        auth: auth,
+    })),
+    setLoading: (loading) => set(state => ({
+        ...state,
+        ui: loading,
     })),
     logout: async() => {
         try {
           await axios.get(Apiurl + 'users/logout/?username=' + get().auth.user.username);
+        } catch (error) {
+          console.log(error);
+        } finally {
           set({
             ...get(),
             auth: {
@@ -27,8 +39,6 @@ export const storeEdulink = create(persist((set, get) => ({
               isTokenActive: false
             }
           })
-        } catch (error) {
-          console.log(error);
         }
       }
 

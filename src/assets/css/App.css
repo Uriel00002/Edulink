@@ -1,6 +1,11 @@
 .App {
   text-align: center;
 }
+/* CSS */
+.body > section:first-of-type, .body > div:first-of-type {
+  height: 100vh;
+}
+
 
 .App-logo {
   height: 40vmin;

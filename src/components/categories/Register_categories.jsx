@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Apiurl } from "../../services/apirest";
+import { storeEdulink } from "../../store/EdulinkStore";
 
 export const Register_categories = () =>{
-    const token = localStorage.getItem("token");
+    const token = storeEdulink(state => state.auth.token);
 
     const [fields, setFields] = useState(null)
     const [data, setData] = useState({
