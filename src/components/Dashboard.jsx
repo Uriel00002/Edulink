@@ -95,17 +95,17 @@ export const Dashboard = () => {
                         <div className="wrapper">
                             <i id="left" className="fa-solid fa-angle-left"></i>
                             <ul className="carousel">
-                                <Link className="card" to="/">
+                                <Link className="card" to="/student/register">
                                     <img src={Img} className="img" alt="imagen" />
-                                    <h2>Text 1</h2>
+                                    <h2>Registrar estudiante</h2>
                                 </Link>
-                                <Link className="card" to="/">
+                                <Link className="card" to="/career/register">
                                     <img src={Img} className="img" alt="imagen" />
-                                    <h2>Text 2</h2>
+                                    <h2>Registrar carrera</h2>
                                 </Link>
-                                <Link className="card" to="/">
+                                <Link className="card" to="/buildings/register">
                                     <img src={Img} className="img" alt="imagen" />
-                                    <h2>Text 3</h2>
+                                    <h2>Registrar edificio</h2>
                                 </Link>
                                 <Link className="card" to="/">
                                     <img src={Img} className="img" alt="imagen" />

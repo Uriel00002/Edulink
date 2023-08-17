@@ -123,7 +123,7 @@ export const Register = () => {
             {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
             if(response.status === 201){
                 alert('Registro exitoso de datos escolares');
-                setDataType('#school_info');
+                setDataType('#fam_data');
                 setCount(count + 1);
             }
         } catch (error) {
@@ -142,7 +142,7 @@ export const Register = () => {
             {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
             if(response.status === 201){
                 alert('Registro exitoso de datos de padre o tutor');
-                setDataType('#school_info');
+                setDataType('');
                 setCount(count + 1);
             }
         } catch (error) {
