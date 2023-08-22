@@ -1,15 +1,31 @@
+:root{
+  --primary :#10A472;
+  --secondary :#E89923;
+}
+
+*{
+  margin: 0;
+}
+
 .App {
   text-align: center;
 }
-/* CSS */
-.body > section:first-of-type, .body > div:first-of-type {
-  height: 100vh;
-}
-
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.header_main{
+  width: 100vw;
+  height: 12vh;
+  background-color: red;
+}
+
+.footer_main{
+  width: 100vw;
+  height: 30vh;
+  background-color: var(--primary);
 }
 
 @media (prefers-reduced-motion: no-preference) {

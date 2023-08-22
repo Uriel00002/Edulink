@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import '../assets/css/dashboard.css';
 import Img from '../assets/img/wallpaper.png';
 import Header from "../templates/Header";
+import Footer from "../templates/Footer";
 import { Link } from 'react-router-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
@@ -40,7 +41,7 @@ export const Dashboard = () => {
                 startScrollLeft = carousel.scrollLeft;
             }
             const dragging = (e) => {
-                if(!isDragging) return; // if isDragging is false return from here
+                if (!isDragging) return; // if isDragging is false return from here
                 carousel.scrollLeft = startScrollLeft - (e.pageX - startX);
             }
             const dragStop = () => {
@@ -49,13 +50,13 @@ export const Dashboard = () => {
             }
             const infiniteScroll = () => {
                 // If the carousel is at the beginning, scroll to the end
-                if(carousel.scrollLeft === 0) {
+                if (carousel.scrollLeft === 0) {
                     carousel.classList.add("no-transition");
                     carousel.scrollLeft = carousel.scrollWidth - (2 * carousel.offsetWidth);
                     carousel.classList.remove("no-transition");
                 }
                 // If the carousel is at the end, scroll to the beginning
-                else if(Math.ceil(carousel.scrollLeft) === carousel.scrollWidth - carousel.offsetWidth) {
+                else if (Math.ceil(carousel.scrollLeft) === carousel.scrollWidth - carousel.offsetWidth) {
                     carousel.classList.add("no-transition");
                     carousel.scrollLeft = carousel.offsetWidth;
                     carousel.classList.remove("no-transition");
@@ -63,10 +64,10 @@ export const Dashboard = () => {
 
                 // Clear existing timeout & start autoplay if mouse is not hovering over carousel
                 clearTimeout(timeoutId);
-                if(!wrapper.matches(":hover")) autoPlay();
+                if (!wrapper.matches(":hover")) autoPlay();
             }
             const autoPlay = () => {
-                if(window.innerWidth < 800 || !isAutoPlay) return; // Return if window is smaller than 800 or isAutoPlay is false
+                if (window.innerWidth < 800 || !isAutoPlay) return; // Return if window is smaller than 800 or isAutoPlay is false
                 timeoutId = setTimeout(() => carousel.scrollLeft += firstCardWidth, 2500);
             }
             autoPlay();
@@ -84,45 +85,46 @@ export const Dashboard = () => {
     return (
         <React.Fragment>
 
-            <section className="dashboard">
-                <Header name={"Inicio"} />
-
-                <div className="dashboard_content d-flex align-items-center">
-
-
-                    <div className="dash_menu">
-
-                        <div className="wrapper">
-                            <i id="left" className="fa-solid fa-angle-left"></i>
-                            <ul className="carousel">
-                                <Link className="card" to="/student/register">
-                                    <img src={Img} className="img" alt="imagen" />
-                                    <h2>Registrar estudiante</h2>
-                                </Link>
-                                <Link className="card" to="/career/register">
-                                    <img src={Img} className="img" alt="imagen" />
-                                    <h2>Registrar carrera</h2>
-                                </Link>
-                                <Link className="card" to="/buildings/register">
-                                    <img src={Img} className="img" alt="imagen" />
-                                    <h2>Registrar edificio</h2>
-                                </Link>
-                                <Link className="card" to="/">
-                                    <img src={Img} className="img" alt="imagen" />
-                                    <h2>Text 4</h2>
-                                </Link>
-                                <Link className="card" to="/">
-                                    <img src={Img} className="img" alt="imagen" />
-                                    <h2>Text 5</h2>
-                                </Link>
-                            </ul>
-                            <i id="right" className="fa-solid fa-angle-right"></i>
-                        </div>
-                    </div>
-
-
-                </div>
+            <section className="header_main">
+                <Header name={"Inicio2"} />
             </section>
+            <section className="dash_main">
+                <div className="dash_menu">
+
+                    <div className="wrapper">
+                        <i id="left" className="fa-solid fa-angle-left"></i>
+                        <ul className="carousel">
+                            <Link className="card" to="/student/register">
+                                <img src={Img} className="img" alt="imagen" />
+                                <h2>Registrar estudiante</h2>
+                            </Link>
+                            <Link className="card" to="/career/register">
+                                <img src={Img} className="img" alt="imagen" />
+                                <h2>Registrar carrera</h2>
+                            </Link>
+                            <Link className="card" to="/buildings/register">
+                                <img src={Img} className="img" alt="imagen" />
+                                <h2>Registrar edificio</h2>
+                            </Link>
+                            <Link className="card" to="/">
+                                <img src={Img} className="img" alt="imagen" />
+                                <h2>Text 4</h2>
+                            </Link>
+                            <Link className="card" to="/">
+                                <img src={Img} className="img" alt="imagen" />
+                                <h2>Text 5</h2>
+                            </Link>
+                        </ul>
+                        <i id="right" className="fa-solid fa-angle-right"></i>
+                    </div>
+                </div>
+
+
+            </section>
+            <section className="footer_main">
+                <Footer />
+            </section>
+
         </React.Fragment>
     );
 }

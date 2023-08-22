@@ -26,10 +26,10 @@ const Header = ({name}) => {
         <div className="d-flex w-100 justify-content-end">
           <div style={{transform: togleOptions ? 'translateY(0%)' : 'translateY(-1000%)'}} className="header_options">
               <ul>
+                  <li onClick={()=>{}}>Ver perfil</li>
                   <li onClick={()=>{}}>... ... ...</li>
                   <li onClick={()=>{}}>... ... ...</li>
-                  <li onClick={()=>{}}>... ... ...</li>
-                  <li onClick={()=>{}}>... ... ...</li>
+                  <li onClick={()=>{}}>Cambiar contraseña</li>
                   <li onClick={logout}>Cerrar Sesión</li>
               </ul>
           </div>
