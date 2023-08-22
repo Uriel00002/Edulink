@@ -6,6 +6,9 @@
 *{
   margin: 0;
 }
+body{
+  font-size: 14px !important;
+}
 
 .App {
   text-align: center;
