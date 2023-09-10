@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import '../assets/css/dashboard.css';
 import Img from '../assets/img/wallpaper.png';
+import Img2 from '../assets/img/profile_img.png';
 import Header from "../templates/Header";
 import Footer from "../templates/Footer";
 import { Link } from 'react-router-dom';
@@ -86,7 +87,7 @@ export const Dashboard = () => {
         <React.Fragment>
 
             <section className="header_main">
-                <Header name={"Inicio2"} />
+                <Header name={"EDULINK"} />
             </section>
             <section className="dash_main">
                 <div className="dash_menu">
@@ -95,7 +96,7 @@ export const Dashboard = () => {
                         <i id="left" className="fa-solid fa-angle-left"></i>
                         <ul className="carousel">
                             <Link className="card" to="/student/register">
-                                <img src={Img} className="img" alt="imagen" />
+                                <img src={Img2} className="img" alt="imagen" />
                                 <h2>Registrar estudiante</h2>
                             </Link>
                             <Link className="card" to="/career/register">

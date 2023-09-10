@@ -1,4 +1,5 @@
 .header{
+    position: relative;
     background-color:whitesmoke;
     width: 100vw;
     height: 12vh;
@@ -24,12 +25,17 @@
     width: 40%;
     height: 100%;
     font-size: 50px;
+    font-weight: 600;
     text-align: center;
-    color: var(--secondary);
+    color:linear-gradient(to right, var(--primary), var(--secondary));
+}
+
+.info-page:hover{
+    text-decoration: none;    
 }
 
 .header_icon{
-    width: 300%;
+    width: 30%;
     float: right;
     width: 10%;
     height: 100%;
@@ -69,6 +75,109 @@
     transition: all .5s ease-in-out;
     background-color: var(--secondary);
 }
+
+
+
+
+
+.footer{
+    width: 100vw;
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary);
+}
+
+.footer ul{
+    position: relative;
+    display: flex;
+    gap: 25px;
+}
+
+.footer ul li{
+    position: relative;
+    list-style: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+}
+
+.footer ul li:hover{
+    width: 180px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0);
+}
+
+.footer ul li::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50px;
+    background: linear-gradient(45deg, var(--i), var(--j));
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.footer ul li:hover::before{
+    opacity: 1;
+}
+
+.footer ul li::after{
+    content: '';
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    height: 100%;
+    border-radius: 60px;
+    background: linear-gradient(45deg, var(--i), var(--j));
+    opacity: 0;
+    transition: 0.5s;
+    z-index: -1;
+    filter: blur(15px);
+}
+
+.footer ul li:hover::after{
+    opacity: 0.5;
+}
+
+.footer ul li i{
+    color: white;
+    font-size: 1cm ;
+    transition: 0.5s;
+    transition-delay: 0.25s;
+}
+
+.footer ul li:hover i{
+    transform: scale(0);
+    font-size: 1.75cm;
+    transition: 0.5s;
+}
+
+.footer ul li a{
+    position: absolute;
+    text-decoration: none;
+}
+
+.footer ul li .titulo{
+    color: white;
+    font-size: 1.1cm;
+    text-transform: uppercase;
+    letter-spacing: 0.1cm;
+    transform: scale(0);
+    transition: 0.5s;
+    transition-delay: 0.25s;
+}
+
+.footer ul li:hover .titulo{
+    transform: scale(.5);
+    transition-delay: 0.5s;
+}
+
 
 @media (width < 500px){
 

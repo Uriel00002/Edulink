@@ -11,11 +11,11 @@ export const Register_career = () => {
         //name, type, verbose
     })
 
-    
+
 
     useEffect(() => {
         getFields();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     useEffect(() => {
         console.log(fields);
@@ -30,9 +30,9 @@ export const Register_career = () => {
         })
     }, [fields])
 
-    const getFields = async() => {
+    const getFields = async () => {
         try {
-            const response = await axios.get(Apiurl + 'careers/fields?token=' + token, {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
+            const response = await axios.get(Apiurl + 'careers/fields?token=' + token, { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } })
             setFields(response.data)
             console.log(response.data);
         } catch (error) {
@@ -40,12 +40,12 @@ export const Register_career = () => {
         }
     }
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post(Apiurl + 'careers/',
-            data.form,
-            {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}}
+                data.form,
+                { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } }
             )
             console.log(response.data);
         } catch (error) {
@@ -54,32 +54,34 @@ export const Register_career = () => {
     }
 
 
-  return (
-    <div>
-       
-       <form onSubmit={handleSubmit}>
+    return (
+        <div>
 
-            {
-                fields?.map((field,index) => {
-                    return (
-                        <div key={index}>
-                            <label htmlFor={field.name}>{field.verbose}</label>
-                            <input type={
-                                field.type === "DateField" ? 'date' : 'text'
-                            } name={field.name} id={field.name} onChange={(e) => setData({
-                                ...data,
-                                form: {
-                                    ...data.form,
-                                    [field.name]: e.target.value
-                                }
-                            })} />
-                        </div>
-                    )
-                })
-            }
+            <form onSubmit={handleSubmit}>
 
-            <button type='submit'>Enviar</button>
-       </form>       
-    </div>
-  )
+                {
+                    fields?.map((field, index) => {
+                        return (
+                            <div key={index}>
+                                <label htmlFor={field.name}>{field.verbose}</label>
+                                <input type={
+                                    field.type === "DateField" ? 'date' : 'text'
+                                } name={field.name} id={field.name} onChange={(e) => setData({
+                                    ...data,
+                                    form: {
+                                        ...data.form,
+                                        [field.name]: e.target.value
+                                    }
+                                })} />
+                            </div>
+                        )
+                    })
+                }
+
+                <button type='submit'>Enviar</button>
+            </form>
+
+        </div>
+
+    )
 }

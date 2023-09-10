@@ -4,12 +4,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: var(--secondary);
 }
 
 .dash_menu{
-    background-color: var(--secondary);
-    width: 95%;
-    height: 90%;
+    background-color: whitesmoke;
+    width: 85%;
+    height: 80%;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -49,6 +50,7 @@ a{
 .wrapper {
     max-width: 80%;
     width: 100%;
+    height: 80%;
     position: relative;
   }
   
@@ -78,6 +80,7 @@ a{
   }
   .wrapper .carousel{
     display: grid;
+    height: 100%;
     grid-auto-flow: column;
     grid-auto-columns: calc((100% / 4) - 8px);
     overflow-x: auto;
@@ -108,13 +111,14 @@ a{
   }
   .carousel .card {
     scroll-snap-align: start;
-    height: 342px;
+    height: 85%;
     list-style: none;
-    background: #fff;
+    background-image: url(../img/Uttlaxcala07.jpg);
+    backdrop-filter: blur(5px);
     cursor: pointer;
-    padding-bottom: 15px;
     flex-direction: column;
     border-radius: 8px;
+    align-self: center;
   }
   .carousel .card .img {
     background: #8B53FF;

@@ -6,6 +6,7 @@
 *{
   margin: 0;
 }
+
 body{
   font-size: 14px !important;
 }
@@ -19,17 +20,7 @@ body{
   pointer-events: none;
 }
 
-.header_main{
-  width: 100vw;
-  height: 12vh;
-  background-color: red;
-}
 
-.footer_main{
-  width: 100vw;
-  height: 30vh;
-  background-color: var(--primary);
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -37,19 +28,10 @@ body{
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+
 
 .App-link {
-  color: #61dafb;
+  color: var(--primary);
 }
 
 @keyframes App-logo-spin {

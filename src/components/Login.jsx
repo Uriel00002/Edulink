@@ -60,7 +60,7 @@ const manejadorChange = async e=>{
         <React.Fragment>
 
             <section className="login_body">
-                <div className="wrapper fadeInDown">
+                <div className="wrapperr fadeInDown">
                     <div id="formContent">
 
                     <div className="fadeIn first">
