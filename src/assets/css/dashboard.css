@@ -40,6 +40,9 @@ a{
     }
 }
 @media screen and (max-width: 375px){
+    .dash_main{
+      height: 75vh;
+    }
     .dashboard_content{
         height: 65%;
     }

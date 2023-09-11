@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import '../assets/css/dashboard.css';
 import Img from '../assets/img/wallpaper.png';
-import Img2 from '../assets/img/profile_img.png';
+import Profile from '../assets/img/profile_img.png';
+import Carreer from '../assets/img/carrera.png';
+import Building from '../assets/img/edificio.png';
+import Calif from '../assets/img/calif.png';
 import Header from "../templates/Header";
 import Footer from "../templates/Footer";
 import { Link } from 'react-router-dom';
@@ -96,20 +99,20 @@ export const Dashboard = () => {
                         <i id="left" className="fa-solid fa-angle-left"></i>
                         <ul className="carousel">
                             <Link className="card" to="/student/register">
-                                <img src={Img2} className="img" alt="imagen" />
+                                <img src={Profile} className="img" alt="imagen" />
                                 <h2>Registrar estudiante</h2>
                             </Link>
                             <Link className="card" to="/career/register">
-                                <img src={Img} className="img" alt="imagen" />
+                                <img src={Carreer} className="img" alt="imagen" />
                                 <h2>Registrar carrera</h2>
                             </Link>
                             <Link className="card" to="/buildings/register">
-                                <img src={Img} className="img" alt="imagen" />
+                                <img src={Building} className="img" alt="imagen" />
                                 <h2>Registrar edificio</h2>
                             </Link>
                             <Link className="card" to="/">
-                                <img src={Img} className="img" alt="imagen" />
-                                <h2>Text 4</h2>
+                                <img src={Calif} className="img" alt="imagen" />
+                                <h2>Ver calificaciones</h2>
                             </Link>
                             <Link className="card" to="/">
                                 <img src={Img} className="img" alt="imagen" />

@@ -1,7 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Apiurl } from "../services/apirest";
-import Logo from '../assets/img/logo.png'
+import Logo from '../assets/img/logo.png';
+import Pic from '../assets/img/pics.jpg'
+import Pic2 from '../assets/img/pics2.jpg'
+import Pic3 from '../assets/img/pics3.jpg'
 import '../assets/css/login.css'
 import { useNavigate } from 'react-router-dom';
 import { storeEdulink } from "../store/EdulinkStore";
@@ -12,50 +15,51 @@ import { storeEdulink } from "../store/EdulinkStore";
 export const Login = () => {
     const setAuth = storeEdulink(state => state.setAuth);
     const [data, setData] = useState({
-        form:{
-            "username":"",
-            "password":""
+        form: {
+            "username": "",
+            "password": ""
         },
-        error : false,
-        errorMsg:""
+        error: false,
+        errorMsg: ""
     })
 
-  const manejadorSubmit = e=>{
-    e.preventDefault();
-}
-
-const manejadorChange = async e=>{
-    await setData({
-        ...data,
-        form:{
-            ...data.form,
-            [e.target.name]: e.target.value
-        }
-    })
-}
-
-  const manejadorBoton = async() => {
-    let url = Apiurl + "users/login/";
-    try {
-        const response = await axios.post(url, data.form);
-        setAuth({
-            token: response.data.token,
-            user: response.data.user,
-            isAuth: true,
-            isTokenActive: true
-        });
-        console.log(response.data);
-    } catch (error) {
-        console.log(error);
-        setData({
-            ...data,
-            error: true,
-            errorMsg: error.response.data.error
-        });
+    const manejadorSubmit = e => {
+        e.preventDefault();
     }
-  }
 
-    return(
+    const manejadorChange = async e => {
+        await setData({
+            ...data,
+            form: {
+                ...data.form,
+                [e.target.name]: e.target.value
+            }
+        })
+    }
+
+    const manejadorBoton = async () => {
+        let url = Apiurl + "users/login/";
+        try {
+            const response = await axios.post(url, data.form);
+            setAuth({
+                token: response.data.token,
+                user: response.data.user,
+                isAuth: true,
+                isTokenActive: true
+            });
+            console.log(response.data);
+        } catch (error) {
+            console.log(error);
+            setData({
+                ...data,
+                error: true,
+                errorMsg: error.response.data.error
+            });
+        }
+    }
+
+    return (
+
 
         <React.Fragment>
 
@@ -63,29 +67,36 @@ const manejadorChange = async e=>{
                 <div className="wrapperr fadeInDown">
                     <div id="formContent">
 
-                    <div className="fadeIn first">
-                        <img src={Logo} />
-                    </div>
-
-                    <form onSubmit={manejadorSubmit}>
-                        <input type="text" id="login" className="fadeIn second" name="username" placeholder="Usuario" onChange={manejadorChange}/>
-                        <input type="password" id="password" className="fadeIn third" name="password" placeholder="Contraseña" onChange={manejadorChange}/>
-                        <input type="submit" className="fadeIn fourth" value="Log In" onClick={manejadorBoton}/>
-                    </form>
-
-                    {data.error === true &&
-                        <div className="alert alert-danger" role="alert">
-                            {data.errorMsg}
+                        <div className="fadeIn first">
+                            <img src={Logo} />
                         </div>
-                    }
+
+                        <form onSubmit={manejadorSubmit}>
+                            <input type="text" id="login" className="fadeIn second" name="username" placeholder="Usuario" onChange={manejadorChange} />
+                            <input type="password" id="password" className="fadeIn third" name="password" placeholder="Contraseña" onChange={manejadorChange} />
+                            <input type="submit" className="fadeIn fourth" value="Log In" onClick={manejadorBoton} />
+                        </form>
+
+                        {data.error === true &&
+                            <div className="alert alert-danger" role="alert">
+                                {data.errorMsg}
+                            </div>
+                        }
 
                     </div>
                 </div>
             </section>
+            <section className="login_pics">
+                <img src={Pic} className="one" alt="" />
+                <img src={Pic2} className="two" alt="" />
+                <img src={Pic} className="three" alt="" />
+                <img src={Pic3} className="four" alt="" />
+                <img src={Pic} className="five" alt="" />
+            </section>
 
         </React.Fragment>
 
- );
+    );
 }
 
 // export default withRouter(Login); // Utiliza withRouter para acceder a props.history
