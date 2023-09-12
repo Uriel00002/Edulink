@@ -1,5 +1,5 @@
 import  axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Apiurl } from "../../services/apirest";
 import { storeEdulink } from "../../store/EdulinkStore";
 
@@ -52,7 +52,7 @@ export const Register_position = () => {
     }
 
     return (
-        <div>
+        <Fragment>
 
             <form onSubmit={handleSubmit}>
 
@@ -76,7 +76,7 @@ export const Register_position = () => {
                 }
                 <button type='submit'>Enviar</button>
             </form>
-        </div>
+        </Fragment>
     )
 
 }

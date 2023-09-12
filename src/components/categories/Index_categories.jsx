@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Apiurl } from "../../services/apirest";
 
 export const Index_categories = () => {
@@ -26,8 +26,8 @@ export const Index_categories = () => {
     }
 
     return (
-        <div>
+        <Fragment>
         <pre>{JSON.stringify(data, null, 2)}</pre>
-        </div>
+        </Fragment>
     )
 }
