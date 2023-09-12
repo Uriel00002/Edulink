@@ -5,6 +5,9 @@ import Logo from '../assets/img/logo.png';
 import Pic from '../assets/img/pics.jpg'
 import Pic2 from '../assets/img/pics2.jpg'
 import Pic3 from '../assets/img/pics3.jpg'
+import Uni from '../assets/img/uni.jpg';
+import Uni2 from '../assets/img/uni2.jpg';
+import Uni3 from '../assets/img/uni3.jpg';
 import '../assets/css/login.css'
 import { useNavigate } from 'react-router-dom';
 import { storeEdulink } from "../store/EdulinkStore";
@@ -88,9 +91,9 @@ export const Login = () => {
             </section>
             <section className="login_pics">
                 <img src={Pic} className="one" alt="" />
-                <img src={Pic2} className="two" alt="" />
-                <img src={Pic} className="three" alt="" />
-                <img src={Pic3} className="four" alt="" />
+                <img src={Uni} className="two" alt="" />
+                <img src={Uni2} className="three" alt="" />
+                <img src={Uni3} className="four" alt="" />
                 <img src={Pic} className="five" alt="" />
             </section>
 

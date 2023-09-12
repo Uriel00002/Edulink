@@ -100,15 +100,15 @@ export const Dashboard = () => {
                         <ul className="carousel">
                             <Link className="card" to="/student/register">
                                 <img src={Profile} className="img" alt="imagen" />
-                                <h2>Registrar estudiante</h2>
+                                <h2>Estudiantes</h2>
                             </Link>
                             <Link className="card" to="/career/register">
                                 <img src={Carreer} className="img" alt="imagen" />
-                                <h2>Registrar carrera</h2>
+                                <h2>Carreras</h2>
                             </Link>
                             <Link className="card" to="/buildings/register">
                                 <img src={Building} className="img" alt="imagen" />
-                                <h2>Registrar edificio</h2>
+                                <h2>Edificios</h2>
                             </Link>
                             <Link className="card" to="/">
                                 <img src={Calif} className="img" alt="imagen" />

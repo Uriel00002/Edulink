@@ -1,5 +1,8 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react'
+import Header from "../../templates/Header";
+import Footer from "../../templates/Footer";
+import "../../assets/css/carreer.css";
 import { Apiurl } from '../../services/apirest';
 import { storeEdulink } from '../../store/EdulinkStore';
 
@@ -57,29 +60,40 @@ export const Register_career = () => {
     return (
         <Fragment>
 
-            <form onSubmit={handleSubmit}>
 
-                {
-                    fields?.map((field, index) => {
-                        return (
-                            <div key={index}>
-                                <label htmlFor={field.name}>{field.verbose}</label>
-                                <input type={
-                                    field.type === "DateField" ? 'date' : 'text'
-                                } name={field.name} id={field.name} onChange={(e) => setData({
-                                    ...data,
-                                    form: {
-                                        ...data.form,
-                                        [field.name]: e.target.value
-                                    }
-                                })} />
-                            </div>
-                        )
-                    })
-                }
+            <section className="header_main">
+                <Header name={"Carreras"} />
+            </section>
 
-                <button type='submit'>Enviar</button>
-            </form>
+            <section className="carreer_building_main">
+                <form onSubmit={handleSubmit}>
+
+                    {
+                        fields?.map((field, index) => {
+                            return (
+                                <div key={index}>
+                                    <label htmlFor={field.name}>{field.verbose}</label>
+                                    <input type={
+                                        field.type === "DateField" ? 'date' : 'text'
+                                    } name={field.name} id={field.name} onChange={(e) => setData({
+                                        ...data,
+                                        form: {
+                                            ...data.form,
+                                            [field.name]: e.target.value
+                                        }
+                                    })} />
+                                </div>
+                            )
+                        })
+                    }
+
+                    <button type='submit'>Enviar</button>
+                </form>
+            </section>
+
+            <section className="footer_main">
+                <Footer />
+            </section>
 
         </Fragment>
 
