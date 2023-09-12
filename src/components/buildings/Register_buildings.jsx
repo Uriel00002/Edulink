@@ -62,10 +62,15 @@ export const Register_buildings = () => {
                 <Header name={"Edificios"} />
             </section>
 
-            <section className="carreer_building_main">
+            <section className="carreer_building_main row">
+                <div className="col-4 border-end border-dark d-flex flex-column gap-5">
+                    <img src="https://via.placeholder.com/300" alt="" />
+                    <button className="btn btn-primary">registrar</button>
+                    <button className="btn btn-primary">Ver</button>
+                </div>
 
 
-                <form onSubmit={handleSubmit}>
+                <form className="col-8" onSubmit={handleSubmit}>
 
                     {
                         fields?.map((field, index) => {
