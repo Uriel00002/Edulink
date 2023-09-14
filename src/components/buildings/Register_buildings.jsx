@@ -5,6 +5,7 @@ import Footer from "../../templates/Footer";
 import "../../assets/css/carreer.css";
 import { Apiurl } from "../../services/apirest";
 import { storeEdulink } from "../../store/EdulinkStore";
+import { CRUD } from "../../templates/CRUD";
 
 export const Register_buildings = () => {
     const token = storeEdulink(state => state.auth.token);
@@ -57,47 +58,8 @@ export const Register_buildings = () => {
     return (
         <Fragment>
 
-
-            <section className="header_main">
-                <Header name={"Edificios"} />
-            </section>
-
-            <section className="carreer_building_main row">
-                <div className="col-4 border-end border-dark d-flex flex-column gap-5">
-                    <img src="https://via.placeholder.com/300" alt="" />
-                    <button className="btn btn-primary">registrar</button>
-                    <button className="btn btn-primary">Ver</button>
-                </div>
-
-
-                <form className="col-8" onSubmit={handleSubmit}>
-
-                    {
-                        fields?.map((field, index) => {
-                            return (
-                                <div key={index}>
-                                    <label htmlFor={field.name}>{field.verbose}</label>
-                                    <input type={
-                                        field.type === "DateField" ? 'date' : 'text'
-                                    } name={field.name} id={field.name} onChange={(e) => setData({
-                                        ...data,
-                                        form: {
-                                            ...data.form,
-                                            [field.name]: e.target.value
-                                        }
-                                    })} />
-                                </div>
-                            )
-                        })
-                    }
-                    <button type='submit'>Enviar</button>
-                </form>
-
-            </section>
-
-            <section className="footer_main">
-                <Footer />
-            </section>
+            <CRUD name={"Edificios"} fields={fields} handleSubmit={handleSubmit} setData={setData} data={data} />	
+            
         </Fragment>
     )
 };

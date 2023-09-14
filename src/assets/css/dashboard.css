@@ -85,6 +85,7 @@ a {
 
 .wrapper i:first-child {
   left: -22px;
+  z-index: 1;
 }
 
 .wrapper i:last-child {

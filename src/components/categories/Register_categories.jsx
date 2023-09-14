@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
 import { Apiurl } from "../../services/apirest";
 import { storeEdulink } from "../../store/EdulinkStore";
+import { CRUD } from "../../templates/CRUD";
 
 export const Register_categories = () =>{
     const token = storeEdulink(state => state.auth.token);
@@ -54,28 +55,7 @@ export const Register_categories = () =>{
     return (
         <Fragment>
 
-            <form onSubmit={handleSubmit}>
-
-                {
-                    fields?.map((field, index) => {
-                        return (
-                            <div key={index}>
-                                <label htmlFor={field.name}>{field.verbose}</label>
-                                <input type={
-                                    field.type === "DateField" ? 'date' : 'text'
-                                } name={field.name} id={field.name} onChange={(e) => setData({
-                                    ...data,
-                                    form: {
-                                        ...data.form,
-                                        [field.name]: e.target.value
-                                    }
-                                })} />
-                            </div>
-                        )
-                    })
-                }
-                <button type='submit'>Enviar</button>
-            </form>
+            <CRUD name={"Categorias"} fields={fields} handleSubmit={handleSubmit} setData={setData} data={data} />
         </Fragment>
     )
 }

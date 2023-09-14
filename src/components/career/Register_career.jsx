@@ -5,6 +5,7 @@ import Footer from "../../templates/Footer";
 import "../../assets/css/carreer.css";
 import { Apiurl } from '../../services/apirest';
 import { storeEdulink } from '../../store/EdulinkStore';
+import { CRUD } from '../../templates/CRUD';
 
 export const Register_career = () => {
     const token = storeEdulink(state => state.auth.token);
@@ -61,39 +62,7 @@ export const Register_career = () => {
         <Fragment>
 
 
-            <section className="header_main">
-                <Header name={"Carreras"} />
-            </section>
-
-            <section className="carreer_building_main">
-                <form onSubmit={handleSubmit}>
-
-                    {
-                        fields?.map((field, index) => {
-                            return (
-                                <div key={index}>
-                                    <label htmlFor={field.name}>{field.verbose}</label>
-                                    <input type={
-                                        field.type === "DateField" ? 'date' : 'text'
-                                    } name={field.name} id={field.name} onChange={(e) => setData({
-                                        ...data,
-                                        form: {
-                                            ...data.form,
-                                            [field.name]: e.target.value
-                                        }
-                                    })} />
-                                </div>
-                            )
-                        })
-                    }
-
-                    <button type='submit'>Enviar</button>
-                </form>
-            </section>
-
-            <section className="footer_main">
-                <Footer />
-            </section>
+            <CRUD name={"Carreras"} fields={fields} handleSubmit={handleSubmit} setData={setData} data={data} />
 
         </Fragment>
 

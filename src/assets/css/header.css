@@ -43,6 +43,7 @@ body{
     background: linear-gradient(to right, var(--secondary) , var(--primary) );
     background-clip: text;
     color: transparent;
+    cursor: default;
 }
 
 .info-page:hover{
@@ -50,6 +51,7 @@ body{
 }
 
 .header_icon{
+    cursor: pointer;
     width: 30%;
     float: right;
     width: 10%;
@@ -215,6 +217,7 @@ body{
         float: right;
         width: 20%;
         height: 100%;
+        margin-top: 20px;
     }
 
     .header_logo{
