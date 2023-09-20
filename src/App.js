@@ -29,7 +29,11 @@ import { Index_career } from './components/career/Index_career';
 import { storeEdulink } from './store/EdulinkStore';
 
 
+export const typeUser = sessionStorage.getItem('type') //tipo de usuario
+// 0: tutor 1: estudiante 2: docentes 3: asistentes 4: director 5: director academico 6: rector 7: control escolar 8: Recursos humanos  128: TODO
+
 function App() {
+
   const authStatus = storeEdulink(state => state.auth.isAuth)
   const token = storeEdulink(state => state.auth.token)
   const logout = storeEdulink(state => state.logout)

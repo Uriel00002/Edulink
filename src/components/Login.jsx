@@ -46,10 +46,11 @@ export const Login = () => {
             const response = await axios.post(url, data.form);
             setAuth({
                 token: response.data.token,
-                user: response.data.user,
+                user: {...response.data.user, type: response.data.type},
                 isAuth: true,
                 isTokenActive: true
             });
+            sessionStorage.setItem('type', response.data.type);
             console.log(response.data);
         } catch (error) {
             console.log(error);

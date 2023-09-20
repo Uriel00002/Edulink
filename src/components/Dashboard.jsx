@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React, { useEffect } from "react";
 import '../assets/css/dashboard.css';
 import Img from '../assets/img/wallpaper.png';
@@ -10,6 +11,7 @@ import Footer from "../templates/Footer";
 import { Link } from 'react-router-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
+import { typeUser } from "../App";
 
 
 export const Dashboard = () => {
@@ -98,10 +100,13 @@ export const Dashboard = () => {
                     <div className="wrapper">
                         <i id="left" className="fa-solid fa-angle-left"></i>
                         <ul className="carousel">
-                            <Link className="card" to="/student/register">
-                                <img src={Profile} className="img" alt="imagen" />
-                                <h2>Estudiantes</h2>
-                            </Link>
+                            {
+                                typeUser == 128 &&
+                                <Link className="card" to="/student/register">
+                                    <img src={Profile} className="img" alt="imagen" />
+                                    <h2>Estudiantes</h2>
+                                </Link>
+                            }
                             <Link className="card" to="/career/register">
                                 <img src={Carreer} className="img" alt="imagen" />
                                 <h2>Carreras</h2>
@@ -112,11 +117,19 @@ export const Dashboard = () => {
                             </Link>
                             <Link className="card" to="/">
                                 <img src={Calif} className="img" alt="imagen" />
-                                <h2>Ver calificaciones</h2>
+                                <h2>Calificaciones</h2>
                             </Link>
                             <Link className="card" to="/">
                                 <img src={Img} className="img" alt="imagen" />
-                                <h2>Text 5</h2>
+                                <h2>Profesores</h2>
+                            </Link>
+                            <Link className="card" to="/">
+                                <img src={Img} className="img" alt="imagen" />
+                                <h2>Salones</h2>
+                            </Link>
+                            <Link className="card" to="/">
+                                <img src={Img} className="img" alt="imagen" />
+                                <h2>Materias</h2>
                             </Link>
                         </ul>
                         <i id="right" className="fa-solid fa-angle-right"></i>
