@@ -1,0 +1,68 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+body{
+    margin: 0;
+    padding: 0; 
+    border: none;
+}
+
+.cruds_main{
+    width: 100vw;
+    height: 88vh;
+}
+
+.cruds_bar{
+    padding-top: 10px;
+    background-color: var(--secondary);
+    align-items: center;
+}
+
+.cruds_bar .btn{
+    background-color: var(--secondaryDark);
+    width: 100%;
+    height: 50px;
+    font-size: 1.5vw;
+    color: white;
+    font-weight: bold;
+    border-color: white;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.cruds_bar .btn:hover{
+    transition: all .5s ease-in-out;
+    background: linear-gradient(to right, var(--primary) , var(--secondary) );
+}
+
+.cruds_content{
+    background-color: var(--primary);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.cruds_content .form{
+    background-color: white;
+    width: 90%;
+    height: 90%;
+    margin-top: 20px;
+    border-radius: 5px;
+    padding-left: 20px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.cruds_content .form .element{
+    height: 80px;
+}
+.cruds_content .form .element label{
+    width: 20%;
+}
+.cruds_content .form .element input{
+    width: 50%;
+}
+
+.cruds_content .form .btn{
+    
+}

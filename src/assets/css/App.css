@@ -1,6 +1,10 @@
 :root{
   --primary :#10A472;
+  --primaryDark:#12855e;
   --secondary :#E89923;
+  --secondaryDark: #c47c11;
+  --third : rgb(168, 16, 214);
+  --gradient : linear-gradient(to right, var(--secondary), var(--primary));
 }
 
 *{
@@ -10,6 +14,7 @@
 body{
   margin: 0;
   font-size: 14px !important;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .App {
