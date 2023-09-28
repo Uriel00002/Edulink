@@ -104,7 +104,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgb(168, 16, 214);
+    background: var(--third);
 }
 
 .contact_us ul{

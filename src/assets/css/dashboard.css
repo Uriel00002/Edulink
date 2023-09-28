@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to right, var(--secondary), var(--primary));
+  background: var(--gradient);
 }
 
 .dash_menu {
