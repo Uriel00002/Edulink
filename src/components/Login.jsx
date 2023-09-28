@@ -17,6 +17,7 @@ import { storeEdulink } from "../store/EdulinkStore";
 
 export const Login = () => {
     const setAuth = storeEdulink(state => state.setAuth);
+    const setLoading = storeEdulink(state => state.setLoading);
     const [data, setData] = useState({
         form: {
             "username": "",
@@ -41,6 +42,7 @@ export const Login = () => {
     }
 
     const manejadorBoton = async () => {
+        setLoading(true);
         let url = Apiurl + "users/login/";
         try {
             const response = await axios.post(url, data.form);
@@ -59,6 +61,8 @@ export const Login = () => {
                 error: true,
                 errorMsg: error.response.data.error
             });
+        } finally {
+            setLoading(false);
         }
     }
 

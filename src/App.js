@@ -39,6 +39,8 @@ function App() {
   const token = storeEdulink(state => state.auth.token)
   const username = storeEdulink(state => state.auth.user?.username)
   const logout = storeEdulink(state => state.logout)
+  const loading = storeEdulink(state => state.ui.loading)
+  const setLoading = storeEdulink(state => state.setLoading)
   const setAuth = storeEdulink(state => state.setAuth)
   const setToken = storeEdulink(state => state.setToken)
   const [intervalId, setIntervalId] = useState(null);
@@ -102,6 +104,10 @@ function App() {
       setIntervalId(newIntervalId);
     }
     // Limpieza: este retorno se ejecuta antes de que el componente sea desmontado
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
     return () => {
       clearInterval(intervalId); // Limpiar el intervalo al desmontar
     };
@@ -111,6 +117,13 @@ function App() {
   return (
     <React.Fragment>
       <div className='body'>
+        {
+          loading ? (
+            <div className='loading'>
+              <i className="fa-duotone fa-spinner-third fa-spin"></i>
+            </div>
+          ) : null
+        }
         <BrowserRouter>
         <Routes>
         <Route path="/auth/*" element={

@@ -81,6 +81,7 @@ body {
 
 .cruds_content .form .element input {
     width: 65%;
+    border: 1px solid rgb(0, 0, 0);
 }
 
 .cruds_content .form .element input[type="date"] {

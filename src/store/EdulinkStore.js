@@ -55,7 +55,10 @@ export const storeEdulink = create(persist((set, get) => ({
     })),
     setLoading: (loading) => set(state => ({
         ...state,
-        ui: loading,
+        ui: {
+            ...state.ui,
+            loading: loading,
+        },
     })),
     logout: async() => {
         try {

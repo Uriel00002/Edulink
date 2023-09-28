@@ -14,6 +14,7 @@ export const Register = () => {
     const [fields, setFields] = useState(null)
     const [studentId, setStudentId] = useState(null)
     const [count, setCount] = useState(0)
+    const [photo, setPhoto] = useState("http://ssl.gstatic.com/accounts/ui/avatar_2x.png")
     const [data, setData] = useState({
         //name, type, verbose
     })
@@ -167,8 +168,8 @@ export const Register = () => {
                     <div className="row">
                         <div className="col-sm-3">
                             <div className="text-center">
-                                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" className="avatar img-circle img-thumbnail" alt="avatar"/>
-                                <h6>Upload a different photo...</h6>
+                                <img src={photo} className="avatar img-circle img-thumbnail" alt="avatar"/>
+                                <h6>...</h6>
                             </div>
 
                             <hr/>
@@ -217,6 +218,7 @@ export const Register = () => {
                                                                         field.type === 'FileField' ? 'file' : 
                                                                         'text'
                                                                     } name={field.name} id={field.name} onChange={(e) => {
+                                                                        e.target.files && e.target.files.length ? setPhoto(URL.createObjectURL(e.target.files[0])) : setPhoto('http://ssl.gstatic.com/accounts/ui/avatar_2x.png')
                                                                         setData({
                                                                             ...data,
                                                                             form: {
