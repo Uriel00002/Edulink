@@ -26,7 +26,8 @@ import { Apiurl } from './services/apirest';
 import { Register_career } from './components/career/Register_career';
 import { Index_career } from './components/career/Index_career';
 
-import { storeEdulink } from './store/EdulinkStore';
+import { alertError, alertSuccess, storeEdulink } from './store/EdulinkStore';
+import Swal from 'sweetalert2';
 
 
 export const typeUser = sessionStorage.getItem('type') //tipo de usuario
@@ -36,9 +37,37 @@ function App() {
 
   const authStatus = storeEdulink(state => state.auth.isAuth)
   const token = storeEdulink(state => state.auth.token)
+  const username = storeEdulink(state => state.auth.user.username)
   const logout = storeEdulink(state => state.logout)
   const setAuth = storeEdulink(state => state.setAuth)
+  const setToken = storeEdulink(state => state.setToken)
   const [intervalId, setIntervalId] = useState(null);
+
+  const swalAlertTime = (min) => {
+    Swal.fire({
+      title: 'Tiempo de sesión',
+      text: `La sesión expira en ${min} minutos`,
+      icon: 'warning',
+      showCancelButton: true,
+      showConfirmButton: true,
+      confirmButtonText: 'Refrescar sesión',
+      cancelButtonText: 'Ignorar',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axios.get(Apiurl + 'users/refreshtoken/?username=' + username);
+          console.log(res);
+          setToken(res.data.token);
+          alertSuccess(res.data.message);
+        } catch (error) {
+          console.log(error);
+          alertError(error.response.data.error)
+        }
+      }
+    });
+  }
   
 
   useEffect(() => {
@@ -58,6 +87,15 @@ function App() {
               })
               logout()
               clearInterval(newIntervalId);
+            }else{
+              const time = res.data.time;//time in seconds
+              if(time > 1795 && time <= 1805){// 30 minutos
+                swalAlertTime(30)
+              }else if(time > 895 && time <= 905){// 15 minutos
+                swalAlertTime(15)
+              }else if(time > 295 && time <= 305){// 5 minutos
+                swalAlertTime(5)
+              }
             }
           })
       }, 5000);

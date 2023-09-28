@@ -18,16 +18,16 @@ export const CRUD = ({name, fields, handleSubmit, setData, data}) => {
 
                 <div className="cruds_bar col-3 d-flex flex-column gap-3">
                     <img src="https://via.placeholder.com/300" alt="" />
-                    <button className="btn btn-primary">registrar</button>
-                    <button className="btn btn-primary">Ver</button>
-                    <button className="btn btn-primary">Reportes</button>
+                    <button className="btn btn-primary" onClick={() => setAction('registrar')}>registrar</button>
+                    <button className="btn btn-primary" onClick={() => setAction('ver')}>Ver</button>
+                    <button className="btn btn-primary" onClick={() => setAction('reportes')}>Reportes</button>
                 </div>
 
                 <div className="cruds_content col-9" >
 
                 <form className="col-8" onSubmit={handleSubmit}>
 
-                    {
+                    {   action === 'registrar' &&	
                         fields?.map((field, index) => {
                             return (
                                 <div key={index}>
