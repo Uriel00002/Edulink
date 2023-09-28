@@ -37,7 +37,7 @@ function App() {
 
   const authStatus = storeEdulink(state => state.auth.isAuth)
   const token = storeEdulink(state => state.auth.token)
-  const username = storeEdulink(state => state.auth.user.username)
+  const username = storeEdulink(state => state.auth.user?.username)
   const logout = storeEdulink(state => state.logout)
   const setAuth = storeEdulink(state => state.setAuth)
   const setToken = storeEdulink(state => state.setToken)
