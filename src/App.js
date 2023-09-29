@@ -14,8 +14,7 @@ import {Dashboard} from './components/Dashboard';
 import {Register} from './components/student/Register';
 import {Calif} from './components/grade/Calif';
 import {New} from './components/New';
-import {Index_buildings} from './components/buildings/Index_buildings';
-import {Register_buildings} from './components/buildings/Register_buildings';
+import {IndexBuildings} from './components/buildings/IndexBuildings';
 import {Index_categories} from './components/categories/Index_categories';
 import {Register_categories} from './components/categories/Register_categories';
 import {Index_position} from './components/positions/Index_position';
@@ -166,8 +165,7 @@ function App() {
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>}/>
                       <Route path="/buildings/*" element ={<Routes>
-                        <Route path="/" element={<Index_buildings />} />
-                        <Route path="/register" element={<Register_buildings />} />
+                        <Route path="/" element={<IndexBuildings />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>}/>
                       <Route path="/career/*" element={<Routes>

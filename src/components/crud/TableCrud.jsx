@@ -61,11 +61,12 @@ export const TableCrud = ({data}) => {
   return (
     <div className='container py-4'>
        
-       <table id="tableCrud" className="table table-striped table-bordered" style={{width: '100%'}}>
+       {  data?.length > 0 ?
+          <table id="tableCrud" className="table table-striped table-bordered" style={{width: '100%'}}>
             <thead>
                 <tr>
                     {
-                        fields?.map((field, index) => (
+                        fields?.concat('Acciones')?.map((field, index) => (
                         <th key={index}>{field}</th>
                         ))
                     }
@@ -76,15 +77,26 @@ export const TableCrud = ({data}) => {
                     data.length && data?.map((item, index) => (
                         <tr key={index}>
                             {
-                                Object.keys(item)?.map((field, index) => (
-                                    <td key={index}>{item[field]}</td>
+                                Object.keys(item).concat('Acciones')?.map((field, index) => (
+                                    <>{
+                                        field === 'Acciones' ? (
+                                            <td key={index} className=''>
+                                                <button className="btn btn-primary me-3"><i className="fas fa-solid fa-pen-to-square"></i></button>
+                                                <button className="btn btn-danger"><i className="fas fa-solid fa-trash"></i></button>
+                                            </td>
+                                        ) : (
+                                            <td key={index}>{item[field]}</td>
+                                        )
+                                    }</>
                                 ))
                             }
                         </tr>
                     ))
                 }
             </tbody>
-       </table>
+          </table>
+          : <p className='text-center'>No hay datos</p>
+       }
        
     </div>
   )

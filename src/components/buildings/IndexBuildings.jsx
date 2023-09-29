@@ -2,11 +2,11 @@ import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react'
 import "../../assets/css/carreer.css";
 import { Apiurl } from '../../services/apirest';
-import { alertError, alertSuccess, storeEdulink } from '../../store/EdulinkStore';
+import { storeEdulink } from '../../store/EdulinkStore';
 import { CRUD } from '../../templates/CRUD';
 
-export const IndexCareer = () => {
-    const nameAPI = 'careers';
+export const IndexBuildings = () => {
+    const nameAPI = 'buildings';
     const token = storeEdulink(state => state.auth.token);
 
     const [fields, setFields] = useState(null)
@@ -68,10 +68,8 @@ export const IndexCareer = () => {
                 data.form,
                 { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } }
             )
-            alertSuccess('Registro exitoso');
             console.log(response.data);
         } catch (error) {
-            alertError('Error: ' + error);
             console.log(error);
         }
     }
@@ -80,7 +78,7 @@ export const IndexCareer = () => {
     return (
         <Fragment>
 
-            <CRUD name={"Carreras"} fields={fields} handleSubmit={handleSubmit} setData={setData} data={data} view={view} setView={setView} />
+            <CRUD name={"Edificios"} fields={fields} handleSubmit={handleSubmit} setData={setData} data={data} view={view} setView={setView} />
 
         </Fragment>
 
