@@ -1,12 +1,36 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Footer from './Footer'
 import Header from './Header'
 import '../assets/css/cruds.css'
 import Pic from '../assets/img/pics.jpg'
+import { FormCrud } from '../components/crud/FormCrud'
+import { TableCrud } from '../components/crud/TableCrud'
+import { storeEdulink } from '../store/EdulinkStore'
 
 
-export const CRUD = ({name, fields, handleSubmit, setData, data}) => {
+export const CRUD = ({name, fields, handleSubmit, setData, data, view, setView}) => {
+    const setLoading = storeEdulink(state => state.setLoading)
     const [action, setAction] = useState('ver')
+    useEffect(() => {
+        switch (action) {
+            case 'ver':
+                setView('v')
+                break
+
+            case 'registrar':
+                setView('r')
+                break
+
+            default:
+                break
+        }
+    }, [action, setView])
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        }, 3000)
+    }, [])
   return (
     <>
        
@@ -26,31 +50,12 @@ export const CRUD = ({name, fields, handleSubmit, setData, data}) => {
                 <div className="cruds_content col col-9" >
 
                 { action === 'registrar' &&	
-                    <form className="form" onSubmit={handleSubmit}>
-
-                    {
-                        fields?.map((field, index) => {
-                            return (
-                                <div key={index} className='element'>
-                                    <label htmlFor={field.name}>{field.verbose}</label>
-                                    <input type={
-                                        field.type === "DateField" ? 'date' : 'text'
-                                    } name={field.name} id={field.name} onChange={(e) => setData({
-                                        ...data,
-                                        form: {
-                                            ...data.form,
-                                            [field.name]: e.target.value
-                                        }
-                                    })} />
-                                </div>
-                            )
-                        })
-                    }
-                    <button type='submit'>Enviar</button>
-                    </form>
+                    <FormCrud fields={fields} handleSubmit={handleSubmit} setData={setData} data={data} />
                 }
 
-                { action === 'ver' &&	<div></div>}
+                { action === 'ver' &&	
+                    <TableCrud data={data} />
+                }
 
                 { action === 'reportes' &&	<div></div>}
 

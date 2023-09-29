@@ -23,8 +23,7 @@ import {Register_position} from './components/positions/Register_position';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { Apiurl } from './services/apirest';
-import { Register_career } from './components/career/Register_career';
-import { Index_career } from './components/career/Index_career';
+import { IndexCareer } from './components/career/IndexCareer';
 
 import { alertError, alertSuccess, storeEdulink } from './store/EdulinkStore';
 import Swal from 'sweetalert2';
@@ -172,8 +171,7 @@ function App() {
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>}/>
                       <Route path="/career/*" element={<Routes>
-                        <Route path="/" element={<Index_career />} />
-                        <Route path="/register" element={<Register_career />} />
+                        <Route path="/" element={<IndexCareer />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
         

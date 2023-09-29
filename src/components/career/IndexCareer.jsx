@@ -1,28 +1,36 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react'
-import Header from "../../templates/Header";
-import Footer from "../../templates/Footer";
 import "../../assets/css/carreer.css";
 import { Apiurl } from '../../services/apirest';
 import { storeEdulink } from '../../store/EdulinkStore';
 import { CRUD } from '../../templates/CRUD';
 
-export const Register_career = () => {
+export const IndexCareer = () => {
     const token = storeEdulink(state => state.auth.token);
 
     const [fields, setFields] = useState(null)
     const [data, setData] = useState({
         //name, type, verbose
     })
-
-
+    const [view, setView] = useState('v')
 
     useEffect(() => {
-        getFields();
+        switch (view) {
+            case 'v':
+                getCareers();
+                break;
+
+            case 'r':
+                getFields();
+                break;
+        
+            default:
+                break;
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [view])
+    
     useEffect(() => {
-        console.log(fields);
         fields?.map(field => {
             setData({
                 ...data,
@@ -38,7 +46,15 @@ export const Register_career = () => {
         try {
             const response = await axios.get(Apiurl + 'careers/fields?token=' + token, { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } })
             setFields(response.data)
-            console.log(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getCareers = async() => {
+        try {
+            const response = await axios.get(Apiurl + 'careers/', {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
+            setData(response.data)
         } catch (error) {
             console.log(error);
         }
@@ -61,8 +77,7 @@ export const Register_career = () => {
     return (
         <Fragment>
 
-
-            <CRUD name={"Carreras"} fields={fields} handleSubmit={handleSubmit} setData={setData} data={data} />
+            <CRUD name={"Carreras"} fields={fields} handleSubmit={handleSubmit} setData={setData} data={data} view={view} setView={setView} />
 
         </Fragment>
 

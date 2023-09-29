@@ -107,7 +107,7 @@ export const Dashboard = () => {
                                     <h2>Estudiantes</h2>
                                 </Link>
                             }
-                            <Link className="card" to="/career/register">
+                            <Link className="card" to="/career/">
                                 <img src={Carreer} className="img" alt="imagen" />
                                 <h2>Carreras</h2>
                             </Link>

@@ -9,6 +9,8 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.1",
+    "datatables.net-buttons": "^2.4.2",
+    "datatables.net-dt": "^1.13.6",
     "eslint-config-react-app": "^7.0.1",
     "jquery": "^3.7.0",
     "materialize-css": "^1.0.0",
@@ -21,6 +23,7 @@
     "sweetalert2": "^11.7.22",
     "sweetalert2-react-content": "^5.0.7",
     "swiper": "^10.1.0",
+    "translate": "^2.0.2",
     "web-vitals": "^2.1.4",
     "zustand": "^4.4.1"
   },

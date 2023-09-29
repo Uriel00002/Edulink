@@ -12,7 +12,7 @@ body {
 
 .cruds_main {
     width: 100vw;
-    height: 88vh;
+    min-height: 88vh;
 }
 
 .cruds_bar {
@@ -86,7 +86,7 @@ body {
 
 .cruds_content .form .element input[type="date"] {
     height: 40px;
-    font-size: 10px;
+    font-size: 12px;
     border-radius: 5px;
     padding: 10px;
 }
