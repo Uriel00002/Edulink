@@ -1,20 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import translate from 'translate'; // Asegúrate de importar la biblioteca translate
 
 export const FormCrud = ({fields, handleSubmit, setData, data}) => {
+    const [translatedFields, setTranslatedFields] = useState([]);
+    useEffect(() => {
+        // Función asincrónica para traducir los campos
+        const translateFields = async () => {
+          try{
+            const translated = await Promise.all(
+                fields.map(async (field) => {
+                  const translation = await translate(field.verbose.toUpperCase().replace(/_/g, " "), 'es');
+                  return translation;
+                })
+              );
+              setTranslatedFields(translated);
+          } catch (err) {
+            console.error(err);
+          }
+        };
+    
+        translateFields();
+      }, [fields]);
+
   return (
     <form className="form" onSubmit={handleSubmit}>
       {
-          fields?.map((field, index) => {
+          translatedFields?.map((translatedFields, index) => {
               return (
                   <div key={index} className='element'>
-                      <label htmlFor={field.name}>{field.verbose}</label>
+                      <label htmlFor={fields[index].name}>{translatedFields}</label>
                       <input type={
-                          field.type === "DateField" ? 'date' : 'text'
-                      } name={field.name} id={field.name} onChange={(e) => setData({
+                          fields[index].type === "DateField" ? 'date' : 'text'
+                      } name={fields[index].name} id={fields[index].name} onChange={(e) => setData({
                           ...data,
                           form: {
                               ...data.form,
-                              [field.name]: e.target.value
+                              [fields[index].name]: e.target.value
                           }
                       })} />
                   </div>

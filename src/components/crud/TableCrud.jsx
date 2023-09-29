@@ -81,8 +81,8 @@ export const TableCrud = ({data}) => {
                                     <>{
                                         field === 'Acciones' ? (
                                             <td key={index} className=''>
-                                                <button className="btn btn-primary me-3"><i className="fas fa-solid fa-pen-to-square"></i></button>
-                                                <button className="btn btn-danger"><i className="fas fa-solid fa-trash"></i></button>
+                                                <button className="btn btn-primary me-3" ><i className="fas fa-solid fa-pen-to-square"></i></button>
+                                                <button className="btn btn-danger" ><i className="fas fa-solid fa-trash"></i></button>
                                             </td>
                                         ) : (
                                             <td key={index}>{item[field]}</td>
