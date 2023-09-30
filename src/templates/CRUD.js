@@ -5,32 +5,15 @@ import '../assets/css/cruds.css'
 import Pic from '../assets/img/pics.jpg'
 import { FormCrud } from '../components/crud/FormCrud'
 import { TableCrud } from '../components/crud/TableCrud'
-import { storeEdulink } from '../store/EdulinkStore'
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
-export const CRUD = ({name, fields, handleSubmit, setData, data, view, setView}) => {
-    const setLoading = storeEdulink(state => state.setLoading)
-    const [action, setAction] = useState('ver')
-    useEffect(() => {
-        switch (action) {
-            case 'ver':
-                setView('v')
-                break
-
-            case 'registrar':
-                setView('r')
-                break
-
-            default:
-                break
-        }
-    }, [action, setView])
-    useEffect(() => {
-        setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-        }, 3000)
-    }, [])
+export const CRUD = ({name, fields, handleSubmit, setData, data, view, setView, action, setAction}) => {
+  const history = useNavigate();
+  const location = useLocation();
+  const handleRemoveIdFromURL = () => {
+    history({pathname: location.pathname, search: ''});
+  }
   return (
     <>
        
@@ -42,7 +25,7 @@ export const CRUD = ({name, fields, handleSubmit, setData, data, view, setView})
 
                 <div className="cruds_bar col col-3 d-flex flex-column gap-3 position-relative overflow-hidden">
                     <img className='img-cruds' src="https://via.placeholder.com/300" alt="" />
-                    <button className="btn btn-primary" onClick={() => setAction('registrar')}><span className='text-btn-slider'>Registrar</span><span className='icon-btn-slider'><i className="fas fa-solid fa-plus"></i></span></button>
+                    <button className="btn btn-primary" onClick={() => {setAction('registrar'); handleRemoveIdFromURL(); setData({data:data.data, form:{}})}}><span className='text-btn-slider'>Registrar</span><span className='icon-btn-slider'><i className="fas fa-solid fa-plus"></i></span></button>
                     <button className="btn btn-primary" onClick={() => setAction('ver')}><span className='text-btn-slider'>Ver</span><span className='icon-btn-slider'><i className="fas fa-solid fa-eyes"></i></span></button>
                     <button className="btn btn-primary" onClick={() => setAction('reportes')}><span className='text-btn-slider'>Reportes</span><span className='icon-btn-slider'><i className="fas fa-solid fa-chart-line"></i></span></button>
                 </div>
@@ -54,7 +37,7 @@ export const CRUD = ({name, fields, handleSubmit, setData, data, view, setView})
                 }
 
                 { action === 'ver' &&	
-                    <TableCrud data={data} setAction={setAction} />
+                    <TableCrud data={data.data} setAction={setAction} />
                 }
 
                 { action === 'reportes' &&	<div></div>}

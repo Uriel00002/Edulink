@@ -11,12 +11,20 @@ import "datatables.net-buttons/js/buttons.flash.js";
 import "datatables.net-buttons/js/buttons.html5.js";
 import "datatables.net-buttons/js/buttons.print.js";
 import { useLocation, useNavigate } from 'react-router-dom';
+import { storeEdulink } from '../../store/EdulinkStore';
 
 
 export const TableCrud = ({data, setAction}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [fields, setFields] = useState([])
+  const setLoading = storeEdulink(state => state.setLoading)
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        }, 3000)
+    }, [])
 
   setTimeout(() => {
       try {
@@ -36,7 +44,7 @@ export const TableCrud = ({data, setAction}) => {
       } catch (error) {
           console.log(error);
       }
-    },1000)
+    },2000)
 
   useEffect(() => {
       const translateAllWords = async () => {

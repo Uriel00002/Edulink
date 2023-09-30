@@ -19,7 +19,7 @@ import { Apiurl } from './services/apirest';
 
 import { alertError, alertSuccess, storeEdulink } from './store/EdulinkStore';
 import Swal from 'sweetalert2';
-import { Career } from './components/crud/models/Career';
+import { IndexCRUD } from './components/crud/models/IndexCRUD';
 
 
 export const typeUser = sessionStorage.getItem('type') //tipo de usuario
@@ -148,7 +148,7 @@ function App() {
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
                       <Route path="/career/*" element={<Routes>
-                        <Route path="/" element={<Career />} />
+                        <Route path="/" element={<IndexCRUD nameAPI="careers" nameView="Carreras" />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
         

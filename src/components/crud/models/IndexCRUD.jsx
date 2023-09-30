@@ -4,20 +4,59 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { Apiurl } from '../../../services/apirest';
 import { alertError, alertSuccess, storeEdulink } from '../../../store/EdulinkStore';
 import { CRUD } from '../../../templates/CRUD';
+import { useLocation } from 'react-router-dom';
 
 export const IndexCRUD = ({nameAPI='', nameView=''}) => {
+    const {search} = useLocation();
     const token = storeEdulink(state => state.auth.token);
 
     const [fields, setFields] = useState(null)
     const [data, setData] = useState({
         //name, type, verbose
+        form: {
+            
+        }
     })
     const [view, setView] = useState('v')
+    const [idItem, setIdItem] = useState(null)
+    const [action, setAction] = useState('ver')
+
+    useEffect(() => {
+        switch (action) {
+            case 'ver':
+                setView('v')
+                break
+
+            case 'registrar':
+                setView('r')
+                break
+
+            default:
+                break
+        }
+    }, [action, setView])
+    
+    useEffect(() => {
+      if (search){
+        const params = new URLSearchParams(search);
+        setIdItem(params.get('id'));
+      }
+    }, [search]);
+
+    useEffect(() => {
+        if (idItem) {
+            setTimeout(() => {
+                getDataById();
+            }, 1000);
+            setAction('registrar');
+        }
+        console.log(data);
+    }, [idItem])
 
     useEffect(() => {
         switch (view) {
             case 'v':
-                getCareers();
+                getData();
                 break;
 
             case 'r':
@@ -51,10 +90,25 @@ export const IndexCRUD = ({nameAPI='', nameView=''}) => {
         }
     }
 
-    const getCareers = async() => {
+    const getDataById = async () => {
+        try {
+            const response = await axios.get(Apiurl + nameAPI + '/' + idItem + '/?token=' + token, { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } })
+            setData({
+                ...data,
+                form: response.data
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getData = async() => {
         try {
             const response = await axios.get(Apiurl + nameAPI + '/', {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
-            setData(response.data)
+            setData({
+                ...data,
+                data: response.data
+            })
         } catch (error) {
             console.log(error);
         }
@@ -78,10 +132,7 @@ export const IndexCRUD = ({nameAPI='', nameView=''}) => {
 
     return (
         <Fragment>
-
-            <CRUD name={nameView} fields={fields} handleSubmit={handleSubmit} setData={setData} data={data} view={view} setView={setView} />
-
+            <CRUD name={nameView} fields={fields} handleSubmit={handleSubmit} setData={setData} data={data} view={view} setView={setView} action={action} setAction={setAction} />
         </Fragment>
-
     )
 }
