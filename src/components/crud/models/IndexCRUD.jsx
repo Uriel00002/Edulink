@@ -1,11 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react'
 import { Apiurl } from '../../../services/apirest';
 import { alertError, alertSuccess, storeEdulink } from '../../../store/EdulinkStore';
 import { CRUD } from '../../../templates/CRUD';
 
-export const IndexCareer = () => {
-    const nameAPI = 'careers';
+export const IndexCRUD = ({nameAPI='', nameView=''}) => {
     const token = storeEdulink(state => state.auth.token);
 
     const [fields, setFields] = useState(null)
@@ -79,7 +79,7 @@ export const IndexCareer = () => {
     return (
         <Fragment>
 
-            <CRUD name={"Carreras"} fields={fields} handleSubmit={handleSubmit} setData={setData} data={data} view={view} setView={setView} />
+            <CRUD name={nameView} fields={fields} handleSubmit={handleSubmit} setData={setData} data={data} view={view} setView={setView} />
 
         </Fragment>
 

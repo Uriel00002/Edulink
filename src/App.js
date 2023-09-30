@@ -16,10 +16,10 @@ import {Calif} from './components/grade/Calif';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { Apiurl } from './services/apirest';
-import { IndexCareer } from './components/crud/models/IndexCareer';
 
 import { alertError, alertSuccess, storeEdulink } from './store/EdulinkStore';
 import Swal from 'sweetalert2';
+import { Career } from './components/crud/models/Career';
 
 
 export const typeUser = sessionStorage.getItem('type') //tipo de usuario
@@ -148,7 +148,7 @@ function App() {
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
                       <Route path="/career/*" element={<Routes>
-                        <Route path="/" element={<IndexCareer />} />
+                        <Route path="/" element={<Career />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
         
