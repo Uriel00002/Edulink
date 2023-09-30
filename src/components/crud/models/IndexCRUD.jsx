@@ -9,6 +9,7 @@ import { useLocation } from 'react-router-dom';
 export const IndexCRUD = ({nameAPI='', nameView=''}) => {
     const {search} = useLocation();
     const token = storeEdulink(state => state.auth.token);
+    const setLoading = storeEdulink(state => state.setLoading)
 
     const [fields, setFields] = useState(null)
     const [data, setData] = useState({
@@ -41,13 +42,15 @@ export const IndexCRUD = ({nameAPI='', nameView=''}) => {
         const params = new URLSearchParams(search);
         setIdItem(params.get('id'));
       }
+      console.log(idItem);
     }, [search]);
 
     useEffect(() => {
         if (idItem) {
+            activateLoading();
             setTimeout(() => {
                 getDataById();
-            }, 1000);
+            }, 2000);
             setAction('registrar');
         }
         console.log(data);
@@ -57,6 +60,7 @@ export const IndexCRUD = ({nameAPI='', nameView=''}) => {
         switch (view) {
             case 'v':
                 getData();
+                activateLoading();
                 break;
 
             case 'r':
@@ -80,6 +84,13 @@ export const IndexCRUD = ({nameAPI='', nameView=''}) => {
             })
         })
     }, [fields])
+
+    const activateLoading = () => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        }, 3000)
+    }
 
     const getFields = async () => {
         try {
@@ -116,23 +127,36 @@ export const IndexCRUD = ({nameAPI='', nameView=''}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post(Apiurl + nameAPI + '/',
-                data.form,
-                { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } }
-            )
-            alertSuccess('Registro exitoso');
-            console.log(response.data);
-        } catch (error) {
-            alertError('Error: ' + error);
-            console.log(error);
+        if(idItem){
+            try {
+                const response = await axios.put(Apiurl + nameAPI + '/' + idItem + '/',
+                    data.form,
+                    { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } }
+                )
+                alertSuccess('Actualización exitosa');
+                console.log(response.data);
+            } catch (error) {
+                alertError('Error: ' + error);
+                console.log(error);
+            }
+        }else{
+            try {
+                const response = await axios.post(Apiurl + nameAPI + '/',
+                    data.form,
+                    { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } }
+                )
+                alertSuccess('Registro exitoso');
+                console.log(response.data);
+            } catch (error) {
+                alertError('Error: ' + error);
+                console.log(error);
+            }
         }
     }
 
-
     return (
         <Fragment>
-            <CRUD name={nameView} fields={fields} handleSubmit={handleSubmit} setData={setData} data={data} view={view} setView={setView} action={action} setAction={setAction} />
+            <CRUD name={nameView} fields={fields} handleSubmit={handleSubmit} setData={setData} data={data} view={view} setView={setView} action={action} setAction={setAction} setIdItem={setIdItem} />
         </Fragment>
     )
 }

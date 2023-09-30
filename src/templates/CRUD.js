@@ -8,11 +8,12 @@ import { TableCrud } from '../components/crud/TableCrud'
 import { useLocation, useNavigate } from 'react-router-dom';
 
 
-export const CRUD = ({name, fields, handleSubmit, setData, data, view, setView, action, setAction}) => {
+export const CRUD = ({name, fields, handleSubmit, setData, data, view, setView, action, setAction, setIdItem}) => {
   const history = useNavigate();
   const location = useLocation();
   const handleRemoveIdFromURL = () => {
     history({pathname: location.pathname, search: ''});
+    setIdItem(null);
   }
   return (
     <>
@@ -26,7 +27,7 @@ export const CRUD = ({name, fields, handleSubmit, setData, data, view, setView, 
                 <div className="cruds_bar col col-3 d-flex flex-column gap-3 position-relative overflow-hidden">
                     <img className='img-cruds' src="https://via.placeholder.com/300" alt="" />
                     <button className="btn btn-primary" onClick={() => {setAction('registrar'); handleRemoveIdFromURL(); setData({data:data.data, form:{}})}}><span className='text-btn-slider'>Registrar</span><span className='icon-btn-slider'><i className="fas fa-solid fa-plus"></i></span></button>
-                    <button className="btn btn-primary" onClick={() => setAction('ver')}><span className='text-btn-slider'>Ver</span><span className='icon-btn-slider'><i className="fas fa-solid fa-eyes"></i></span></button>
+                    <button className="btn btn-primary" onClick={() => {setAction('ver'); handleRemoveIdFromURL(); setData({data:data.data, form:{}})}}><span className='text-btn-slider'>Ver</span><span className='icon-btn-slider'><i className="fas fa-solid fa-eyes"></i></span></button>
                     <button className="btn btn-primary" onClick={() => setAction('reportes')}><span className='text-btn-slider'>Reportes</span><span className='icon-btn-slider'><i className="fas fa-solid fa-chart-line"></i></span></button>
                 </div>
 
