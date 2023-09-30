@@ -115,21 +115,9 @@ export const Dashboard = () => {
                                 <img src={Building} className="img" alt="imagen" />
                                 <h2>Edificios</h2>
                             </Link>
-                            <Link className="card" to="/">
+                            <Link className="card" to="/calif">
                                 <img src={Calif} className="img" alt="imagen" />
                                 <h2>Calificaciones</h2>
-                            </Link>
-                            <Link className="card" to="/">
-                                <img src={Img} className="img" alt="imagen" />
-                                <h2>Profesores</h2>
-                            </Link>
-                            <Link className="card" to="/">
-                                <img src={Img} className="img" alt="imagen" />
-                                <h2>Salones</h2>
-                            </Link>
-                            <Link className="card" to="/">
-                                <img src={Img} className="img" alt="imagen" />
-                                <h2>Materias</h2>
                             </Link>
                         </ul>
                         <i id="right" className="fa-solid fa-angle-right"></i>

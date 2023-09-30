@@ -13,16 +13,10 @@ import {Login} from './components/Login';
 import {Dashboard} from './components/Dashboard';
 import {Register} from './components/student/Register';
 import {Calif} from './components/grade/Calif';
-import {New} from './components/New';
-import {IndexBuildings} from './components/buildings/IndexBuildings';
-import {Index_categories} from './components/categories/Index_categories';
-import {Register_categories} from './components/categories/Register_categories';
-import {Index_position} from './components/positions/Index_position';
-import {Register_position} from './components/positions/Register_position';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { Apiurl } from './services/apirest';
-import { IndexCareer } from './components/career/IndexCareer';
+import { IndexCareer } from './components/crud/models/IndexCareer';
 
 import { alertError, alertSuccess, storeEdulink } from './store/EdulinkStore';
 import Swal from 'sweetalert2';
@@ -147,27 +141,12 @@ function App() {
                     //rutas para logueados
                     <Routes>
                       <Route path="/" element={<Dashboard />} />
-                      <Route path="/new" element={<New />} />
                       <Route path="/calif" element={<Calif />} />
                       <Route path="/student/*" element={<Routes>
                         {/* <Route path="/" element={<Index_position />} /> */}
                         <Route path="/register" element={<Register />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
-                      <Route path="/position/*" element ={<Routes>
-                        <Route path="/" element={<Index_position />} />
-                        <Route path="/register" element={<Register_position />} />
-                        <Route path="*" element={<Navigate to="/" />} />
-                      </Routes>}/>
-                      <Route path="/categories/*" element={<Routes>
-                        <Route path="/" element={<Index_categories />} />
-                        <Route path="/register" element={<Register_categories />} />
-                        <Route path="*" element={<Navigate to="/" />} />
-                      </Routes>}/>
-                      <Route path="/buildings/*" element ={<Routes>
-                        <Route path="/" element={<IndexBuildings />} />
-                        <Route path="*" element={<Navigate to="/" />} />
-                      </Routes>}/>
                       <Route path="/career/*" element={<Routes>
                         <Route path="/" element={<IndexCareer />} />
                         <Route path="*" element={<Navigate to="/" />} />

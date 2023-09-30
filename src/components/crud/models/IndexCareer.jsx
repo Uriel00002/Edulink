@@ -1,12 +1,11 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react'
-import "../../assets/css/carreer.css";
-import { Apiurl } from '../../services/apirest';
-import { storeEdulink } from '../../store/EdulinkStore';
-import { CRUD } from '../../templates/CRUD';
+import { Apiurl } from '../../../services/apirest';
+import { alertError, alertSuccess, storeEdulink } from '../../../store/EdulinkStore';
+import { CRUD } from '../../../templates/CRUD';
 
-export const IndexBuildings = () => {
-    const nameAPI = 'buildings';
+export const IndexCareer = () => {
+    const nameAPI = 'careers';
     const token = storeEdulink(state => state.auth.token);
 
     const [fields, setFields] = useState(null)
@@ -68,8 +67,10 @@ export const IndexBuildings = () => {
                 data.form,
                 { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } }
             )
+            alertSuccess('Registro exitoso');
             console.log(response.data);
         } catch (error) {
+            alertError('Error: ' + error);
             console.log(error);
         }
     }
@@ -78,7 +79,7 @@ export const IndexBuildings = () => {
     return (
         <Fragment>
 
-            <CRUD name={"Edificios"} fields={fields} handleSubmit={handleSubmit} setData={setData} data={data} view={view} setView={setView} />
+            <CRUD name={"Carreras"} fields={fields} handleSubmit={handleSubmit} setData={setData} data={data} view={view} setView={setView} />
 
         </Fragment>
 

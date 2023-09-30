@@ -54,7 +54,7 @@ export const CRUD = ({name, fields, handleSubmit, setData, data, view, setView})
                 }
 
                 { action === 'ver' &&	
-                    <TableCrud data={data} />
+                    <TableCrud data={data} setAction={setAction} />
                 }
 
                 { action === 'reportes' &&	<div></div>}
