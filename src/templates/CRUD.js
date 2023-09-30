@@ -8,7 +8,7 @@ import { TableCrud } from '../components/crud/TableCrud'
 import { useLocation, useNavigate } from 'react-router-dom';
 
 
-export const CRUD = ({name, fields, handleSubmit, setData, data, view, setView, action, setAction, setIdItem}) => {
+export const CRUD = ({name, fields, handleSubmit, handleDelete, setData, data, view, setView, action, setAction, setIdItem}) => {
   const history = useNavigate();
   const location = useLocation();
   const handleRemoveIdFromURL = () => {
@@ -38,7 +38,7 @@ export const CRUD = ({name, fields, handleSubmit, setData, data, view, setView, 
                 }
 
                 { action === 'ver' &&	
-                    <TableCrud data={data.data} setAction={setAction} />
+                    <TableCrud data={data.data} setAction={setAction} handleDelete={handleDelete} />
                 }
 
                 { action === 'reportes' &&	<div></div>}

@@ -5,6 +5,7 @@ import { Apiurl } from '../../../services/apirest';
 import { alertError, alertSuccess, storeEdulink } from '../../../store/EdulinkStore';
 import { CRUD } from '../../../templates/CRUD';
 import { useLocation } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export const IndexCRUD = ({nameAPI='', nameView=''}) => {
     const {search} = useLocation();
@@ -154,9 +155,38 @@ export const IndexCRUD = ({nameAPI='', nameView=''}) => {
         }
     }
 
+    const handleDelete = async (id) => {
+        console.log(id);
+        Swal.fire({
+            title: 'Eliminar?',
+            text: "Esta accion no se puede deshacer!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminar!',
+            cancelButtonText: 'Cancelar'
+        }).then(async(result) => {
+            if (result.isConfirmed) {
+                try {
+                    const response = await axios.delete(Apiurl + nameAPI + '/' + id + '/',
+                        { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } })
+                    alertSuccess(response.data.message);
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
+                    console.log(response.data);
+                } catch (error) {
+                    alertError('Error: ' + error);
+                    console.log(error);
+                }
+            }
+        })
+    }
+
     return (
         <Fragment>
-            <CRUD name={nameView} fields={fields} handleSubmit={handleSubmit} setData={setData} data={data} view={view} setView={setView} action={action} setAction={setAction} setIdItem={setIdItem} />
+            <CRUD name={nameView} fields={fields} handleSubmit={handleSubmit} handleDelete={handleDelete} setData={setData} data={data} view={view} setView={setView} action={action} setAction={setAction} setIdItem={setIdItem} />
         </Fragment>
     )
 }
