@@ -43,7 +43,6 @@ export const IndexCRUD = ({nameAPI='', nameView=''}) => {
         const params = new URLSearchParams(search);
         setIdItem(params.get('id'));
       }
-      console.log(idItem);
     }, [search]);
 
     useEffect(() => {
@@ -54,7 +53,6 @@ export const IndexCRUD = ({nameAPI='', nameView=''}) => {
             }, 2000);
             setAction('registrar');
         }
-        console.log(data);
     }, [idItem])
 
     useEffect(() => {

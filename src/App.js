@@ -143,12 +143,27 @@ function App() {
                       <Route path="/" element={<Dashboard />} />
                       <Route path="/calif" element={<Calif />} />
                       <Route path="/student/*" element={<Routes>
-                        {/* <Route path="/" element={<Index_position />} /> */}
                         <Route path="/register" element={<Register />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
                       <Route path="/career/*" element={<Routes>
                         <Route path="/" element={<IndexCRUD nameAPI="careers" nameView="Carreras" />} />
+                        <Route path="*" element={<Navigate to="/" />} />
+                      </Routes>} />
+                      <Route path="/positions/*" element={<Routes>
+                        <Route path="/" element={<IndexCRUD nameAPI="positions" nameView="Puestos" />} />
+                        <Route path="*" element={<Navigate to="/" />} />
+                      </Routes>} />
+                      <Route path="/employees/*" element={<Routes>
+                        <Route path="/" element={<IndexCRUD nameAPI="employees" nameView="Empleados" />} />
+                        <Route path="*" element={<Navigate to="/" />} />
+                      </Routes>} />
+                      <Route path="/categories/*" element={<Routes>
+                        <Route path="/" element={<IndexCRUD nameAPI="categories" nameView="Categorías de aulas" />} />
+                        <Route path="*" element={<Navigate to="/" />} />
+                      </Routes>} />
+                      <Route path="/buildings/*" element={<Routes>
+                        <Route path="/" element={<IndexCRUD nameAPI="buildings" nameView="Edificios" />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
         
