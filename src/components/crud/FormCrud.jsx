@@ -58,7 +58,7 @@ export const FormCrud = ({fields, handleSubmit, setData, data}) => {
                       <label htmlFor={fields[index].name}>{translatedFields}</label>
                       {
                         fields[index].type === 'OneToOneField' || fields[index].type === 'ForeignKey' 
-                        ? <select defaultValue={data?.form[fields[index]?.name] || ''} name={fields[index].name} id={fields[index].name} onChange={(e) => {
+                        ? <select value={data.form[fields[index].name]?.toString() || ''} name={fields[index].name} id={fields[index].name} onChange={(e) => {
                           setData({
                             ...data,
                             form: {
@@ -72,7 +72,6 @@ export const FormCrud = ({fields, handleSubmit, setData, data}) => {
                             fields[index].value.map((item, i) => {
                               const value = item.split(' - ')[0];
                               const label = item.split(' - ')[1];
-                              console.log(data.form[fields[index].name]);
                               return (
                                 <option key={i} value={value} >{label}</option>
                               )
@@ -80,7 +79,7 @@ export const FormCrud = ({fields, handleSubmit, setData, data}) => {
                           }
                         </select>
                         : fields[index].type === 'ManyToManyField' 
-                        ? <select defaultValue={data.form[fields[index].value] || ''} multiple name={fields[index].name} id={fields[index].name} onChange={(e)=>{
+                        ? <select value={data.form[fields[index].name]?.toString() || ''} multiple name={fields[index].name} id={fields[index].name} onChange={(e)=>{
                           setData({
                             ...data,
                             form: {
@@ -94,7 +93,6 @@ export const FormCrud = ({fields, handleSubmit, setData, data}) => {
                             fields[index].value.map((item, i) => {
                               const value = item.split(' - ')[0];
                               const label = item.split(' - ')[1];
-                              // console.log(data,fields[index].name, data.form[fields[index].name]);
                               return (
                                 <option key={i} value={value} >{label}</option>
                               )
