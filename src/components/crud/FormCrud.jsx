@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import translate from 'translate'; // Asegúrate de importar la biblioteca translate
+import { alertError } from '../../store/EdulinkStore';
 
 export const FormCrud = ({fields, handleSubmit, setData, data}) => {
   const [translatedFields, setTranslatedFields] = useState([]);
@@ -22,8 +23,34 @@ export const FormCrud = ({fields, handleSubmit, setData, data}) => {
     translateFields();
   }, [fields]);
 
+  const validateFields = async(e) => {
+    e.preventDefault();
+    const validate = fields?.reduce((acc, field) => {
+      if (field.required && !data.form[field.name]) {
+        acc.push(field.name);
+      }
+      return acc;
+    }, []); // Initialize acc as an empty array
+    if (validate.length > 0) {
+      const translatedFields = await Promise.all(validate.map(async (field) => await translate(field, 'es')));
+      alertError(`Los siguientes campos son requeridos: ${translatedFields.join(', ')}`);
+      // alert(`Los siguientes campos son requeridos: ${validate.join(', ')}`);
+      //ponle la clase error a cada input que tenga un campo requerido
+      validate.forEach((field) => {
+        document.getElementById(field).classList.add('error');
+      })
+      //al primero ponerle el focus
+      document.getElementById(validate[0]).focus();
+      
+    } else {
+      console.log(data);
+      handleSubmit(e);
+    }
+  }
+  
+
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form className="form" onSubmit={validateFields}>
       {
           translatedFields?.map((translatedFields, index) => {
               return (
@@ -31,7 +58,15 @@ export const FormCrud = ({fields, handleSubmit, setData, data}) => {
                       <label htmlFor={fields[index].name}>{translatedFields}</label>
                       {
                         fields[index].type === 'OneToOneField' || fields[index].type === 'ForeignKey' 
-                        ? <select defaultValue={''}>
+                        ? <select defaultValue={''} name={fields[index].name} id={fields[index].name} onChange={(e) => {
+                          setData({
+                            ...data,
+                            form: {
+                              ...data.form,
+                              [fields[index].name]: e.target.value
+                            }
+                          })
+                        }}>
                           <option value='' disabled>Seleccione una opcion</option>
                           {
                             fields[index].value.map((item, index) => {
@@ -44,7 +79,15 @@ export const FormCrud = ({fields, handleSubmit, setData, data}) => {
                           }
                         </select>
                         : fields[index].type === 'ManyToManyField' 
-                        ? <select multiple>
+                        ? <select defaultValue={''} multiple name={fields[index].name} id={fields[index].name} onChange={(e)=>{
+                          setData({
+                            ...data,
+                            form: {
+                              ...data.form,
+                              [fields[index].name]: [...e.target.options].filter(option => option.selected).map(option => option.value)
+                            }
+                          })
+                        }}>
                           <option value='' disabled>Seleccione una opción</option>
                           {
                             fields[index].value.map((item, index) => {
@@ -64,13 +107,21 @@ export const FormCrud = ({fields, handleSubmit, setData, data}) => {
                             : fields[index].type === "EmailField" ? 'email' 
                             : fields[index].type === "IntegerField" ? 'number' 
                             : 'text'
-                            } name={fields[index].name} id={fields[index].name} onChange={(e) => setData({
+                            } name={fields[index].name} id={fields[index].name} onChange={(e) => {
+                              if(e.target.value){
+                                e.target.classList.remove('error');
+                                e.target.classList.add('success');
+                              }else {
+                                e.target.classList.remove('success');
+                                e.target.classList.remove('error');
+                              }
+                              setData({
                                 ...data,
                                 form: {
-                                    ...data.form,
-                                    [fields[index].name]: e.target.value
+                                  ...data.form,
+                                  [fields[index].name]: e.target.value
                                 }
-                            })} value={data.form[fields[index].name] || ''} />
+                            })}} value={data.form[fields[index].name] || ''} />
                       }
                   </div>
               )

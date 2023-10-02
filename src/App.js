@@ -173,6 +173,10 @@ function App() {
                         <Route path="/" element={<IndexCRUD nameAPI="classrooms" nameView="Salones" />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
+                      <Route path="/subjects/*" element={<Routes>
+                        <Route path="/" element={<IndexCRUD nameAPI="subjects" nameView="Materias" />} />
+                        <Route path="*" element={<Navigate to="/" />} />
+                      </Routes>} />
                       <Route path="/buildings/*" element={<Routes>
                         <Route path="/" element={<IndexCRUD nameAPI="buildings" nameView="Edificios" />} />
                         <Route path="*" element={<Navigate to="/" />} />

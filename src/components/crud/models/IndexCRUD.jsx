@@ -126,6 +126,7 @@ export const IndexCRUD = ({nameAPI='', nameView=''}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         if(idItem){
             try {
                 const response = await axios.put(Apiurl + nameAPI + '/' + idItem + '/',
@@ -134,6 +135,7 @@ export const IndexCRUD = ({nameAPI='', nameView=''}) => {
                 )
                 alertSuccess('Actualización exitosa');
                 console.log(response.data);
+                setLoading(false);
             } catch (error) {
                 alertError('Error: ' + error);
                 console.log(error);
@@ -146,6 +148,7 @@ export const IndexCRUD = ({nameAPI='', nameView=''}) => {
                 )
                 alertSuccess('Registro exitoso');
                 console.log(response.data);
+                setLoading(false);
             } catch (error) {
                 alertError('Error: ' + error);
                 console.log(error);
@@ -155,6 +158,7 @@ export const IndexCRUD = ({nameAPI='', nameView=''}) => {
 
     const handleDelete = async (id) => {
         console.log(id);
+        setLoading(true);
         Swal.fire({
             title: 'Eliminar?',
             text: "Esta accion no se puede deshacer!",
@@ -174,6 +178,7 @@ export const IndexCRUD = ({nameAPI='', nameView=''}) => {
                         window.location.reload();
                     }, 2000);
                     console.log(response.data);
+                    setLoading(false);
                 } catch (error) {
                     alertError('Error: ' + error);
                     console.log(error);

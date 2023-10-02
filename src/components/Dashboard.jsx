@@ -135,6 +135,10 @@ export const Dashboard = () => {
                                 <img src={Img} className="img" alt="imagen" />
                                 <h2>Salones</h2>
                             </Link>
+                            <Link className="card" to="/subjects/">
+                                <img src={Img} className="img" alt="imagen" />
+                                <h2>Materias</h2>
+                            </Link>
                             <Link className="card" to="/calif">
                                 <img src={Calif} className="img" alt="imagen" />
                                 <h2>Calificaciones</h2>
