@@ -58,7 +58,7 @@ export const FormCrud = ({fields, handleSubmit, setData, data}) => {
                       <label htmlFor={fields[index].name}>{translatedFields}</label>
                       {
                         fields[index].type === 'OneToOneField' || fields[index].type === 'ForeignKey' 
-                        ? <select defaultValue={''} name={fields[index].name} id={fields[index].name} onChange={(e) => {
+                        ? <select defaultValue={data?.form[fields[index]?.name] || ''} name={fields[index].name} id={fields[index].name} onChange={(e) => {
                           setData({
                             ...data,
                             form: {
@@ -67,19 +67,20 @@ export const FormCrud = ({fields, handleSubmit, setData, data}) => {
                             }
                           })
                         }}>
-                          <option value='' disabled>Seleccione una opcion</option>
-                          {
-                            fields[index].value.map((item, index) => {
+                          <option value='' >Seleccione una opcion</option>
+                          { data &&
+                            fields[index].value.map((item, i) => {
                               const value = item.split(' - ')[0];
                               const label = item.split(' - ')[1];
+                              console.log(data.form[fields[index].name]);
                               return (
-                                <option key={index} value={value}>{label}</option>
+                                <option key={i} value={value} >{label}</option>
                               )
                             })
                           }
                         </select>
                         : fields[index].type === 'ManyToManyField' 
-                        ? <select defaultValue={''} multiple name={fields[index].name} id={fields[index].name} onChange={(e)=>{
+                        ? <select defaultValue={data.form[fields[index].value] || ''} multiple name={fields[index].name} id={fields[index].name} onChange={(e)=>{
                           setData({
                             ...data,
                             form: {
@@ -88,13 +89,14 @@ export const FormCrud = ({fields, handleSubmit, setData, data}) => {
                             }
                           })
                         }}>
-                          <option value='' disabled>Seleccione una opción</option>
+                          <option value='' >Seleccione una opción</option>
                           {
-                            fields[index].value.map((item, index) => {
+                            fields[index].value.map((item, i) => {
                               const value = item.split(' - ')[0];
                               const label = item.split(' - ')[1];
+                              // console.log(data,fields[index].name, data.form[fields[index].name]);
                               return (
-                                <option key={index} value={value}>{label}</option>
+                                <option key={i} value={value} >{label}</option>
                               )
                             })
                           }
