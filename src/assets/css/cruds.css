@@ -43,6 +43,7 @@ body {
 }
 
 .cruds_content .form {
+    padding-top: 10px;
     background-color: rgba(255, 255, 255, 0.623);
     width: 90%;
     height: 90%;
@@ -81,28 +82,44 @@ body {
 
 .cruds_content .form .element input {
     width: 65%;
-    border: 1px solid rgb(0, 0, 0);
-}
-
-.cruds_content .form .element input[type="date"] {
     height: 40px;
-    font-size: 12px;
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 5px;
     padding: 10px;
 }
+.cruds_content .form .element select {
+    width: 65%;
+    height: 40px;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+/*saber si el select es multiple*/
+.cruds_content .form .element select[multiple] {
+    height: 70px;
+}
+
+.cruds_content .form .element select:hover {
+    cursor: pointer;
+}
 
 .cruds_content .form .btn {}
-.icon-btn-slider{
+
+.icon-btn-slider {
     font-size: 15px;
     display: none;
 }
+
 @media screen and (max-width: 500px) {
     .img-cruds {
         display: none;
     }
+
     .text-btn-slider {
         display: none;
     }
+
     .icon-btn-slider {
         display: block;
     }

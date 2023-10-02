@@ -16,6 +16,17 @@ export const TableCrud = ({data, setAction, handleDelete}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [fields, setFields] = useState([])
+  const [fData, setFData] = useState(data)
+
+  useEffect(() => {
+    if (data && data.length > 0) {
+      setFData(data.map((item, index) => {
+        delete item.password;
+        return item
+      }))
+    }
+
+  },[data])
 
   setTimeout(() => {
       try {
@@ -75,7 +86,7 @@ export const TableCrud = ({data, setAction, handleDelete}) => {
             </thead>
             <tbody>
                 {
-                    data.length && data?.map((item, index) => (
+                    fData?.length && fData?.map((item, index) => (
                         <tr key={index}>
                             {
                                 Object.keys(item).concat('Acciones')?.map((field, index) => (

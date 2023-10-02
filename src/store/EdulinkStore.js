@@ -10,6 +10,9 @@ export const alertError = (msg) => {
     title: 'Oops...',
     text: msg + ' ---- Intente nuevamente o cierre la sesión.'
   })
+  setTimeout(() => {
+    Swal.close()
+  }, 5000)
 }
 
 export const alertSuccess = (msg) => {
@@ -18,6 +21,9 @@ export const alertSuccess = (msg) => {
     title: 'Correcto',
     text: msg
   })
+  setTimeout(() => {
+    Swal.close()
+  }, 5000)
 }
 
 export const alertWarning = (msg) => {
@@ -26,6 +32,9 @@ export const alertWarning = (msg) => {
     title: 'Advertencia',
     text: msg
   })
+  setTimeout(() => {
+    Swal.close()
+  }, 5000)
 }
 
 

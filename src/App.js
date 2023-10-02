@@ -61,6 +61,9 @@ function App() {
         }
       }
     });
+    setTimeout(() => {
+      Swal.close()
+    }, 5000)
   }
   
 
@@ -142,6 +145,10 @@ function App() {
                     <Routes>
                       <Route path="/" element={<Dashboard />} />
                       <Route path="/calif" element={<Calif />} />
+                      <Route path="/users/*" element={<Routes>
+                        <Route path="/" element={<IndexCRUD nameAPI="users" nameView="Usuarios" />} />
+                        <Route path="*" element={<Navigate to="/" />} />
+                      </Routes>} />
                       <Route path="/student/*" element={<Routes>
                         <Route path="/register" element={<Register />} />
                         <Route path="*" element={<Navigate to="/" />} />
@@ -160,6 +167,10 @@ function App() {
                       </Routes>} />
                       <Route path="/categories/*" element={<Routes>
                         <Route path="/" element={<IndexCRUD nameAPI="categories" nameView="Categorías de aulas" />} />
+                        <Route path="*" element={<Navigate to="/" />} />
+                      </Routes>} />
+                      <Route path="/classrooms/*" element={<Routes>
+                        <Route path="/" element={<IndexCRUD nameAPI="classrooms" nameView="Salones" />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
                       <Route path="/buildings/*" element={<Routes>

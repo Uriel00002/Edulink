@@ -100,6 +100,10 @@ export const Dashboard = () => {
                     <div className="wrapper">
                         <i id="left" className="fa-solid fa-angle-left"></i>
                         <ul className="carousel">
+                            <Link className="card" to="/users/">
+                                <img src={Img} className="img" alt="imagen" />
+                                <h2>Usuarios</h2>
+                            </Link>
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/student/register">
@@ -126,6 +130,10 @@ export const Dashboard = () => {
                             <Link className="card" to="/categories/">
                                 <img src={Img} className="img" alt="imagen" />
                                 <h2>Categorías de aulas</h2>
+                            </Link>
+                            <Link className="card" to="/classrooms/">
+                                <img src={Img} className="img" alt="imagen" />
+                                <h2>Salones</h2>
                             </Link>
                             <Link className="card" to="/calif">
                                 <img src={Calif} className="img" alt="imagen" />
