@@ -48,7 +48,7 @@ export const Login = () => {
         try {
             const response = await axios.post(url, data.form);
             setAuth({
-                type: await encriptar_desencriptar(response.data.type, 'e'),
+                type: response.data.type,
                 token: response.data.token,
                 user: {...response.data.user, type: response.data.type},
                 isAuth: true,
