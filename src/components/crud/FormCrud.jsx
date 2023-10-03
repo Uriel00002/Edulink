@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import translate from 'translate'; // Asegúrate de importar la biblioteca translate
 import { alertError } from '../../store/EdulinkStore';
 
-export const FormCrud = ({fields, handleSubmit, setData, data}) => {
+export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, data}) => {
   const [translatedFields, setTranslatedFields] = useState([]);
   useEffect(() => {
     // Función asincrónica para traducir los campos

@@ -3,7 +3,6 @@ import {create} from 'zustand';
 import { persist } from 'zustand/middleware';
 import { Apiurl } from '../services/apirest';
 import Swal from 'sweetalert2';
-
 export const alertError = (msg) => {
   Swal.fire({
     icon: 'error',

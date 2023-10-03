@@ -11,6 +11,7 @@ import Uni3 from '../assets/img/uni3.jpg';
 import '../assets/css/login.css'
 import { useNavigate } from 'react-router-dom';
 import { storeEdulink } from "../store/EdulinkStore";
+import { encriptar_desencriptar } from "../helpers/criptografia";
 
 
 // Resto del código...
@@ -47,7 +48,7 @@ export const Login = () => {
         try {
             const response = await axios.post(url, data.form);
             setAuth({
-                type: response.data.type,
+                type: await encriptar_desencriptar(response.data.type, 'e'),
                 token: response.data.token,
                 user: {...response.data.user, type: response.data.type},
                 isAuth: true,

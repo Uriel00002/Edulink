@@ -16,7 +16,6 @@ import { storeEdulink } from "../store/EdulinkStore";
 export const Dashboard = () => {
     const typeUser = storeEdulink(state => state.auth.type); //tipo de usuario
 
-
     useEffect(() => {
         try {
             const wrapper = document.querySelector(".wrapper");
@@ -101,77 +100,125 @@ export const Dashboard = () => {
                     <div className="wrapper">
                         <i id="left" className="fa-solid fa-angle-left"></i>
                         <ul className="carousel">
-                            <Link className="card" to="/users/">
-                                <img src={Img} className="img" alt="imagen" />
-                                <h2>Usuarios</h2>
-                            </Link>
                             {
-                                typeUser && typeUser == 128 &&
+                                typeUser == 128 &&
                                 <Link className="card" to="/students/register">
                                     <img src={Profile} className="img" alt="imagen" />
                                     <h2>Inscripcion</h2>
                                 </Link>
                             }
-                            <Link className="card" to="/students/">
-                                <img src={Img} className="img" alt="imagen" />
-                                <h2>Estudiantes</h2>
-                            </Link>
-                            <Link className="card" to="/parents/">
-                                <img src={Img} className="img" alt="imagen" />
-                                <h2>Padres</h2>
-                            </Link>
-                            <Link className="card" to="/profiles/">
-                                <img src={Img} className="img" alt="imagen" />
-                                <h2>Perfiles</h2>
-                            </Link>
-                            <Link className="card" to="/addresses/">
-                                <img src={Img} className="img" alt="imagen" />
-                                <h2>Direcciones</h2>
-                            </Link>
-                            <Link className="card" to="/highschools/">
-                                <img src={Img} className="img" alt="imagen" />
-                                <h2>Preparatorias</h2>
-                            </Link>
-                            <Link className="card" to="/career/">
-                                <img src={Carreer} className="img" alt="imagen" />
-                                <h2>Carreras</h2>
-                            </Link>
-                            <Link className="card" to="/positions/">
-                                <img src={Img} className="img" alt="imagen" />
-                                <h2>Posicion</h2>
-                            </Link>
-                            <Link className="card" to="/employees/">
-                                <img src={Img} className="img" alt="imagen" />
-                                <h2>Empleados</h2>
-                            </Link>
-                            <Link className="card" to="/buildings/">
-                                <img src={Building} className="img" alt="imagen" />
-                                <h2>Edificios</h2>
-                            </Link>
-                            <Link className="card" to="/categories/">
-                                <img src={Img} className="img" alt="imagen" />
-                                <h2>Categorías de aulas</h2>
-                            </Link>
-                            <Link className="card" to="/classrooms/">
-                                <img src={Img} className="img" alt="imagen" />
-                                <h2>Salones</h2>
-                            </Link>
-                            <Link className="card" to="/subjects/">
-                                <img src={Img} className="img" alt="imagen" />
-                                <h2>Materias</h2>
-                            </Link>
-                            <Link className="card" to="/grades/">
-                                <img src={Img} className="img" alt="imagen" />
-                                <h2>Calificaciones</h2>
-                            </Link>
-                            <Link className="card" to="/groups/">
-                                <img src={Img} className="img" alt="imagen" />
-                                <h2>Grupos</h2>
-                            </Link>
-                            <Link className="card" to="/calif">
-                                <img src={Calif} className="img" alt="imagen" />
-                                <h2>Calificaciones</h2>
-                            </Link>
+                            {
+                                typeUser == 128 &&
+                                <Link className="card" to="/calif">
+                                    <img src={Calif} className="img" alt="imagen" />
+                                    <h2>Calificaciones</h2>
+                                </Link>
+                            }
+                            {
+                                typeUser == 128 &&
+                                <Link className="card" to="/users/">
+                                    <img src={Img} className="img" alt="imagen" />
+                                    <h2>Usuarios</h2>
+                                </Link>
+                            }
+                            {
+                                typeUser == 128 &&
+                                <Link className="card" to="/students/">
+                                    <img src={Img} className="img" alt="imagen" />
+                                    <h2>Estudiantes</h2>
+                                </Link>
+                            }
+                            {
+                                typeUser == 128 &&
+                                <Link className="card" to="/highschools/">
+                                    <img src={Img} className="img" alt="imagen" />
+                                    <h2>Preparatorias</h2>
+                                </Link>
+                            }
+                            {
+                                typeUser == 128 &&
+                                <Link className="card" to="/parents/">
+                                    <img src={Img} className="img" alt="imagen" />
+                                    <h2>Padres</h2>
+                                </Link>
+                            }
+                            {
+                                typeUser == 128 &&
+                                <Link className="card" to="/profiles/">
+                                    <img src={Img} className="img" alt="imagen" />
+                                    <h2>Perfiles</h2>
+                                </Link>
+                            }
+                            {
+                                typeUser == 128 &&
+                                <Link className="card" to="/positions/">
+                                    <img src={Img} className="img" alt="imagen" />
+                                    <h2>Posicion</h2>
+                                </Link>
+                            }
+                            {
+                                typeUser == 128 &&
+                                <Link className="card" to="/employees/">
+                                    <img src={Img} className="img" alt="imagen" />
+                                    <h2>Empleados</h2>
+                                </Link>
+                            }
+                            {
+                                typeUser == 128 &&
+                                <Link className="card" to="/addresses/">
+                                    <img src={Img} className="img" alt="imagen" />
+                                    <h2>Direcciones</h2>
+                                </Link>
+                            }
+                            {
+                                typeUser == 128 &&
+                                <Link className="card" to="/subjects/">
+                                    <img src={Img} className="img" alt="imagen" />
+                                    <h2>Materias</h2>
+                                </Link>
+                            }
+                            {
+                                typeUser == 128 &&
+                                <Link className="card" to="/grades/">
+                                    <img src={Img} className="img" alt="imagen" />
+                                    <h2>Calificaciones</h2>
+                                </Link>
+                            }
+                            {
+                                typeUser == 128 &&
+                                <Link className="card" to="/categories/">
+                                    <img src={Img} className="img" alt="imagen" />
+                                    <h2>Categorías de aulas</h2>
+                                </Link>
+                            }
+                            {
+                                typeUser == 128 &&
+                                <Link className="card" to="/classrooms/">
+                                    <img src={Img} className="img" alt="imagen" />
+                                    <h2>Salones</h2>
+                                </Link>
+                            }
+                            {
+                                typeUser == 128 &&
+                                <Link className="card" to="/career/">
+                                    <img src={Carreer} className="img" alt="imagen" />
+                                    <h2>Carreras</h2>
+                                </Link>
+                            }
+                            {
+                                typeUser == 128 &&
+                                <Link className="card" to="/buildings/">
+                                    <img src={Building} className="img" alt="imagen" />
+                                    <h2>Edificios</h2>
+                                </Link>
+                            }
+                            {
+                                typeUser == 128 &&
+                                <Link className="card" to="/groups/">
+                                    <img src={Img} className="img" alt="imagen" />
+                                    <h2>Grupos</h2>
+                                </Link>
+                            }
                         </ul>
                         <i id="right" className="fa-solid fa-angle-right"></i>
                     </div>

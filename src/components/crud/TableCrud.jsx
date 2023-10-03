@@ -12,7 +12,7 @@ import "datatables.net-buttons/js/buttons.html5.js";
 import "datatables.net-buttons/js/buttons.print.js";
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export const TableCrud = ({data, setAction, handleDelete}) => {
+export const TableCrud = ({permissions, typeUser, data, setAction, handleDelete}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [fields, setFields] = useState([])
@@ -93,8 +93,14 @@ export const TableCrud = ({data, setAction, handleDelete}) => {
                                     <>{
                                         field === 'Acciones' ? (
                                             <td key={index} className=''>
-                                                <button className="btn btn-primary me-3" onClick={() => {setAction('registrar'); navigate(location.pathname + '?id='+ item.id)}}><i className="fas fa-solid fa-pen-to-square"></i></button>
-                                                <button className="btn btn-danger" onClick={() => handleDelete(item.id)}><i className="fas fa-solid fa-trash"></i></button>
+                                                {
+                                                    permissions.u.includes(typeUser) &&
+                                                    <button className="btn btn-primary me-3" onClick={() => {setAction('registrar'); navigate(location.pathname + '?id='+ item.id)}}><i className="fas fa-solid fa-pen-to-square"></i></button>
+                                                }
+                                                {
+                                                    permissions.d.includes(typeUser) &&
+                                                    <button className="btn btn-danger" onClick={() => handleDelete(item.id)}><i className="fas fa-solid fa-trash"></i></button>
+                                                }
                                             </td>
                                         ) : (
                                             <td key={index}>{item[field]}</td>

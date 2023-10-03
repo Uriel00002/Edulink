@@ -4,11 +4,13 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { Apiurl } from '../../../services/apirest';
 import { alertError, alertSuccess, storeEdulink } from '../../../store/EdulinkStore';
 import { CRUD } from '../../../templates/CRUD';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-export const IndexCRUD = ({nameAPI='', nameView=''}) => {
+export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     const {search} = useLocation();
+    const navigate = useNavigate();
+    const typeUser = storeEdulink(state => state.auth.type);
     const token = storeEdulink(state => state.auth.token);
     const setLoading = storeEdulink(state => state.setLoading)
 
@@ -22,6 +24,10 @@ export const IndexCRUD = ({nameAPI='', nameView=''}) => {
     const [view, setView] = useState('v')
     const [idItem, setIdItem] = useState(null)
     const [action, setAction] = useState('ver')
+
+    useEffect(() => {
+        if (permissions.c.includes(typeUser) || permissions.r.includes(typeUser) || permissions.rbid.includes(typeUser) || permissions.u.includes(typeUser) || permissions.d.includes(typeUser)){}else navigate('/');
+    }, [])
 
     useEffect(() => {
         switch (action) {
@@ -101,26 +107,36 @@ export const IndexCRUD = ({nameAPI='', nameView=''}) => {
     }
 
     const getDataById = async () => {
-        try {
-            const response = await axios.get(Apiurl + nameAPI + '/' + idItem + '/?token=' + token, { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } })
-            setData({
-                ...data,
-                form: response.data
-            })
-        } catch (error) {
-            console.log(error);
+        if(permissions.rbid.includes(typeUser)){
+            try {
+                const response = await axios.get(Apiurl + nameAPI + '/' + idItem + '/?token=' + token, { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } })
+                setData({
+                    ...data,
+                    form: response.data
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        }else{
+            alertError('No tiene permisos para ver los datos.');
+            setLoading(false);
         }
     }
 
     const getData = async() => {
-        try {
-            const response = await axios.get(Apiurl + nameAPI + '/', {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
-            setData({
-                ...data,
-                data: response.data
-            })
-        } catch (error) {
-            console.log(error);
+        if(permissions.r.includes(typeUser)){
+            try {
+                const response = await axios.get(Apiurl + nameAPI + '/', {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
+                setData({
+                    ...data,
+                    data: response.data
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        }else{
+            alertError('No tiene permisos para ver los datos.');	
+            setLoading(false);
         }
     }
 
@@ -128,37 +144,48 @@ export const IndexCRUD = ({nameAPI='', nameView=''}) => {
         e.preventDefault();
         setLoading(true);
         if(idItem){
-            try {
-                const response = await axios.put(Apiurl + nameAPI + '/' + idItem + '/',
-                    data.form,
-                    { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } }
-                )
-                alertSuccess('Actualización exitosa');
-                console.log(response.data);
+            if(permissions.u.includes(typeUser)){
+                try {
+                    const response = await axios.put(Apiurl + nameAPI + '/' + idItem + '/',
+                        data.form,
+                        { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } }
+                    )
+                    alertSuccess('Actualización exitosa');
+                    console.log(response.data);
+                    setLoading(false);
+                } catch (error) {
+                    alertError('Error: ' + error);
+                    console.log(error);
+                }
+            }else{
+                alertError('No tiene permisos para realizar esta operación.');
                 setLoading(false);
-            } catch (error) {
-                alertError('Error: ' + error);
-                console.log(error);
             }
         }else{
-            try {
-                const response = await axios.post(Apiurl + nameAPI + '/',
-                    data.form,
-                    { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } }
-                )
-                alertSuccess('Registro exitoso');
-                console.log(response.data);
+            if(permissions.c.includes(typeUser)){
+                try {
+                    const response = await axios.post(Apiurl + nameAPI + '/',
+                        data.form,
+                        { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } }
+                    )
+                    alertSuccess('Registro exitoso');
+                    console.log(response.data);
+                    setLoading(false);
+                } catch (error) {
+                    alertError('Error: ' + error);
+                    console.log(error);
+                }
+            }else{
+                alertError('No tiene permisos para realizar esta operación.');
                 setLoading(false);
-            } catch (error) {
-                alertError('Error: ' + error);
-                console.log(error);
             }
         }
     }
 
     const handleDelete = async (id) => {
         console.log(id);
-        setLoading(true);
+        if(permissions.d.includes(typeUser)){
+            setLoading(true);
         Swal.fire({
             title: 'Eliminar?',
             text: "Esta accion no se puede deshacer!",
@@ -185,11 +212,15 @@ export const IndexCRUD = ({nameAPI='', nameView=''}) => {
                 }
             }
         })
+        }else{
+            alertError('No tiene permisos para eliminar');
+            setLoading(false);
+        }
     }
 
     return (
         <Fragment>
-            <CRUD name={nameView} fields={fields} handleSubmit={handleSubmit} handleDelete={handleDelete} setData={setData} data={data} view={view} setView={setView} action={action} setAction={setAction} setIdItem={setIdItem} />
+            <CRUD permissions={permissions} typeUser={typeUser} name={nameView} fields={fields} handleSubmit={handleSubmit} handleDelete={handleDelete} setData={setData} data={data} view={view} setView={setView} action={action} setAction={setAction} setIdItem={setIdItem} />
         </Fragment>
     )
 }
