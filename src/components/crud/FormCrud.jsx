@@ -58,7 +58,7 @@ export const FormCrud = ({fields, handleSubmit, setData, data}) => {
                       <label htmlFor={fields[index].name}>{translatedFields}</label>
                       {
                         fields[index].type === 'OneToOneField' || fields[index].type === 'ForeignKey' 
-                        ? <select value={data.form[fields[index].name]?.toString() || ''} name={fields[index].name} id={fields[index].name} onChange={(e) => {
+                        ? <select value={data?.form[fields[index]?.name]?.toString() || ''} name={fields[index].name} id={fields[index].name} onChange={(e) => {
                           setData({
                             ...data,
                             form: {
@@ -79,7 +79,7 @@ export const FormCrud = ({fields, handleSubmit, setData, data}) => {
                           }
                         </select>
                         : fields[index].type === 'ManyToManyField' 
-                        ? <select value={data.form[fields[index].name]?.toString() || ''} multiple name={fields[index].name} id={fields[index].name} onChange={(e)=>{
+                        ? <select value={data?.form[fields[index]?.name]?.toString() || ''} multiple name={fields[index].name} id={fields[index].name} onChange={(e)=>{
                           setData({
                             ...data,
                             form: {
@@ -105,6 +105,7 @@ export const FormCrud = ({fields, handleSubmit, setData, data}) => {
                             fields[index].type === "DateField" ? 'date' 
                             : fields[index].type === "PasswordField" ? 'password' 
                             : fields[index].type === "EmailField" ? 'email' 
+                            : fields[index].type === "BooleanField" ? 'checkbox'
                             : fields[index].type === "IntegerField" ? 'number' 
                             : 'text'
                             } name={fields[index].name} id={fields[index].name} onChange={(e) => {
@@ -115,13 +116,22 @@ export const FormCrud = ({fields, handleSubmit, setData, data}) => {
                                 e.target.classList.remove('success');
                                 e.target.classList.remove('error');
                               }
-                              setData({
+                              fields[index].type === "BooleanField"
+                              ?setData({
+                                ...data,
+                                form: {
+                                  ...data.form,
+                                  [fields[index].name]: e.target.checked
+                                }
+                              })
+                              :setData({
                                 ...data,
                                 form: {
                                   ...data.form,
                                   [fields[index].name]: e.target.value
                                 }
-                            })}} value={data.form[fields[index].name] || ''} />
+                              })
+                            }} value={data.form[fields[index].name] || ''} checked={data.form[fields[index].name] || ''} />
                       }
                   </div>
               )

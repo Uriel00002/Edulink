@@ -22,11 +22,11 @@ import Swal from 'sweetalert2';
 import { IndexCRUD } from './components/crud/models/IndexCRUD';
 
 
-export const typeUser = sessionStorage.getItem('type') //tipo de usuario
+
 // 0: tutor 1: estudiante 2: docentes 3: asistentes 4: director 5: director academico 6: rector 7: control escolar 8: Recursos humanos  128: TODO
+export function App() {
 
-function App() {
-
+  const typeUser = storeEdulink(state => state.auth.type); //tipo de usuario
   const authStatus = storeEdulink(state => state.auth.isAuth)
   const token = storeEdulink(state => state.auth.token)
   const username = storeEdulink(state => state.auth.user?.username)
@@ -149,8 +149,25 @@ function App() {
                         <Route path="/" element={<IndexCRUD nameAPI="users" nameView="Usuarios" />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
-                      <Route path="/student/*" element={<Routes>
+                      <Route path="/students/*" element={<Routes>
+                        <Route path="/" element={<IndexCRUD nameAPI="students" nameView="Estudiantes" />} />
                         <Route path="/register" element={<Register />} />
+                        <Route path="*" element={<Navigate to="/" />} />
+                      </Routes>} />
+                      <Route path="/parents/*" element={<Routes>
+                        <Route path="/" element={<IndexCRUD nameAPI="parents" nameView="Padres" />} />
+                        <Route path="*" element={<Navigate to="/" />} />
+                      </Routes>} />
+                      <Route path="/profiles/*" element={<Routes>
+                        <Route path="/" element={<IndexCRUD nameAPI="profiles" nameView="Perfiles" />} />
+                        <Route path="*" element={<Navigate to="/" />} />
+                      </Routes>} />
+                      <Route path="/addresses/*" element={<Routes>
+                        <Route path="/" element={<IndexCRUD nameAPI="addresses" nameView="Direcciones" />} />
+                        <Route path="*" element={<Navigate to="/" />} />
+                      </Routes>} />
+                      <Route path="/highschools/*" element={<Routes>
+                        <Route path="/" element={<IndexCRUD nameAPI="highschools" nameView="Preparatorias" />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
                       <Route path="/career/*" element={<Routes>
@@ -177,6 +194,14 @@ function App() {
                         <Route path="/" element={<IndexCRUD nameAPI="subjects" nameView="Materias" />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
+                      <Route path="/grades/*" element={<Routes>
+                        <Route path="/" element={<IndexCRUD nameAPI="grades" nameView="Calificaciones" />} />
+                        <Route path="*" element={<Navigate to="/" />} />
+                      </Routes>} />
+                      <Route path="/groups/*" element={<Routes>
+                        <Route path="/" element={<IndexCRUD nameAPI="groups" nameView="Grupos" />} />
+                        <Route path="*" element={<Navigate to="/" />} />
+                      </Routes>} />
                       <Route path="/buildings/*" element={<Routes>
                         <Route path="/" element={<IndexCRUD nameAPI="buildings" nameView="Edificios" />} />
                         <Route path="*" element={<Navigate to="/" />} />
@@ -194,5 +219,3 @@ function App() {
     </React.Fragment>
   );
 }
-
-export default App;

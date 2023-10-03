@@ -5,8 +5,7 @@ import Logo from '../../assets/img/logo.png'
 import '../../assets/css/profile.css'
 import { Apiurl } from "../../services/apirest";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
-import { storeEdulink } from "../../store/EdulinkStore";
+import { alertSuccess, storeEdulink } from "../../store/EdulinkStore";
 
 export const Register = () => {
     const token = storeEdulink(state => state.auth.token);
@@ -104,7 +103,7 @@ export const Register = () => {
             },
             {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
             if(response.status === 201 && response2.status === 201 && response3.status === 201){
-                alert('Registro exitoso de datos personales');
+                alertSuccess('Registro exitoso de datos personales');
                 setDataType('#school_info');
                 setCount(count + 1);
             }
@@ -123,7 +122,7 @@ export const Register = () => {
             },
             {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
             if(response.status === 201){
-                alert('Registro exitoso de datos escolares');
+                alert('Registro exitoso de datos de escuela');
                 setDataType('#fam_data');
                 setCount(count + 1);
             }
@@ -142,7 +141,7 @@ export const Register = () => {
             },
             {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
             if(response.status === 201){
-                alert('Registro exitoso de datos de padre o tutor');
+                alert('Registro exitoso de datos de tutor');
                 setDataType('');
                 setCount(count + 1);
             }

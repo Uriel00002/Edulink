@@ -11,10 +11,11 @@ import Footer from "../templates/Footer";
 import { Link } from 'react-router-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-import { typeUser } from "../App";
-
+import { storeEdulink } from "../store/EdulinkStore";
 
 export const Dashboard = () => {
+    const typeUser = storeEdulink(state => state.auth.type); //tipo de usuario
+
 
     useEffect(() => {
         try {
@@ -105,12 +106,32 @@ export const Dashboard = () => {
                                 <h2>Usuarios</h2>
                             </Link>
                             {
-                                typeUser == 128 &&
-                                <Link className="card" to="/student/register">
+                                typeUser && typeUser == 128 &&
+                                <Link className="card" to="/students/register">
                                     <img src={Profile} className="img" alt="imagen" />
-                                    <h2>Estudiantes</h2>
+                                    <h2>Inscripcion</h2>
                                 </Link>
                             }
+                            <Link className="card" to="/students/">
+                                <img src={Img} className="img" alt="imagen" />
+                                <h2>Estudiantes</h2>
+                            </Link>
+                            <Link className="card" to="/parents/">
+                                <img src={Img} className="img" alt="imagen" />
+                                <h2>Padres</h2>
+                            </Link>
+                            <Link className="card" to="/profiles/">
+                                <img src={Img} className="img" alt="imagen" />
+                                <h2>Perfiles</h2>
+                            </Link>
+                            <Link className="card" to="/addresses/">
+                                <img src={Img} className="img" alt="imagen" />
+                                <h2>Direcciones</h2>
+                            </Link>
+                            <Link className="card" to="/highschools/">
+                                <img src={Img} className="img" alt="imagen" />
+                                <h2>Preparatorias</h2>
+                            </Link>
                             <Link className="card" to="/career/">
                                 <img src={Carreer} className="img" alt="imagen" />
                                 <h2>Carreras</h2>
@@ -138,6 +159,14 @@ export const Dashboard = () => {
                             <Link className="card" to="/subjects/">
                                 <img src={Img} className="img" alt="imagen" />
                                 <h2>Materias</h2>
+                            </Link>
+                            <Link className="card" to="/grades/">
+                                <img src={Img} className="img" alt="imagen" />
+                                <h2>Calificaciones</h2>
+                            </Link>
+                            <Link className="card" to="/groups/">
+                                <img src={Img} className="img" alt="imagen" />
+                                <h2>Grupos</h2>
                             </Link>
                             <Link className="card" to="/calif">
                                 <img src={Calif} className="img" alt="imagen" />

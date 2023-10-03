@@ -40,6 +40,7 @@ export const alertWarning = (msg) => {
 
 export const storeEdulink = create(persist((set, get) => ({
     auth:{
+        type: null,
         token: null,
         user: null,
         isAuth: false,
