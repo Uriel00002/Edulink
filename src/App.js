@@ -25,16 +25,12 @@ import { IndexCRUD } from './components/crud/models/IndexCRUD';
 
 // 0: tutor 1: estudiante 2: docentes 3: asistentes 4: director 5: director academico 6: rector 7: control escolar 8: Recursos humanos  128: TODO
 export function App() {
-
-  const typeUser = storeEdulink(state => state.auth.type); //tipo de usuario
-  console.log(typeUser);
   const authStatus = storeEdulink(state => state.auth.isAuth)
   const token = storeEdulink(state => state.auth.token)
   const username = storeEdulink(state => state.auth.user?.username)
   const logout = storeEdulink(state => state.logout)
   const loading = storeEdulink(state => state.ui.loading)
   const setLoading = storeEdulink(state => state.setLoading)
-  const setAuth = storeEdulink(state => state.setAuth)
   const setToken = storeEdulink(state => state.setToken)
   const [intervalId, setIntervalId] = useState(null);
 
@@ -75,14 +71,6 @@ export function App() {
         })
           .then((res) => {
             if(res.data.isExpired){ // Si está expirado
-              //cerrar sesión
-              setAuth({
-                type: null,
-                token: null,
-                user: null,
-                isAuth: false,
-                isTokenActive: false
-              })
               logout()
               clearInterval(newIntervalId);
             }else{

@@ -22,12 +22,12 @@ const diccionario = [
 ];
 
 export const encriptar_desencriptar = (texto, accion) => {
-    console.log(texto);
+    const fTexto = texto.toString();
     let resp = "";
-    const size = texto.length;
+    const size = fTexto.length;
     
     for (let i = 0; i < size; i++) {
-        const letra = texto[i];
+        const letra = fTexto[i];
         let index = diccionario.indexOf(letra);
         if (index == -1) {
             resp += letra;
@@ -49,6 +49,5 @@ export const encriptar_desencriptar = (texto, accion) => {
             resp += diccionario[index];
         }
     }
-    console.log(resp);
     return resp;
 }

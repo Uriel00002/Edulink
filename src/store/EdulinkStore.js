@@ -78,6 +78,7 @@ export const storeEdulink = create(persist((set, get) => ({
           set({
             ...get(),
             auth: {
+              type: null,
               token: null,
               user: null,
               isAuth: false,

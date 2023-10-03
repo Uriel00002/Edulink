@@ -40,12 +40,11 @@ const Header = ({name}) => {
         <div className="d-flex w-100 justify-content-end">
           <div style={{transform: togleOptions ? 'translateY(0%)' : 'translateY(-1000%)'}} className="header_options">
               <ul>
-                  <li onClick={()=>{}}>Ver perfil</li>
-                  <li onClick={()=>{}}>TEMPO</li>
-                  <li onClick={()=>{}}>SICAH</li>
+                  <li onClick={()=>{}}><i className="fa-duotone fa-user"></i> Ver perfil</li>
+                  <li onClick={()=>{}}><i className="fa-duotone fa-table"></i> TEMPO</li>
+                  <li onClick={()=>{}}><i className="fa-duotone fa-clock"></i> SICAH</li>
                   <li onClick={()=>{}}>...</li>
-                  <li onClick={()=>{}}>Cambiar contraseña</li>
-                  <li onClick={logout}>Cerrar Sesión</li>
+                  <li onClick={logout}><i className="fa-duotone fa-arrow-right-from-bracket"></i> Cerrar Sesión</li>
               </ul>
           </div>
         </div>

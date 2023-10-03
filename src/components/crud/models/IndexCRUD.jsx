@@ -6,11 +6,12 @@ import { alertError, alertSuccess, storeEdulink } from '../../../store/EdulinkSt
 import { CRUD } from '../../../templates/CRUD';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { encriptar_desencriptar } from '../../../helpers/criptografia';
 
 export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     const {search} = useLocation();
     const navigate = useNavigate();
-    const typeUser = storeEdulink(state => state.auth.type);
+    const typeUser = parseInt(encriptar_desencriptar(storeEdulink(state => state.auth.type), "d")); //tipo de usuario
     const token = storeEdulink(state => state.auth.token);
     const setLoading = storeEdulink(state => state.setLoading)
 

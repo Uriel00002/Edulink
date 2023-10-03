@@ -12,9 +12,10 @@ import { Link } from 'react-router-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import { storeEdulink } from "../store/EdulinkStore";
+import { encriptar_desencriptar } from "../helpers/criptografia";
 
 export const Dashboard = () => {
-    const typeUser = storeEdulink(state => state.auth.type); //tipo de usuario
+    const typeUser = parseInt(encriptar_desencriptar(storeEdulink(state => state.auth.type), "d")) //tipo de usuario
 
     useEffect(() => {
         try {

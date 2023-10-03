@@ -48,13 +48,12 @@ export const Login = () => {
         try {
             const response = await axios.post(url, data.form);
             setAuth({
-                type: response.data.type,
+                type: encriptar_desencriptar(response.data.type, "e"),
                 token: response.data.token,
                 user: {...response.data.user, type: response.data.type},
                 isAuth: true,
                 isTokenActive: true
             });
-            sessionStorage.setItem('type', response.data.type);
             console.log(response.data);
         } catch (error) {
             console.log(error);
@@ -108,5 +107,3 @@ export const Login = () => {
 
     );
 }
-
-// export default withRouter(Login); // Utiliza withRouter para acceder a props.history
