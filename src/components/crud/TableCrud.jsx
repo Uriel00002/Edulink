@@ -31,7 +31,7 @@ export const TableCrud = ({permissions, typeUser, data, setAction, handleDelete}
   setTimeout(() => {
       try {
           $("#tableCrud").dataTable().fnDestroy();
-          $( '#tableCrud' ).dataTable( {
+          let table = $( '#tableCrud' ).dataTable( {
           "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
               // Bold the grade for all 'A' grade browsers
               if ( aData[4] === "A" )
@@ -43,6 +43,13 @@ export const TableCrud = ({permissions, typeUser, data, setAction, handleDelete}
           "order": [[ 0, "desc" ]],
           "pageLength": 10,
           } );
+
+          table.on('error.dt', function(e, settings, techNote, message) {
+            if (message.indexOf('Incorrect column count') !== -1) {
+              // Si el mensaje de error contiene "Incorrect column count", recarga la página
+              location.reload();
+            }
+          });
       } catch (error) {
           console.log(error);
       }

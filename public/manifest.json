@@ -1,6 +1,12 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "EDULINK",
+  "name": "EDULINK",
+  "description": "PWA contruido con React para el proyecto Edulink",
+  "version": "1.0.0",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
   "icons": [
     {
       "src": "favicon.ico",
@@ -23,9 +29,5 @@
       "type": "image/png",
       "sizes": "124x52"
     }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  ]
 }

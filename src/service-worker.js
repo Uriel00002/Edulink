@@ -70,3 +70,68 @@ self.addEventListener('message', (event) => {
 });
 
 // Any other custom service worker logic can go here.
+
+const apiRoutes = [
+  'users/',
+  'profiles/',
+  'addresses/',
+  'students/',
+  'highschools/',
+  'positions/',
+  'employees/',
+  'parents/',
+  'me/',
+  'subjects/',
+  'grades/',
+  'groups/',
+  'categories/',
+  'classrooms/',
+  'buildings/',
+  'careers/',
+  'academiccharges/',
+  'schedules/',
+  'grader/student',
+];
+
+// Registrar rutas individuales para cachear los datos de la API
+apiRoutes.forEach((route) => {
+  registerRoute(
+    new RegExp(`https://edulink-vmob.onrender.com/api/${route}`), // Patrón de URL de la API
+    new StaleWhileRevalidate({
+      cacheName: `api-data-cache-${route.replace('/', '-')}`,
+      plugins: [
+        new ExpirationPlugin({
+          maxAgeSeconds: 60 * 60 * 24, // 1 day
+          maxEntries: 50,
+        }),
+      ],
+    })
+  );
+});
+
+// ... Otras rutas de almacenamiento en caché y estrategias ...
+
+self.addEventListener('fetch', (event) => {
+  const { request } = event;
+  apiRoutes.forEach((route) => {
+    if (request.url.startsWith('https://edulink-vmob.onrender.com/api'+route)) {
+      event.respondWith(
+        caches.open('api-data-cache').then((cache) => {
+          return cache.match(request).then((cachedResponse) => {
+            if (cachedResponse) {
+              // Si hay una respuesta en caché, la devolvemos
+              return cachedResponse;
+            }
+
+            // Si no hay respuesta en caché, realizamos la solicitud de red
+            return fetch(request).then((response) => {
+              // Almacenar la respuesta en caché para futuras solicitudes
+              cache.put(request, response.clone());
+              return response;
+            });
+          });
+        })
+      );
+    }
+  })
+});

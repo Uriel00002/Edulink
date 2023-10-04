@@ -75,11 +75,11 @@ export function App() {
               clearInterval(newIntervalId);
             }else{
               const time = res.data.time;//time in seconds
-              if(time > 1795 && time <= 1805){// 30 minutos
+              if(time > 1795 && time <= 1800){// 30 minutos
                 swalAlertTime(30)
-              }else if(time > 895 && time <= 905){// 15 minutos
+              }else if(time > 895 && time <= 900){// 15 minutos
                 swalAlertTime(15)
-              }else if(time > 295 && time <= 305){// 5 minutos
+              }else if(time > 295 && time <= 300){// 5 minutos
                 swalAlertTime(5)
               }
             }
