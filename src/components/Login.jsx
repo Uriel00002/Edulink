@@ -46,14 +46,17 @@ export const Login = () => {
         setLoading(true);
         let url = Apiurl + "users/login/";
         try {
-            const response = await axios.post(url, data.form);
-            setAuth({
-                type: encriptar_desencriptar(response.data.type, "e"),
-                token: response.data.token,
-                user: {...response.data.user, type: response.data.type},
-                isAuth: true,
-                isTokenActive: true
-            });
+            const response = await axios.post(url, data?.form);
+            if(response?.data){
+                const newType = encriptar_desencriptar(response.data.type, "e");
+                newType && setAuth({
+                    type: newType,
+                    token: response.data.token,
+                    user: {...response.data.user, type: response.data.type},
+                    isAuth: true,
+                    isTokenActive: true
+                });
+            }
             console.log(response.data);
         } catch (error) {
             console.log(error);
@@ -68,8 +71,6 @@ export const Login = () => {
     }
 
     return (
-
-
         <React.Fragment>
 
             <section className="login_body">
@@ -77,7 +78,7 @@ export const Login = () => {
                     <div id="formContent">
 
                         <div className="fadeIn first">
-                            <img src={Logo} />
+                            <img src={Logo} alt="Logo" />
                         </div>
 
                         <form onSubmit={manejadorSubmit}>
@@ -104,6 +105,5 @@ export const Login = () => {
             </section>
 
         </React.Fragment>
-
     );
 }
