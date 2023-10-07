@@ -6,6 +6,7 @@ import Pic from '../assets/img/pics.jpg'
 import { FormCrud } from '../components/crud/FormCrud'
 import { TableCrud } from '../components/crud/TableCrud'
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ReportCrud } from '../components/crud/ReportCrud'
 
 
 export const CRUD = ({permissions, typeUser, name, fields, handleSubmit, handleDelete, setData, data, view, setView, action, setAction, setIdItem}) => {
@@ -47,7 +48,7 @@ export const CRUD = ({permissions, typeUser, name, fields, handleSubmit, handleD
                     <TableCrud permissions={permissions} typeUser={typeUser} data={data.data} setAction={setAction} handleDelete={handleDelete} />
                 }
 
-                { action === 'reportes' &&	<div></div>}
+                { action === 'reportes' &&	<ReportCrud fields={fields} />}
 
                 </div>
                 

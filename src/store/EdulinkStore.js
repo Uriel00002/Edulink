@@ -70,11 +70,13 @@ export const storeEdulink = create(persist((set, get) => ({
         },
     })),
     logout: async() => {
+        get().setLoading(true);
         try {
           await axios.get(Apiurl + 'users/logout/?username=' + get().auth.user.username);
         } catch (error) {
           console.log(error);
         } finally {
+          get().setLoading(false);
           set({
             ...get(),
             auth: {

@@ -40,6 +40,10 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
                 setView('r')
                 break
 
+            case 'reportes':
+                setView('r')
+                break
+
             default:
                 break
         }
@@ -110,7 +114,7 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
     const getDataById = async () => {
         if(permissions.rbid.includes(typeUser)){
             try {
-                const response = await axios.get(Apiurl + nameAPI + '/' + idItem + '/?token=' + token, { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } })
+                const response = await axios.get(Apiurl + nameAPI + '/' + idItem + '/', { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } })
                 setData({
                     ...data,
                     form: response.data

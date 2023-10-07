@@ -29,17 +29,17 @@ export const encriptar_desencriptar = (texto, accion) => {
     for (let i = 0; i < size; i++) {
         const letra = fTexto[i];
         let index = diccionario.indexOf(letra);
-        if (index == -1) {
+        if (index === -1) {
             resp += letra;
         } else {
             switch (accion) {
                 case "e":
-                    index = ((size - 2)+(index + size) + 1) % diccionario.length;
+                    index = ((size - 2)+(index + size * 20) + 1) % diccionario.length;
                     break;
 
                 case "d":
                     //la operacion es la misma que la de encriptar pero al reves
-                    index = ((index - size) - (size - 2) - 1) % diccionario.length;
+                    index = ((index - size * 20) - (size - 2) - 1) % diccionario.length;
                     break;
 
                 default:
