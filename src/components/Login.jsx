@@ -52,7 +52,7 @@ export const Login = () => {
                 newType && setAuth({
                     type: newType,
                     token: response.data.token,
-                    user: {...response.data.user, type: response.data.type},
+                    user: {...response.data.user, type: 'Por que estas viendo esto? -_-'},
                     isAuth: true,
                     isTokenActive: true
                 });
