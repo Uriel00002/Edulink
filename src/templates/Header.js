@@ -5,10 +5,11 @@ import '../assets/css/header.css'
 import axios from "axios";
 import { Apiurl } from "../services/apirest";
 import { storeEdulink } from "../store/EdulinkStore";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Header = ({name}) => {
+  const navigate = useNavigate()
   const username = storeEdulink(state => state.auth.user.username)
   const setAuth = storeEdulink(state => state.setAuth)
   const logout = storeEdulink(state => state.logout)
@@ -40,7 +41,7 @@ const Header = ({name}) => {
         <div className="d-flex w-100 justify-content-end">
           <div style={{transform: togleOptions ? 'translateY(0%)' : 'translateY(-1000%)'}} className="header_options">
               <ul>
-                  <li onClick={()=>{}}><i className="fa-duotone fa-user"></i> Ver perfil</li>
+                  <li onClick={()=>{navigate('/perfilusuario')}}><i className="fa-duotone fa-user"></i> Ver perfil</li>
                   <li onClick={()=>{}}><i className="fa-duotone fa-table"></i> TEMPO</li>
                   <li onClick={()=>{}}><i className="fa-duotone fa-clock"></i> SICAH</li>
                   <li onClick={()=>{}}>...</li>

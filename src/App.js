@@ -53,6 +53,7 @@ export function App() {
           console.log(res);
           setToken(res.data.token);
           alertSuccess(res.data.message);
+          window.location.reload();
         } catch (error) {
           console.log(error);
           alertError(error.response.data.error)

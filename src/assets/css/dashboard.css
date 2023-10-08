@@ -141,7 +141,9 @@ a {
   flex-direction: column;
   border-radius: 8px;
   align-self: center;
-  
+}
+.carousel .card:hover{
+  text-decoration: none;
 }
 
 .carousel .card .circle{

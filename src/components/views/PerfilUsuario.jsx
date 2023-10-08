@@ -3,8 +3,16 @@ import React, { useEffect } from "react";
 import Header from "../../templates/Header";
 import Footer from "../../templates/Footer";
 import "../../assets/css/App.css";
+import { storeEdulink } from "../../store/EdulinkStore";
+import { encriptar_desencriptar } from "../../helpers/criptografia";
 
 export const PerfilUsuario = () => {
+    const {user} = storeEdulink(state => state.auth)
+    const typeUser = parseInt(encriptar_desencriptar(storeEdulink(state => state.auth.type), "d"))
+
+    const handleChangePassword = () => {
+        console.log("Cambiar contraseña")
+    }
     return (
         <React.Fragment>
             <section className="header_main">
@@ -15,23 +23,22 @@ export const PerfilUsuario = () => {
                     <h1>Datos del Usuario</h1>
                     <div class="detail">
                         <label for="nombre">Nombre:</label>
-                        <span id="nombre">John</span>
+                        <span id="nombre">{user.name || 'Sin nombre'}</span>
                     </div>
                     <div class="detail">
-                        <label for="apellido-paterno">Apellido Paterno:</label>
-                        <span id="apellido-paterno">Doe</span>
-                    </div>
-                    <div class="detail">
-                        <label for="apellido-materno">Apellido Materno:</label>
-                        <span id="apellido-materno">Smith</span>
+                        <label for="email">Usuario:</label>
+                        <span id="email">{user.username}</span>
                     </div>
                     <div class="detail">
                         <label for="email">Email:</label>
-                        <span id="email">john.doe@example.com</span>
+                        <span id="email">{user.email}</span>
                     </div>
                     <div class="detail">
-                        <label for="contrasena">Contraseña:</label>
-                        <span id="contrasena">**********</span>
+                        <label for="email">Rol:</label>
+                        <span id="email">{typeUser === 0 ? 'Tutor' : typeUser === 1 ? 'Estudiante' : 'Empleado'}</span>
+                    </div>
+                    <div class="detail">
+                        <button onClick={handleChangePassword} type="button" class="btn btn-primary w-100 fs-4">Cambiar contraseña</button>
                     </div>
                 </div>
             </section>
