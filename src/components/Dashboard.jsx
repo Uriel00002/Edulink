@@ -103,6 +103,13 @@ export const Dashboard = () => {
                         <ul className="carousel">
                             {
                                 typeUser == 128 &&
+                                <Link className="card" to="/perfilusuario">
+                                    <img src={Img} className="img" alt="imagen" />
+                                    <h2>PerfilAlumno</h2>
+                                </Link>
+                            }      
+                            {
+                                typeUser == 128 &&
                                 <Link className="card" to="/students/register">
                                     <img src={Profile} className="img" alt="imagen" />
                                     <h2>Inscripcion</h2>

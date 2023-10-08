@@ -13,6 +13,7 @@ import {Login} from './components/Login';
 import {Dashboard} from './components/Dashboard';
 import {Register} from './components/student/Register';
 import {Calif} from './components/grade/Calif';
+import {PerfilUsuario} from './components/views/PerfilUsuario';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { Apiurl } from './services/apirest';
@@ -133,6 +134,7 @@ export function App() {
                     <Routes>
                       <Route path="/" element={<Dashboard />} />
                       <Route path="/calif" element={<Calif />} />
+                      <Route path="/perfilusuario" element={<PerfilUsuario />} />
                       <Route path="/users/*" element={<Routes>
                         <Route path="/" element={<IndexCRUD nameAPI="users" nameView="Usuarios" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
                         <Route path="*" element={<Navigate to="/" />} />
