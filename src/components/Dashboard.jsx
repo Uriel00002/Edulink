@@ -99,136 +99,136 @@ export const Dashboard = () => {
                 <div className="dash_menu">
 
                     <div className="wrapper">
-                        <i id="left" className="fa-solid fa-angle-left"></i>
+                        <i id="left" className="arrow fa-solid fa-angle-left"></i>
                         <ul className="carousel">
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/perfilusuario">
-                                    <img src={Img} className="img" alt="imagen" />
+                                    <div className="circle"><i className="fa-solid fa-file fa-bounce"></i></div>
                                     <h2>PerfilAlumno</h2>
                                 </Link>
-                            }      
+                            }
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/students/register">
-                                    <img src={Profile} className="img" alt="imagen" />
+                                    <div className="circle"><i class="fa-solid fa-graduation-cap fa-bounce"></i></div>
                                     <h2>Inscripcion</h2>
                                 </Link>
                             }
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/calif">
-                                    <img src={Calif} className="img" alt="imagen" />
+                                    <div className="circle"><i className="fa-solid fa-file fa-bounce"></i></div>
                                     <h2>Calificaciones</h2>
                                 </Link>
                             }
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/users/">
-                                    <img src={Img} className="img" alt="imagen" />
+                                    <div className="circle"><i className="fa-solid fa-file fa-bounce"></i></div>
                                     <h2>Usuarios</h2>
                                 </Link>
                             }
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/students/">
-                                    <img src={Img} className="img" alt="imagen" />
+                                    <div className="circle"><i class="fa-solid fa-file-user fa-bounce"></i></div>
                                     <h2>Estudiantes</h2>
                                 </Link>
                             }
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/highschools/">
-                                    <img src={Img} className="img" alt="imagen" />
+                                    <div className="circle"><i class="fa-solid fa-school fa-bounce"></i></div>
                                     <h2>Preparatorias</h2>
                                 </Link>
                             }
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/parents/">
-                                    <img src={Img} className="img" alt="imagen" />
+                                    <div className="circle"><i class="fa-solid fa-family-pants fa-bounce"></i></div>
                                     <h2>Padres</h2>
                                 </Link>
                             }
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/profiles/">
-                                    <img src={Img} className="img" alt="imagen" />
+                                    <div className="circle"><i class="fa-solid fa-user fa-bounce"></i></div>
                                     <h2>Perfiles</h2>
                                 </Link>
                             }
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/positions/">
-                                    <img src={Img} className="img" alt="imagen" />
+                                    <div className="circle"><i class="fa-solid fa-crosshairs-simple fa-bounce"></i></div>
                                     <h2>Posicion</h2>
                                 </Link>
                             }
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/employees/">
-                                    <img src={Img} className="img" alt="imagen" />
+                                    <div className="circle"><i class="fa-solid fa-chalkboard-user fa-bounce"></i></div>
                                     <h2>Empleados</h2>
                                 </Link>
                             }
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/addresses/">
-                                    <img src={Img} className="img" alt="imagen" />
+                                    <div className="circle"><i class="fa-solid fa-address-card fa-bounce"></i></div>
                                     <h2>Direcciones</h2>
                                 </Link>
                             }
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/subjects/">
-                                    <img src={Img} className="img" alt="imagen" />
+                                    <div className="circle"><i class="fa-solid fa-book fa-bounce"></i></div>
                                     <h2>Materias</h2>
                                 </Link>
                             }
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/grades/">
-                                    <img src={Img} className="img" alt="imagen" />
+                                    <div className="circle"><i class="fa-light fa-objects-align-bottom fa-bounce"></i></div>
                                     <h2>Calificaciones</h2>
                                 </Link>
                             }
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/categories/">
-                                    <img src={Img} className="img" alt="imagen" />
+                                    <div className="circle"><i class="fa-solid fa-booth-curtain fa-bounce"></i></div>
                                     <h2>Categorías de aulas</h2>
                                 </Link>
                             }
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/classrooms/">
-                                    <img src={Img} className="img" alt="imagen" />
+                                    <div className="circle"><i class="fa-solid fa-booth-curtain fa-bounce"></i></div>
                                     <h2>Salones</h2>
                                 </Link>
                             }
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/career/">
-                                    <img src={Carreer} className="img" alt="imagen" />
+                                    <div className="circle"><i className="fa-solid fa-file fa-bounce"></i></div>
                                     <h2>Carreras</h2>
                                 </Link>
                             }
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/buildings/">
-                                    <img src={Building} className="img" alt="imagen" />
+                                    <div className="circle"><i class="fa-solid fa-building fa-bounce"></i></div>
                                     <h2>Edificios</h2>
                                 </Link>
                             }
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/groups/">
-                                    <img src={Img} className="img" alt="imagen" />
+                                    <div className="circle"><i class="fa-solid fa-layer-group fa-bounce"></i></div>
                                     <h2>Grupos</h2>
                                 </Link>
                             }
                         </ul>
-                        <i id="right" className="fa-solid fa-angle-right"></i>
+                        <i id="right" className="arrow fa-solid fa-angle-right"></i>
                     </div>
                 </div>
 
