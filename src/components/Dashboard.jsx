@@ -1,11 +1,6 @@
 /* eslint-disable eqeqeq */
 import React, { useEffect } from "react";
 import '../assets/css/dashboard.css';
-import Img from '../assets/img/wallpaper.png';
-import Profile from '../assets/img/profile_img.png';
-import Carreer from '../assets/img/carrera.png';
-import Building from '../assets/img/edificio.png';
-import Calif from '../assets/img/calif.png';
 import Header from "../templates/Header";
 import Footer from "../templates/Footer";
 import { Link } from 'react-router-dom';

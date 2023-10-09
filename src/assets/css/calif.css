@@ -1,102 +1,53 @@
-.calif{
-    background-color: whitesmoke;
-    width: 100vw;
-    height: 100vh;
-}
-
-.calif_content{
-    background-color: whitesmoke ;
-    width: 100%;
-    margin-top: .1%;
-    height: 87.75%;
-}
-
-
-.user_info{
-    width: 25.5%;
-    height: 92%;
-    background-color: var(--primary);
-    float: left;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-}
-
-.user_info .user_image{
+.calif_main{
+    width: auto;
+    min-height: 94vh;
+    height: fit-content;
     display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 50%;
+    background: var(--gradient);
+    padding: 15px;
 }
 
-.user_info img{
-    width: 75%;
-    margin-top: 2rem;
-    border-radius: 50%;
+.calif_main img{
+    width: 25vw;
+    max-width: 300px;
+    max-height: 280px;
+    height: 40vh;
+    position: absolute;
+    margin: 50vh auto;
 }
 
-.tables_info{
-    width: 65.5%;
-    height: 92%;
-    background-color: var(--secondary);
-    float: right;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-}
-
-.table_cuatri{
+.student_info{
+    width: 25vw;
+    height: 50vh;
     margin: 0 auto;
-    width: 90%;
-    margin-top: 2rem;
-    background-color: white;
-    border-radius: 3px;
-    font-size: larger;
-    text-align: center;
+    border-radius: 5px;
+    background-color: var(--white);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.table_cuatri .t_title{
-    height: 4rem;
-    background-color: blue;
+.notes{
+    width: 68vw;
+    min-height: 82vh;
+    height: fit-content;
+    margin: 0 auto;
+    background-color: var(--white);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.table_cuatri{
-
-}
-
-@media (width < 500px){
-
-    .calif_content{
-        height: 200vh;
-        flex-direction: column;
+@media screen and (max-width: 600px) {
+    .calif_main{
+        display: block;
     }
-
-    .user_info{
-        width: 90%;
-        height: 35%;
-        margin-top: 5%;
+    .calif_main img{
+        display: none;
     }
-
-    .user_info .user_image{
-        width: 70%;
-        height: 50%;
-        margin-left: 15%;
-        margin-top: 20px;
+    .student_info{
+        width: 90vw;
+        height: 30vh;
+        margin-bottom: 15px;
     }
-
-    .user_info img{
-        width: 70%;
-        margin-top: 2rem;
-        margin-left: 15%;
+    .notes{
+        width: 90vw;
     }
-
-    .tables_info{
-        width: 90%;
-        
-    }
-
-    .table_cuatri{
-        width: 90%;
-        font-size: smaller;
-        margin-top: 2rem;
-    }
-
-}
+  }
