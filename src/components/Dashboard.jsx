@@ -105,19 +105,12 @@ export const Dashboard = () => {
                             }
                             {
                                 typeUser == 128 &&
-                                <Link className="card" to="/calif">
-                                    <div className="circle"><i className="fa-solid fa-file fa-bounce"></i></div>
-                                    <h2>Calificaciones</h2>
-                                </Link>
-                            }
-                            {
-                                typeUser == 128 &&
                                 <Link className="card" to="/users/">
-                                    <div className="circle"><i className="fa-solid fa-file fa-bounce"></i></div>
+                                    <div className="circle"><i className="fa-solid fa-user fa-bounce"></i></div>
                                     <h2>Usuarios</h2>
                                 </Link>
                             }
-                            {
+                            {/* {
                                 typeUser == 128 &&
                                 <Link className="card" to="/students/">
                                     <div className="circle"><i className="fa-solid fa-file-user fa-bounce"></i></div>
@@ -165,7 +158,7 @@ export const Dashboard = () => {
                                     <div className="circle"><i className="fa-solid fa-address-card fa-bounce"></i></div>
                                     <h2>Direcciones</h2>
                                 </Link>
-                            }
+                            } */}
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/subjects/">
@@ -176,7 +169,7 @@ export const Dashboard = () => {
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/grades/">
-                                    <div className="circle"><i className="fa-light fa-objects-align-bottom fa-bounce"></i></div>
+                                    <div className="circle"><i className="fa-solid fa-objects-align-bottom fa-bounce"></i></div>
                                     <h2>Calificaciones</h2>
                                 </Link>
                             }
@@ -190,14 +183,14 @@ export const Dashboard = () => {
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/classrooms/">
-                                    <div className="circle"><i className="fa-solid fa-booth-curtain fa-bounce"></i></div>
+                                    <div className="circle"><i className="fa-solid fa-chalkboard fa-bounce"></i></div>
                                     <h2>Salones</h2>
                                 </Link>
                             }
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/career/">
-                                    <div className="circle"><i className="fa-solid fa-file fa-bounce"></i></div>
+                                    <div className="circle"><i className="fa-solid fa-briefcase fa-bounce"></i></div>
                                     <h2>Carreras</h2>
                                 </Link>
                             }

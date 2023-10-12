@@ -2,16 +2,13 @@
 import React, { useEffect, useState } from "react";
 import Logo from '../assets/img/logo.png'
 import '../assets/css/header.css'
-import axios from "axios";
-import { Apiurl } from "../services/apirest";
 import { storeEdulink } from "../store/EdulinkStore";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 
 const Header = ({name}) => {
   const navigate = useNavigate()
-  const username = storeEdulink(state => state.auth.user.username)
-  const setAuth = storeEdulink(state => state.setAuth)
+  const location = useLocation() 
   const logout = storeEdulink(state => state.logout)
   const [togleOptions, setTogleOptions] = useState(false)
 
@@ -42,9 +39,10 @@ const Header = ({name}) => {
           <div style={{transform: togleOptions ? 'translateY(0%)' : 'translateY(-1000%)'}} className="header_options">
               <ul> 
                   <li onClick={()=>{navigate('/perfilusuario')}}><i className="fa-duotone fa-user"></i> Ver perfil</li>
+                  <li onClick={()=>{navigate('/')}}><i className="fa-duotone fa-user-graduate"></i> EDULINK</li>
                   <li onClick={()=>{}}><i className="fa-duotone fa-table"></i> TEMPO</li>
                   <li onClick={()=>{navigate('/sicah')}}><i className="fa-duotone fa-clock"></i> SICAH</li>
-                  <li onClick={()=>{}}>...</li>
+                  <li onClick={()=>{}}><i className="fa-duotone fa-user-police"></i> SIPECS</li>
                   <li onClick={logout}><i className="fa-duotone fa-arrow-right-from-bracket"></i> Cerrar Sesión</li>
               </ul>
           </div>

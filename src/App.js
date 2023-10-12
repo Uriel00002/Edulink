@@ -136,39 +136,19 @@ export function App() {
                     <Routes>
                       <Route path="/" element={<Dashboard />} />
                       <Route path="/calif" element={<Calif />} />
-                      <Route path="/perfilusuario" element={<PerfilUsuario />} />
                       <Route path="/sicah" element={<Index />} />
+                      <Route path="/perfilusuario" element={<PerfilUsuario />} />
                       <Route path="/users/*" element={<Routes>
-                        <Route path="/" element={<IndexCRUD nameAPI="users" nameView="Usuarios" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
-                        <Route path="*" element={<Navigate to="/" />} />
-                      </Routes>} />
-                      <Route path="/students/*" element={<Routes>
-                        <Route path="/" element={<IndexCRUD nameAPI="students" nameView="Estudiantes" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="*" element={<Navigate to="/" />} />
-                      </Routes>} />
-                      <Route path="/highschools/*" element={<Routes>
-                        <Route path="/" element={<IndexCRUD nameAPI="highschools" nameView="Preparatorias" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
-                        <Route path="*" element={<Navigate to="/" />} />
-                      </Routes>} />
-                      <Route path="/parents/*" element={<Routes>
-                        <Route path="/" element={<IndexCRUD nameAPI="parents" nameView="Padres" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
-                        <Route path="*" element={<Navigate to="/" />} />
-                      </Routes>} />
-                      <Route path="/profiles/*" element={<Routes>
-                        <Route path="/" element={<IndexCRUD nameAPI="profiles" nameView="Perfiles" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
-                        <Route path="*" element={<Navigate to="/" />} />
-                      </Routes>} />
-                      <Route path="/addresses/*" element={<Routes>
-                        <Route path="/" element={<IndexCRUD nameAPI="addresses" nameView="Direcciones" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
-                        <Route path="*" element={<Navigate to="/" />} />
-                      </Routes>} />
-                      <Route path="/positions/*" element={<Routes>
-                        <Route path="/" element={<IndexCRUD nameAPI="positions" nameView="Puestos" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
-                        <Route path="*" element={<Navigate to="/" />} />
-                      </Routes>} />
-                      <Route path="/employees/*" element={<Routes>
-                        <Route path="/" element={<IndexCRUD nameAPI="employees" nameView="Empleados" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
+                        <Route path="/" element={<></>} />
+                        <Route path="/users" element={<IndexCRUD nameAPI="users" nameView="Usuarios" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
+                        <Route path="/students" element={<IndexCRUD nameAPI="students" nameView="Estudiantes" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
+                        <Route path="/students/register" element={<Register />} />
+                        <Route path="/highschools" element={<IndexCRUD nameAPI="highschools" nameView="Preparatorias" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
+                        <Route path="/parents" element={<IndexCRUD nameAPI="parents" nameView="Padres" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
+                        <Route path="/profiles" element={<IndexCRUD nameAPI="profiles" nameView="Perfiles" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
+                        <Route path='/addresses' element={<IndexCRUD nameAPI="addresses" nameView="Direcciones" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
+                        <Route path='/positions' element={<IndexCRUD nameAPI="positions" nameView="Puestos" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
+                        <Route path='/employees' element={<IndexCRUD nameAPI="employees" nameView="Empleados" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
                       <Route path="/subjects/*" element={<Routes>
@@ -197,6 +177,12 @@ export function App() {
                       </Routes>} />
                       <Route path="/groups/*" element={<Routes>
                         <Route path="/" element={<IndexCRUD nameAPI="groups" nameView="Grupos" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
+                        <Route path="*" element={<Navigate to="/" />} />
+                      </Routes>} />
+
+                      {/* SICAH */}
+                      <Route path="/sicah/academiccharges/*" element={<Routes>
+                        <Route path="/" element={<IndexCRUD nameAPI="academiccharges" nameView="Carga horaria" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
         

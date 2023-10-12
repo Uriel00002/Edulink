@@ -6,7 +6,6 @@ import Pic from '../assets/img/pics.jpg'
 import { FormCrud } from '../components/crud/FormCrud'
 import { TableCrud } from '../components/crud/TableCrud'
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ReportCrud } from '../components/crud/ReportCrud'
 
 
 export const CRUD = ({permissions, typeUser, name, fields, handleSubmit, handleDelete, setData, data, view, setView, action, setAction, setIdItem}) => {
@@ -35,7 +34,6 @@ export const CRUD = ({permissions, typeUser, name, fields, handleSubmit, handleD
                       permissions.r.includes(typeUser) &&
                       <button className="btn btn-primary" onClick={() => {setAction('ver'); handleRemoveIdFromURL(); setData({data:data.data, form:{}})}}><span className='text-btn-slider'>Ver</span><span className='icon-btn-slider'><i className="fas fa-solid fa-eyes"></i></span></button>
                     }
-                    <button className="btn btn-primary" onClick={() => setAction('reportes')}><span className='text-btn-slider'>Reportes</span><span className='icon-btn-slider'><i className="fas fa-solid fa-chart-line"></i></span></button>
                 </div>
 
                 <div className="cruds_content col col-9" >
@@ -47,8 +45,6 @@ export const CRUD = ({permissions, typeUser, name, fields, handleSubmit, handleD
                 { action === 'ver' &&	 permissions.r.includes(typeUser) &&
                     <TableCrud permissions={permissions} typeUser={typeUser} data={data.data} setAction={setAction} handleDelete={handleDelete} />
                 }
-
-                { action === 'reportes' &&	<ReportCrud fields={fields} />}
 
                 </div>
                 
