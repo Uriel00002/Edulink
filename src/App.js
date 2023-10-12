@@ -131,7 +131,7 @@ export function App() {
               <>
                 {
                   !authStatus ? (<Navigate to="/auth" />)
-                  : (
+                  : ( 
                     //rutas para logueados
                     <Routes>
                       <Route path="/" element={<Dashboard />} />

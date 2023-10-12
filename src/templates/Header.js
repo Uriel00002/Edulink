@@ -40,7 +40,7 @@ const Header = ({name}) => {
         
         <div className="d-flex w-100 justify-content-end">
           <div style={{transform: togleOptions ? 'translateY(0%)' : 'translateY(-1000%)'}} className="header_options">
-              <ul>
+              <ul> 
                   <li onClick={()=>{navigate('/perfilusuario')}}><i className="fa-duotone fa-user"></i> Ver perfil</li>
                   <li onClick={()=>{}}><i className="fa-duotone fa-table"></i> TEMPO</li>
                   <li onClick={()=>{navigate('/sicah')}}><i className="fa-duotone fa-clock"></i> SICAH</li>
