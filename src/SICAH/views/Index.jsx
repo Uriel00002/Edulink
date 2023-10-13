@@ -94,10 +94,25 @@ export const Index = () => {
                             {
                                 typeUser == 128 &&
                                 <Link className="card" to="/sicah/academiccharges/">
-                                    <div className="circle"><i className="fa-solid fa-table fa-bounce"></i></div>
+                                    <div className="circle"><i className="fa-solid fa-table-cells fa-bounce"></i></div>
                                     <h2>Carga horaria</h2>
                                 </Link>
                             }
+                            {
+                                typeUser == 128 &&
+                                <Link className="card" to="/sicah/">
+                                    <div className="circle"><i className="fa-solid fa-file fa-bounce"></i></div>
+                                    <h2>Reportes</h2>
+                                </Link>
+                            }
+                            <Link className="card" to="#">
+                                <div className="circle"><i className="fa-solid fa- fa-bounce"></i></div>
+                                <h2>...</h2>
+                            </Link>
+                            <Link className="card" to="#">
+                                <div className="circle"><i className="fa-solid fa- fa-bounce"></i></div>
+                                <h2>...</h2>
+                            </Link>
                         </ul>
                         <i id="right" className="arrow fa-solid fa-angle-right"></i>
                     </div>

@@ -22,6 +22,7 @@ import { alertError, alertSuccess, storeEdulink } from './store/EdulinkStore';
 import Swal from 'sweetalert2';
 import { IndexCRUD } from './components/crud/models/IndexCRUD';
 import { Index } from './SICAH/views/Index';
+import { IndexUsers } from './components/users/IndexUsers';
 
 
 
@@ -139,7 +140,7 @@ export function App() {
                       <Route path="/sicah" element={<Index />} />
                       <Route path="/perfilusuario" element={<PerfilUsuario />} />
                       <Route path="/users/*" element={<Routes>
-                        <Route path="/" element={<></>} />
+                        <Route path="/" element={<IndexUsers />} />
                         <Route path="/users" element={<IndexCRUD nameAPI="users" nameView="Usuarios" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
                         <Route path="/students" element={<IndexCRUD nameAPI="students" nameView="Estudiantes" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
                         <Route path="/students/register" element={<Register />} />
