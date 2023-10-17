@@ -1,3 +1,52 @@
-.sub-list li{
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.item_list li {
+    list-style: none;
     cursor: pointer;
+}
+
+.item_list li:hover::before {
+    content: '>';
+    margin-right: 5px;
+}
+
+.item_list {
+    width: 20%;
+    background: #000;
+    color: #fff;
+    padding: 7px;
+    border-radius: 5px;
+}
+
+.item_list h3 {
+    cursor: pointer;
+    border-bottom: 1px solid #fff;
+}
+
+.item_list h3::before {
+    content: '►';
+    margin-right: 5px;
+}
+
+.item_list h3.active::before {
+    content: '▼';
+    margin-right: 5px;
+}
+
+.item_list h3.active ~ ul {
+    display: block;
+    height: 150px;
+}
+
+.item_list ul {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .item_list {
+        width: 100%;
+    }
 }
