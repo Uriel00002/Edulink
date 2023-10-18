@@ -23,6 +23,7 @@ import Swal from 'sweetalert2';
 import { IndexCRUD } from './components/crud/models/IndexCRUD';
 import { Index } from './SICAH/views/Index';
 import { IndexUsers } from './components/users/IndexUsers';
+import { HomeView } from './TEMPO/views/HomeView';
 
 
 
@@ -138,6 +139,7 @@ export function App() {
                       <Route path="/" element={<Dashboard />} />
                       <Route path="/calif" element={<Calif />} />
                       <Route path="/sicah" element={<Index />} />
+                      <Route path="/tempo" element={<HomeView />} />
                       <Route path="/perfilusuario" element={<PerfilUsuario />} />
                       <Route path="/users/*" element={<Routes>
                         <Route path="/" element={<IndexUsers />} />
@@ -184,6 +186,15 @@ export function App() {
                       {/* SICAH */}
                       <Route path="/sicah/academiccharges/*" element={<Routes>
                         <Route path="/" element={<IndexCRUD nameAPI="academiccharges" nameView="Carga horaria" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
+                        <Route path="*" element={<Navigate to="/" />} />
+                      </Routes>} />
+
+                      {/* TEMPO */}
+                      <Route path="/tempo/*" element={<Routes>
+                        <Route path="/" element={<HomeView />} />
+                        <Route path="/createSchedules" element={<IndexCRUD nameAPI="createSchedules" nameView="Crear horario" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
+                        <Route path="/editSchedules" element={<IndexCRUD nameAPI="editSchedules" nameView="Editar horario" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
+                        <Route path="/seeSchedules" element={<IndexCRUD nameAPI="seeSchedules" nameView="" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
         
