@@ -15,7 +15,7 @@ ul {
 
 .item_list {
     width: 20%;
-    background: #000;
+    background: var(--primary);
     color: #fff;
     padding: 7px;
     border-radius: 5px;
@@ -47,6 +47,8 @@ ul {
 
 @media screen and (max-width: 768px) {
     .item_list {
-        width: 100%;
+        width: 90%;
+        margin: auto;
+        padding: 0;
     }
 }
