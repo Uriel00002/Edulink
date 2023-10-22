@@ -98,7 +98,7 @@ export const Dashboard = () => {
                         <ul className="carousel">
                             {
                                 typeUser == 128 &&
-                                <Link className="card" to="/students/register">
+                                <Link className="card" to="/users/students/register">
                                     <div className="circle"><i className="fa-solid fa-graduation-cap fa-bounce"></i></div>
                                     <h2>Inscripcion</h2>
                                 </Link>

@@ -17,10 +17,12 @@ export const Register = () => {
     const [data, setData] = useState({
         //name, type, verbose
     })
+    const [careers, setCareers] = useState(null)
 
     useEffect(() => {
         switch (dataType) {
             case '#home':
+                getDataCareers();
                 getFieldsPersonal();
                 break;
             case '#school_info':
@@ -57,6 +59,16 @@ export const Register = () => {
         try {
             const response = await axios.get(Apiurl + 'parents/fields?token=' + token, {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
             setFields(response.data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getDataCareers = async() => {
+        try {
+            const response = await axios.get(Apiurl + 'careers/',{headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
+            console.log(response.data);
+            setCareers(response.data)
         } catch (error) {
             console.log(error);
         }
@@ -212,20 +224,33 @@ export const Register = () => {
                                                                 field.name !== 'enrollment' && field.name !== 'generation' &&
                                                                 <div className="">
                                                                     <label htmlFor={field.name}>{field.verbose}</label>
-                                                                    <input type={
-                                                                        field.type === "DateField" ? 'date' : 
-                                                                        field.type === 'FileField' ? 'file' : 
-                                                                        'text'
-                                                                    } name={field.name} id={field.name} onChange={(e) => {
-                                                                        e.target.files && e.target.files.length ? setPhoto(URL.createObjectURL(e.target.files[0])) : setPhoto('http://ssl.gstatic.com/accounts/ui/avatar_2x.png')
-                                                                        setData({
-                                                                            ...data,
-                                                                            form: {
-                                                                                ...data.form,
-                                                                                [field.name]: field.type === 'FileField' ? e.target.files[0] : e.target.value
+                                                                    {
+                                                                        field.name === 'career' 
+                                                                        ? <select className="form-control fs-5" name={field.name} id={field.name} onChange={(e) => setData({ ...data, form: { ...data.form, [field.name]: e.target.value } })}>
+                                                                            <option value="">Selecciona una opción</option>
+                                                                            {
+                                                                                careers && careers.map((career, index) => {
+                                                                                    return (
+                                                                                        <option key={index} value={career.name}>{career.name}</option>
+                                                                                    )
+                                                                                })
                                                                             }
-                                                                        })
-                                                                    }}/>
+                                                                        </select>
+                                                                        : <input type={
+                                                                            field.type === "DateField" ? 'date' : 
+                                                                            field.type === 'FileField' ? 'file' : 
+                                                                            'text'
+                                                                        } name={field.name} id={field.name} onChange={(e) => {
+                                                                            e.target.files && e.target.files.length ? setPhoto(URL.createObjectURL(e.target.files[0])) : setPhoto('http://ssl.gstatic.com/accounts/ui/avatar_2x.png')
+                                                                            setData({
+                                                                                ...data,
+                                                                                form: {
+                                                                                    ...data.form,
+                                                                                    [field.name]: field.type === 'FileField' ? e.target.files[0] : e.target.value
+                                                                                }
+                                                                            })
+                                                                        }}/>
+                                                                    }
                                                                 </div>
                                                             }
                                                         </div>
