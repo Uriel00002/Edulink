@@ -7,6 +7,7 @@ import { CRUD } from '../../../templates/CRUD';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { encriptar_desencriptar } from '../../../helpers/criptografia';
+import { validateUserInView } from '../../../helpers/funtionsGlobals';
 
 export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     const {search} = useLocation();
@@ -27,7 +28,7 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
     const [action, setAction] = useState('ver')
 
     useEffect(() => {
-        if (permissions.c.includes(typeUser) || permissions.r.includes(typeUser) || permissions.rbid.includes(typeUser) || permissions.u.includes(typeUser) || permissions.d.includes(typeUser)){}else navigate('/');
+        !validateUserInView(typeUser, permissions) && navigate('/');
     }, [])
 
     useEffect(() => {

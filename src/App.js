@@ -137,15 +137,15 @@ export function App() {
                     //rutas para logueados
                     <Routes>
                       <Route path="/" element={<Dashboard />} />
-                      <Route path="/calif" element={<Calif />} />
-                      <Route path="/sicah" element={<Index />} />
-                      <Route path="/tempo" element={<HomeView />} />
-                      <Route path="/perfilusuario" element={<PerfilUsuario />} />
+                      <Route path="/calif" element={<Calif permissions={{c:[],r:[128],rbid:[128,0],u:[128],d:[]}} />} />
+                      <Route path="/sicah" element={<Index permissions={{c:[],r:[128],rbid:[],u:[],d:[]}} />} />
+                      <Route path="/tempo" element={<HomeView permissions={{c:[],r:[128],rbid:[],u:[],d:[]}} />} />
+                      <Route path="/perfilusuario" element={<PerfilUsuario permissions={{c:[],r:[],rbid:[128],u:[],d:[]}} />} />
                       <Route path="/users/*" element={<Routes>
-                        <Route path="/" element={<IndexUsers />} />
+                        <Route path="/" element={<IndexUsers permissions={{c:[],r:[128],rbid:[],u:[],d:[]}}  />} />
                         <Route path="/users" element={<IndexCRUD nameAPI="users" nameView="Usuarios" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
                         <Route path="/students" element={<IndexCRUD nameAPI="students" nameView="Estudiantes" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
-                        <Route path="/students/register" element={<Register />} />
+                        <Route path="/students/register" element={<Register permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
                         <Route path="/highschools" element={<IndexCRUD nameAPI="highschools" nameView="Preparatorias" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
                         <Route path="/parents" element={<IndexCRUD nameAPI="parents" nameView="Padres" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
                         <Route path="/profiles" element={<IndexCRUD nameAPI="profiles" nameView="Perfiles" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />

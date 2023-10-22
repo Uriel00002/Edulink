@@ -6,8 +6,13 @@ import '../../assets/css/profile.css'
 import { Apiurl } from "../../services/apirest";
 import axios from "axios";
 import { alertSuccess, storeEdulink } from "../../store/EdulinkStore";
+import { useNavigate } from "react-router-dom";
+import { encriptar_desencriptar } from "../../helpers/criptografia";
+import { validateUserInView } from "../../helpers/funtionsGlobals";
 
-export const Register = () => {
+export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
+    const navigate = useNavigate();
+    const typeUser = parseInt(encriptar_desencriptar(storeEdulink(state => state.auth.type), "d")); //tipo de usuario
     const token = storeEdulink(state => state.auth.token);
     const [dataType, setDataType] = useState('#home')
     const [fields, setFields] = useState(null)
@@ -18,6 +23,10 @@ export const Register = () => {
         //name, type, verbose
     })
     const [careers, setCareers] = useState(null)
+
+    useEffect(() => {
+        !validateUserInView(typeUser, permissions) && navigate('/');
+    }, [])
 
     useEffect(() => {
         switch (dataType) {

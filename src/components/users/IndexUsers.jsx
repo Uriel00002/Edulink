@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Footer from '../../templates/Footer'
 import Header from '../../templates/Header'
 import { useNavigate } from 'react-router-dom'
 import '../../assets/css/list.css'
+import { encriptar_desencriptar } from '../../helpers/criptografia'
+import { storeEdulink } from '../../store/EdulinkStore'
+import { validateUserInView } from '../../helpers/funtionsGlobals'
 
-export const IndexUsers = () => {
+export const IndexUsers = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
   const navigate = useNavigate()
+  const typeUser = parseInt(encriptar_desencriptar(storeEdulink(state => state.auth.type), "d")); //tipo de usuario
   const list = [
     {
       name: 'Cuentas',
@@ -32,6 +36,10 @@ export const IndexUsers = () => {
       ],
     }
   ]
+
+  useEffect(() => {
+    !validateUserInView(typeUser, permissions) && navigate('/');
+}, [])
   return (
     <>
        <section className="header_main">

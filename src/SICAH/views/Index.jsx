@@ -2,14 +2,18 @@
 import Footer from '../../templates/Footer'
 import Header from '../../templates/Header'
 import '../../assets/css/dashboard.css';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { encriptar_desencriptar } from '../../helpers/criptografia'
 import { storeEdulink } from '../../store/EdulinkStore'
+import { useEffect } from 'react';
+import { validateUserInView } from '../../helpers/funtionsGlobals';
 
-export const Index = () => {
-    const typeUser = parseInt(encriptar_desencriptar(storeEdulink(state => state.auth.type), "d")) //tipo de usuario
-
-
+export const Index = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
+    const navigate = useNavigate();
+    const typeUser = parseInt(encriptar_desencriptar(storeEdulink(state => state.auth.type), "d")); //tipo de usuario
+    useEffect(() => {
+        !validateUserInView(typeUser, permissions) && navigate('/');
+    }, [])
     return (
         <>
             <section className="header_main">

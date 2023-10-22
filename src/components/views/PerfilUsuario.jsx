@@ -5,10 +5,17 @@ import Footer from "../../templates/Footer";
 import "../../assets/css/App.css";
 import { storeEdulink } from "../../store/EdulinkStore";
 import { encriptar_desencriptar } from "../../helpers/criptografia";
+import { useNavigate } from "react-router-dom";
+import { validateUserInView } from "../../helpers/funtionsGlobals";
 
-export const PerfilUsuario = () => {
+export const PerfilUsuario = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     const {user} = storeEdulink(state => state.auth)
-    const typeUser = parseInt(encriptar_desencriptar(storeEdulink(state => state.auth.type), "d"))
+    const navigate = useNavigate();
+    const typeUser = parseInt(encriptar_desencriptar(storeEdulink(state => state.auth.type), "d")); //tipo de usuario
+
+    useEffect(() => {
+        !validateUserInView(typeUser, permissions) && navigate('/');
+    }, [])
 
     const handleChangePassword = () => {
         console.log("Cambiar contraseña")
