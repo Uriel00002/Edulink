@@ -185,3 +185,56 @@ a {
     grid-auto-columns: 100%;
   }
 }
+
+/*Estilos del menu de SICAH*/
+ .sicah_card{
+  width: 35%;
+  height: 55%;
+  margin: 5%;
+  border-radius: 5px;
+  background-image: url(../img/unilarge.jpg);
+  background-size: contain;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+ }
+
+ .sicah_card .circle{
+  width: 120px;
+  height: 120px;
+  background-color: white;
+  align-self: center;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sicah_card  h2{
+  font-size: 25px;
+}
+
+.sicah_card .circle i{
+  font-size: 70px;
+  color: var(--secondary);
+}
+
+
+
+@media screen and (max-width: 600px) {
+  .sicah_card{
+    width: 90%;
+    height: 20%;
+    display: flex;
+    flex-direction:row;
+  }
+  .sicah_card .circle{
+    width: 50px;
+    height: 50px;
+  }
+  .sicah_card .circle i{
+    font-size: 20px;
+  }
+  .sicah_card  h2{
+    font-size: 10px;
+  }
+}
