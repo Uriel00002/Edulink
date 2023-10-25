@@ -235,7 +235,7 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                                                                     <label htmlFor={field.name}>{field.verbose}</label>
                                                                     {
                                                                         field.name === 'career' 
-                                                                        ? <select className="form-control fs-5" name={field.name} id={field.name} onChange={(e) => setData({ ...data, form: { ...data.form, [field.name]: e.target.value } })}>
+                                                                        ? <select required className="form-control fs-5" name={field.name} id={field.name} onChange={(e) => setData({ ...data, form: { ...data.form, [field.name]: e.target.value } })}>
                                                                             <option value="">Selecciona una opción</option>
                                                                             {
                                                                                 careers && careers.map((career, index) => {
@@ -245,7 +245,7 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                                                                                 })
                                                                             }
                                                                         </select>
-                                                                        : <input type={
+                                                                        : <input required type={
                                                                             field.type === "DateField" ? 'date' : 
                                                                             field.type === 'FileField' ? 'file' : 
                                                                             'text'
@@ -288,7 +288,7 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                                                                     field.name !== 'enrollment' && field.name !== 'generation' &&
                                                                     <div className="">
                                                                         <label htmlFor={field.name}>{field.verbose}</label>
-                                                                        <input type={
+                                                                        <input required type={
                                                                             field.type === "DateField" ? 'date' : 
                                                                             field.type === 'FileField' ? 'file' : 
                                                                             'text'
@@ -329,7 +329,7 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                                                                     field.name !== 'enrollment' && field.name !== 'generation' &&
                                                                     <div className="">
                                                                         <label htmlFor={field.name}>{field.verbose}</label>
-                                                                        <input type={
+                                                                        <input required type={
                                                                             field.type === "DateField" ? 'date' : 
                                                                             field.type === 'FileField' ? 'file' : 
                                                                             'text'

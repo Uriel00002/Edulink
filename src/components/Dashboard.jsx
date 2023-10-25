@@ -167,7 +167,7 @@ export const Dashboard = () => {
                                 </Link>
                             }
                             {
-                                (typeUser == 128 || typeUser == 0 || typeUser == 1, typeUser == 2 || typeUser == 3 || typeUser == 4 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
+                                (typeUser == 128 || typeUser == 0 || typeUser == 1 || typeUser == 2 || typeUser == 3 || typeUser == 4 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
                                 <Link className="card" to="/grades/">
                                     <div className="circle"><i className="fa-solid fa-objects-align-bottom fa-bounce"></i></div>
                                     <h2>Calificaciones</h2>
@@ -181,7 +181,7 @@ export const Dashboard = () => {
                                 </Link>
                             }
                             {
-                                (typeUser == 128 || typeUser == 0 || typeUser == 1, typeUser == 2 || typeUser == 3 || typeUser == 4 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
+                                (typeUser == 128 || typeUser == 0 || typeUser == 1 || typeUser == 2 || typeUser == 3 || typeUser == 4 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
                                 <Link className="card" to="/classrooms/">
                                     <div className="circle"><i className="fa-solid fa-chalkboard fa-bounce"></i></div>
                                     <h2>Salones</h2>
