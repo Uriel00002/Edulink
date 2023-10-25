@@ -3,6 +3,7 @@ import translate from 'translate'; // Asegúrate de importar la biblioteca trans
 import { alertError } from '../../store/EdulinkStore';
 
 export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, data}) => {
+  console.log(fields);
   const [translatedFields, setTranslatedFields] = useState([]);
   useEffect(() => {
     // Función asincrónica para traducir los campos
@@ -101,7 +102,19 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
                         </select>
                         : fields[index].type === 'PasswordField' && data.form.id
                           ? <input disabled value='**********'/>
-                          : <input type={
+                          : fields[index].options?.length > 0
+                            ? <select value={data?.form[fields[index]?.name]?.toString() || ''} name={fields[index].name} id={fields[index].name} onChange={(e) => 
+                            setData({...data, form: {...data.form, [fields[index].name]: e.target.value}})} >
+                              <option value='' >Seleccione una opción</option>
+                              {
+                                JSON.parse(fields[index].options).map((item, i) => {
+                                  return (
+                                    <option key={i} value={item[Object.keys(item)[0]]} >{Object.keys(item)[0]}</option>
+                                  )
+                                })
+                              }
+                            </select>
+                            :<input type={
                             fields[index].type === "DateField" ? 'date' 
                             : fields[index].type === "PasswordField" ? 'password' 
                             : fields[index].type === "EmailField" ? 'email' 

@@ -105,7 +105,7 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
 
     const getFields = async () => {
         try {
-            const response = await axios.get(Apiurl + nameAPI + '/fields?token=' + token, { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } })
+            const response = await axios.get(Apiurl + nameAPI + '/fields', { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } })
             setFields(response.data)
         } catch (error) {
             console.log(error);
