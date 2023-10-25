@@ -13,26 +13,26 @@ export const IndexUsers = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
   const list = [
     {
       name: 'Cuentas',
-      link: [{name: 'Usuarios', link: 'users'}],
+      link: [{name: 'Usuarios', link: 'users', permissions: [0,1,2,3,4,5,6,7,8]}],
     },
     {
       name: 'Estudiantes',
       link: [
-        {name: 'Datos academicos', link: 'students'},
-        {name: 'Preparatorias', link: 'highschools'},
-        {name: 'Perfiles', link: 'profiles'},
-        {name: 'Direcciones', link: 'addresses'},
+        {name: 'Datos academicos', link: 'students', permissions: [2,3,4,5,6,7]},
+        {name: 'Preparatorias', link: 'highschools',permissions: [2,3,4,5,6,7]},
+        {name: 'Perfiles', link: 'profiles', permissions: [2,3,4,5,6,7]},
+        {name: 'Direcciones', link: 'addresses', permissions: [2,3,4,5,6,7]},
       ],
     },
     {
       name: 'Padres',
-      link: [{name: 'Datos familiares', link: 'parents'}],
+      link: [{name: 'Datos familiares', link: 'parents', permissions: [3,4,5,6,7]}],
     },
     {
       name: 'Empleados',
       link: [
-        {name: 'Datos laborales', link: 'employees'},
-        {name: 'Puestos', link: 'positions'},
+        {name: 'Datos laborales', link: 'employees', permissions: [2,3,4,5,6,7,8]},
+        {name: 'Puestos', link: 'positions', permissions: [2,3,4,5,6,7,8]},
       ],
     }
   ]
@@ -59,11 +59,10 @@ export const IndexUsers = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                           }}>{item.name}</h3>
                           <ul>
                             {
-                              item.link.map((item, index) => {
-                                return (
+                              item.link.map((item, index) => 
+                                item.permissions.includes(typeUser) &&
                                   <li key={index} onClick={() => navigate(item.link)}>{item.name}</li>
-                                )
-                              })
+                              )
                             }
                           </ul>
                         </div>

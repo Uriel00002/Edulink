@@ -97,112 +97,112 @@ export const Dashboard = () => {
                         <i id="left" className="arrow fa-solid fa-angle-left"></i>
                         <ul className="carousel">
                             {
-                                typeUser == 128 &&
+                                (typeUser == 128 || typeUser == 7) &&
                                 <Link className="card" to="/users/students/register">
                                     <div className="circle"><i className="fa-solid fa-graduation-cap fa-bounce"></i></div>
                                     <h2>Inscripcion</h2>
                                 </Link>
                             }
                             {
-                                typeUser == 128 &&
+                                (typeUser == 128 || typeUser == 3 || typeUser == 4 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
                                 <Link className="card" to="/users/">
                                     <div className="circle"><i className="fa-solid fa-user fa-bounce"></i></div>
                                     <h2>Usuarios</h2>
                                 </Link>
                             }
                             {/* {
-                                typeUser == 128 &&
+                                (typeUser == 128) &&
                                 <Link className="card" to="/students/">
                                     <div className="circle"><i className="fa-solid fa-file-user fa-bounce"></i></div>
                                     <h2>Estudiantes</h2>
                                 </Link>
                             }
                             {
-                                typeUser == 128 &&
+                                (typeUser == 128) &&
                                 <Link className="card" to="/highschools/">
                                     <div className="circle"><i className="fa-solid fa-school fa-bounce"></i></div>
                                     <h2>Preparatorias</h2>
                                 </Link>
                             }
                             {
-                                typeUser == 128 &&
+                                (typeUser == 128) &&
                                 <Link className="card" to="/parents/">
                                     <div className="circle"><i className="fa-solid fa-family-pants fa-bounce"></i></div>
                                     <h2>Padres</h2>
                                 </Link>
                             }
                             {
-                                typeUser == 128 &&
+                                (typeUser == 128) &&
                                 <Link className="card" to="/profiles/">
                                     <div className="circle"><i className="fa-solid fa-user fa-bounce"></i></div>
                                     <h2>Perfiles</h2>
                                 </Link>
                             }
                             {
-                                typeUser == 128 &&
+                                (typeUser == 128) &&
                                 <Link className="card" to="/positions/">
                                     <div className="circle"><i className="fa-solid fa-crosshairs-simple fa-bounce"></i></div>
                                     <h2>Posicion</h2>
                                 </Link>
                             }
                             {
-                                typeUser == 128 &&
+                                (typeUser == 128) &&
                                 <Link className="card" to="/employees/">
                                     <div className="circle"><i className="fa-solid fa-chalkboard-user fa-bounce"></i></div>
                                     <h2>Empleados</h2>
                                 </Link>
                             }
                             {
-                                typeUser == 128 &&
+                                (typeUser == 128) &&
                                 <Link className="card" to="/addresses/">
                                     <div className="circle"><i className="fa-solid fa-address-card fa-bounce"></i></div>
                                     <h2>Direcciones</h2>
                                 </Link>
                             } */}
                             {
-                                typeUser == 128 &&
+                                (typeUser == 128 || typeUser == 2 || typeUser == 3 || typeUser == 4 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
                                 <Link className="card" to="/subjects/">
                                     <div className="circle"><i className="fa-solid fa-book fa-bounce"></i></div>
                                     <h2>Materias</h2>
                                 </Link>
                             }
                             {
-                                typeUser == 128 &&
+                                (typeUser == 128 || typeUser == 0 || typeUser == 1, typeUser == 2 || typeUser == 3 || typeUser == 4 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
                                 <Link className="card" to="/grades/">
                                     <div className="circle"><i className="fa-solid fa-objects-align-bottom fa-bounce"></i></div>
                                     <h2>Calificaciones</h2>
                                 </Link>
                             }
                             {
-                                typeUser == 128 &&
+                                (typeUser == 128 || typeUser == 2 || typeUser == 3 || typeUser == 4 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
                                 <Link className="card" to="/categories/">
                                     <div className="circle"><i className="fa-solid fa-booth-curtain fa-bounce"></i></div>
                                     <h2>Categorías de aulas</h2>
                                 </Link>
                             }
                             {
-                                typeUser == 128 &&
+                                (typeUser == 128 || typeUser == 0 || typeUser == 1, typeUser == 2 || typeUser == 3 || typeUser == 4 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
                                 <Link className="card" to="/classrooms/">
                                     <div className="circle"><i className="fa-solid fa-chalkboard fa-bounce"></i></div>
                                     <h2>Salones</h2>
                                 </Link>
                             }
                             {
-                                typeUser == 128 &&
+                                (typeUser == 128 || typeUser == 0 || typeUser == 1 || typeUser == 2 || typeUser == 3 || typeUser == 4 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
                                 <Link className="card" to="/career/">
                                     <div className="circle"><i className="fa-solid fa-briefcase fa-bounce"></i></div>
                                     <h2>Carreras</h2>
                                 </Link>
                             }
                             {
-                                typeUser == 128 &&
+                                (typeUser == 128 || typeUser == 0 || typeUser == 1 || typeUser == 2 || typeUser == 3 || typeUser == 4 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
                                 <Link className="card" to="/buildings/">
                                     <div className="circle"><i className="fa-solid fa-building fa-bounce"></i></div>
                                     <h2>Edificios</h2>
                                 </Link>
                             }
                             {
-                                typeUser == 128 &&
+                                (typeUser == 128 || typeUser == 0 || typeUser == 1 || typeUser == 2 || typeUser == 3 || typeUser == 4 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
                                 <Link className="card" to="/groups/">
                                     <div className="circle"><i className="fa-solid fa-layer-group fa-bounce"></i></div>
                                     <h2>Grupos</h2>
