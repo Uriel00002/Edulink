@@ -24,6 +24,7 @@ import { IndexCRUD } from './components/crud/models/IndexCRUD';
 import { Index } from './SICAH/views/Index';
 import { IndexUsers } from './components/users/IndexUsers';
 import { HomeView } from './TEMPO/views/HomeView';
+import { FormReport } from './components/reports/FormReport';
 
 
 
@@ -180,6 +181,10 @@ export function App() {
                       </Routes>} />
                       <Route path="/groups/*" element={<Routes>
                         <Route path="/" element={<IndexCRUD nameAPI="groups" nameView="Grupos" permissions={{c:[128,4,7],r:[128,3,4,5,6,7],rbid:[128,0,1,2,3,4,5,6,7],u:[128,4,7],d:[128,7]}} />} />
+                        <Route path="*" element={<Navigate to="/" />} />
+                      </Routes>} />
+                      <Route path="/reports/*" element={<Routes>
+                        <Route path="/" element={<FormReport />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
 

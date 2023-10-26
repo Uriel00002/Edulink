@@ -208,6 +208,13 @@ export const Dashboard = () => {
                                     <h2>Grupos</h2>
                                 </Link>
                             }
+                            {
+                                (typeUser == 128) &&
+                                <Link className="card" to="/reports/">
+                                    <div className="circle"><i className="fa-solid fa-file fa-bounce"></i></div>
+                                    <h2>Reportes</h2>
+                                </Link>
+                            }
                         </ul>
                         <i id="right" className="arrow fa-solid fa-angle-right"></i>
                     </div>
