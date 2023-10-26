@@ -5,7 +5,8 @@
   --secondaryDark: #c47c11;
   --third : rgb(168, 16, 214);
   --gradient : linear-gradient(to right, var(--secondary), var(--primary));
-  --white : #ffffffd8 ;
+  --light : #ffffffd8 ;
+  --dark : #000;
 }
 
 *{
