@@ -144,7 +144,7 @@ export function App() {
                       <Route path="/perfilusuario" element={<PerfilUsuario permissions={{c:[],r:[],rbid:[128],u:[],d:[]}} />} />
                       <Route path="/users/*" element={<Routes>
                         <Route path="/" element={<IndexUsers permissions={{c:[],r:[128,3,4,5,6,7],rbid:[],u:[],d:[]}}  />} />
-                        <Route path="/users" element={<IndexCRUD nameAPI="users" nameView="Usuarios" permissions={{c:[128,7,8],r:[128,7,8],rbid:["all"],u:["all"],d:[128,7,8]}} />} />
+                        <Route path="/users" element={<IndexCRUD nameAPI="users" nameView="Usuarios" permissions={{c:[128,7,8],r:[128,7,8],rbid:[128,7,8],u:[128,7,8],d:[128,7,8]}} />} />
                         <Route path="/students" element={<IndexCRUD nameAPI="students" nameView="Estudiantes" permissions={{c:[128,7],r:[128,2,3,4,5,6,7],rbid:[128,2,3,4,5,6,7],u:[128,7],d:[128,7]}} />/*rbid 0,1*/} />
                         <Route path="/students/register" element={<Register permissions={{c:[128,7],r:[],rbid:[],u:[],d:[]}} />} />
                         <Route path="/highschools" element={<IndexCRUD nameAPI="highschools" nameView="Preparatorias" permissions={{c:[128,7],r:[128,3,4,5,6,7],rbid:[128,2,3,4,5,6,7],u:[128,7],d:[128,7]}} />/*rbid 0,1*/} />

@@ -224,9 +224,32 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
         }
     }
 
+    const createAccount = async(idStudent,type) => {
+        setLoading(true);
+        try {
+            const response = await axios.post(Apiurl + 'users/createAccount/',
+            {
+                id: idStudent,
+                type: type
+            },
+            {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
+            console.log(response);
+            alertSuccess('Registro exitoso de datos para cuenta');
+            alert('Credenciales de acceso:\nUsuario: ' + response.data.account.username + '\nContraseña: ' + response.data.account.password);
+            setLoading(false);
+            window.location.reload();
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
     return (
         <Fragment>
-            <CRUD permissions={permissions} typeUser={typeUser} name={nameView} fields={fields} handleSubmit={handleSubmit} handleDelete={handleDelete} setData={setData} data={data} view={view} setView={setView} action={action} setAction={setAction} setIdItem={setIdItem} />
+            <CRUD permissions={permissions} typeUser={typeUser} name={nameView} fields={fields} handleSubmit={handleSubmit} 
+                handleDelete={handleDelete} setData={setData} data={data} view={view} setView={setView} action={action} 
+                setAction={setAction} setIdItem={setIdItem} createAccount={createAccount} />
         </Fragment>
     )
 }

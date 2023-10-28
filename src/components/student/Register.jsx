@@ -95,6 +95,7 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                 last_name_2: data.form.last_name_2,
                 curp: data.form.curp,
                 career: data.form.career,
+                generation: new Date().getFullYear(),
             },
             {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
             console.log(response.data);
@@ -134,6 +135,7 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                 alertSuccess('Registro exitoso de datos personales');
                 setDataType('#school_info');
                 setCount(count + 1);
+                window.scrollTo(0, 0);
             }
         } catch (error) {
             console.log(error);
@@ -153,9 +155,10 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
             },
             {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
             if(response.status === 201){
-                alert('Registro exitoso de datos de escuela');
+                alertSuccess('Registro exitoso de datos de escuela');
                 setDataType('#fam_data');
                 setCount(count + 1);
+                window.scrollTo(0, 0);
             }
         } catch (error) {
             console.log(error);
@@ -175,9 +178,10 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
             },
             {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
             if(response.status === 201){
-                alert('Registro exitoso de datos de tutor');
+                alertSuccess('Registro exitoso de datos de tutor');
                 setDataType('');
                 setCount(count + 1);
+                window.scrollTo(0, 0);
             }
         } catch (error) {
             console.log(error);
