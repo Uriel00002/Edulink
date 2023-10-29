@@ -71,10 +71,10 @@ export const Login = () => {
                 setLoading(false);
             }
         } else if(view === 'recuperar'){
-            const username = data.form.username;
-            const email = data.form.email;
-            const new_password = data.form.new_password;
-            const confirm_password = data.form.confirm_password;
+            const username = data.form.username.trim();
+            const email = data.form.email.trim();
+            const new_password = data.form.new_password.trim();
+            const confirm_password = data.form.confirm_password.trim();
             let url = Apiurl + "users/newpass/";
             if(!username || !email || !new_password){
                 setData({
