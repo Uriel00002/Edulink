@@ -235,7 +235,15 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
             {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
             console.log(response);
             alertSuccess('Registro exitoso de datos para cuenta');
-            alert('Credenciales de acceso:\nUsuario: ' + response.data.account.username + '\nContraseña: ' + response.data.account.password);
+            navigator.clipboard.writeText("Usuario: " + response.data.account.username + "\nContraseña: " + response.data.account.password)
+            .then(function() {
+                alert('Credenciales de acceso copiadas al portapapeles');
+            })
+            .catch(function(err) {
+                alert('Error al copiar al portapapeles');
+            });
+            console.log('Credenciales de acceso:\nUsuario: ' + response.data.account.username + '\nContraseña: ' + response.data.account.password);
+
             setLoading(false);
             window.location.reload();
         } catch (error) {

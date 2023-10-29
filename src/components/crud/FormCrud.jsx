@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import translate from 'translate'; // Asegúrate de importar la biblioteca translate
 import { alertError } from '../../store/EdulinkStore';
+import $ from 'jquery';
+import 'select2';
+
 
 export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, data, name, createAccount}) => {
   const [translatedFields, setTranslatedFields] = useState([]);
@@ -22,6 +25,10 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
 
     translateFields();
   }, [fields]);
+
+  useEffect(() => {
+    $('select').select2();
+  }, [fields, data]);
 
   const validateFields = async(e) => {
     e.preventDefault();
@@ -79,7 +86,7 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
                         <label htmlFor={fields[index].name}>{translatedFields}</label>
                         {
                           fields[index].type === 'OneToOneField' || fields[index].type === 'ForeignKey' 
-                          ? <select value={data?.form[fields[index]?.name]?.toString() || ''} name={fields[index].name} id={fields[index].name} onChange={(e) => {
+                          ? <select className='select' value={data?.form[fields[index]?.name]?.toString() || ''} name={fields[index].name} id={fields[index].name} onChange={(e) => {
                             setData({
                               ...data,
                               form: {
@@ -100,74 +107,84 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
                             }
                           </select>
                           : fields[index].type === 'ManyToManyField' 
-                          ? <select value={data?.form[fields[index]?.name]?.toString() || ''} multiple name={fields[index].name} id={fields[index].name} onChange={(e)=>{
-                            setData({
-                              ...data,
-                              form: {
-                                ...data.form,
-                                [fields[index].name]: [...e.target.options].filter(option => option.selected).map(option => option.value)
-                              }
-                            })
-                          }}>
-                            <option value='' >Seleccione una opción</option>
-                            {
-                              fields[index].value.map((item, i) => {
-                                const value = item.split(' - ')[0];
-                                const label = item.split(' - ')[1];
-                                return (
-                                  <option key={i} value={value} >{label}</option>
-                                )
+                            ? <select value={data?.form[fields[index]?.name]?.toString() || ''} multiple name={fields[index].name} id={fields[index].name} onChange={(e)=>{
+                              setData({
+                                ...data,
+                                form: {
+                                  ...data.form,
+                                  [fields[index].name]: [...e.target.options].filter(option => option.selected).map(option => option.value)
+                                }
                               })
-                            }
-                          </select>
-                          : fields[index].type === 'PasswordField' && data.form.id
-                            ? <input disabled value='**********'/>
-                            : fields[index].options?.length > 0
-                              ? <select value={data?.form[fields[index]?.name]?.toString() || ''} name={fields[index].name} id={fields[index].name} onChange={(e) => 
-                              setData({...data, form: {...data.form, [fields[index].name]: e.target.value}})} >
-                                <option value='' >Seleccione una opción</option>
-                                {
-                                  JSON.parse(fields[index].options).map((item, i) => {
-                                    return (
-                                      <option key={i} value={item[Object.keys(item)[0]]} >{Object.keys(item)[0]}</option>
-                                    )
-                                  })
-                                }
-                              </select>
-                              :<input type={
-                              fields[index].type === "DateField" ? 'date' 
-                              : fields[index].type === "PasswordField" ? 'password' 
-                              : fields[index].type === "EmailField" ? 'email' 
-                              : fields[index].type === "BooleanField" ? 'checkbox'
-                              : fields[index].type === "IntegerField" ? 'number' 
-                              : 'text'
-                              }name={fields[index].name} id={fields[index].name} onChange={(e) => {
-                                if (e.target.name === 'enrollment') {
-                                  e.target.value = data.form[fields[index].name] || ''
-                                }
-                                if(e.target.value){
-                                  e.target.classList.remove('error');
-                                  e.target.classList.add('success');
-                                }else {
-                                  e.target.classList.remove('success');
-                                  e.target.classList.remove('error');
-                                }
-                                fields[index].type === "BooleanField"
-                                ?setData({
-                                  ...data,
-                                  form: {
-                                    ...data.form,
-                                    [fields[index].name]: e.target.checked
-                                  }
+                            }}>
+                              <option value='' >Seleccione una opción</option>
+                              {
+                                fields[index].value.map((item, i) => {
+                                  const value = item.split(' - ')[0];
+                                  const label = item.split(' - ')[1];
+                                  return (
+                                    <option key={i} value={value} >{label}</option>
+                                  )
                                 })
-                                :setData({
-                                  ...data,
-                                  form: {
-                                    ...data.form,
-                                    [fields[index].name]: e.target.value
-                                  }
-                                })
-                              }} value={data.form[fields[index].name] || ''} checked={data.form[fields[index].name] || ''} />
+                              }
+                            </select>
+                            : fields[index].type === 'PasswordField' && data.form.id
+                              ? <input disabled value='**********'/>
+                              : fields[index].type === 'FileField'
+                                ? <input type="file" name={fields[index].name} id={fields[index].name} onChange={(e) => {
+                                    setData({
+                                      ...data,
+                                      form: {
+                                        ...data.form,
+                                        [fields[index].name]: e.target.files[0]
+                                      }
+                                    })
+                                  }}/>
+                                : fields[index].options?.length > 0
+                                  ? <select value={data?.form[fields[index]?.name]?.toString() || ''} name={fields[index].name} id={fields[index].name} onChange={(e) => 
+                                  setData({...data, form: {...data.form, [fields[index].name]: e.target.value}})} >
+                                    <option value='' >Seleccione una opción</option>
+                                    {
+                                      JSON.parse(fields[index].options).map((item, i) => {
+                                        return (
+                                          <option key={i} value={item[Object.keys(item)[0]]} >{Object.keys(item)[0]}</option>
+                                        )
+                                      })
+                                    }
+                                  </select>
+                                  :<input type={
+                                  fields[index].type === "DateField" ? 'date' 
+                                  : fields[index].type === "PasswordField" ? 'password' 
+                                  : fields[index].type === "EmailField" ? 'email' 
+                                  : fields[index].type === "BooleanField" ? 'checkbox'
+                                  : fields[index].type === "IntegerField" ? 'number' 
+                                  : 'text'
+                                  }name={fields[index].name} id={fields[index].name} onChange={(e) => {
+                                    if (e.target.name === 'enrollment') {
+                                      e.target.value = data.form[fields[index].name] || ''
+                                    }
+                                    if(e.target.value){
+                                      e.target.classList.remove('error');
+                                      e.target.classList.add('success');
+                                    }else {
+                                      e.target.classList.remove('success');
+                                      e.target.classList.remove('error');
+                                    }
+                                    fields[index].type === "BooleanField"
+                                    ?setData({
+                                      ...data,
+                                      form: {
+                                        ...data.form,
+                                        [fields[index].name]: e.target.checked
+                                      }
+                                    })
+                                    :setData({
+                                      ...data,
+                                      form: {
+                                        ...data.form,
+                                        [fields[index].name]: e.target.value
+                                      }
+                                    })
+                                  }} value={data.form[fields[index].name] || ''} checked={data.form[fields[index].name] || ''} />
                         }
                     </div>
                 )

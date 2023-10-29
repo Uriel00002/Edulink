@@ -160,7 +160,7 @@ export function App() {
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
                       <Route path="/grades/*" element={<Routes>
-                        <Route path="/" element={<IndexCRUD nameAPI="grades" nameView="Calificaciones" permissions={{c:[128,7],r:[128,3,4,5,6,7],rbid:[128,0,1,2,3,4,5,6,7],u:[128,2,7],d:[128,7]}} />} />
+                        <Route path="/" element={<IndexCRUD nameAPI="grades" nameView="Calificaciones" permissions={{c:[128,7],r:[128,3,4,5,6,7],rbid:[128,2,3,4,5,6,7],u:[128,2,7],d:[128,7]}} />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
                       <Route path="/categories/*" element={<Routes>
@@ -168,19 +168,19 @@ export function App() {
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
                       <Route path="/classrooms/*" element={<Routes>
-                        <Route path="/" element={<IndexCRUD nameAPI="classrooms" nameView="Salones" permissions={{c:[128,7],r:[128,3,4,5,6,7],rbid:[128,0,1,2,3,4,5,6,7],u:[128,7],d:[128,7]}} />} />
+                        <Route path="/" element={<IndexCRUD nameAPI="classrooms" nameView="Salones" permissions={{c:[128,7],r:[128,3,4,5,6,7],rbid:[128,2,3,4,5,6,7],u:[128,7],d:[128,7]}} />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
                       <Route path="/career/*" element={<Routes>
-                        <Route path="/" element={<IndexCRUD nameAPI="careers" nameView="Carreras" permissions={{c:[128,7],r:[128,4,5,6,7],rbid:[128,0,1,2,3,4,5,6,7],u:[128,7],d:[128,7]}} />} />
+                        <Route path="/" element={<IndexCRUD nameAPI="careers" nameView="Carreras" permissions={{c:[128,7],r:[128,4,5,6,7],rbid:[128,2,3,4,5,6,7],u:[128,7],d:[128,7]}} />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
                       <Route path="/buildings/*" element={<Routes>
-                        <Route path="/" element={<IndexCRUD nameAPI="buildings" nameView="Edificios" permissions={{c:[128,7],r:[128,5,6,7],rbid:[128,0,1,2,3,4,5,6,7],u:[128,7],d:[128,7]}} />} />
+                        <Route path="/" element={<IndexCRUD nameAPI="buildings" nameView="Edificios" permissions={{c:[128,7],r:[128,5,6,7],rbid:[128,2,3,4,5,6,7],u:[128,7],d:[128,7]}} />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
                       <Route path="/groups/*" element={<Routes>
-                        <Route path="/" element={<IndexCRUD nameAPI="groups" nameView="Grupos" permissions={{c:[128,4,7],r:[128,3,4,5,6,7],rbid:[128,0,1,2,3,4,5,6,7],u:[128,4,7],d:[128,7]}} />} />
+                        <Route path="/" element={<IndexCRUD nameAPI="groups" nameView="Grupos" permissions={{c:[128,4,7],r:[128,3,4,5,6,7],rbid:[128,2,3,4,5,6,7],u:[128,4,7],d:[128,7]}} />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
                       <Route path="/reports/*" element={<Routes>
