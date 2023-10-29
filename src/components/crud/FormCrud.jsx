@@ -1,9 +1,11 @@
+/* eslint-disable eqeqeq */
 import React, { useEffect, useState } from 'react'
 import translate from 'translate'; // Asegúrate de importar la biblioteca translate
 import { alertError } from '../../store/EdulinkStore';
 import $ from 'jquery';
 import 'select2';
-
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 
 export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, data, name, createAccount}) => {
   const [translatedFields, setTranslatedFields] = useState([]);
@@ -26,9 +28,9 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
     translateFields();
   }, [fields]);
 
-  useEffect(() => {
-    $('select').select2();
-  }, [fields, data]);
+  // useEffect(() => {
+  //   $('select').select2();
+  // }, [fields, data]);
 
   const validateFields = async(e) => {
     e.preventDefault();
@@ -50,7 +52,6 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
       document.getElementById(validate[0]).focus();
       
     } else {
-      console.log(data);
       handleSubmit(e);
     }
   }
@@ -62,6 +63,46 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
     }else if(name.toLowerCase().includes('pa')){
       createAccount(data.form.id, 'parent');
     }
+  }
+
+  const CustomSelect = ({index, isMulti=false, isClearable=false, typeOptions='default'}) => {
+    let options = [];
+    if(typeOptions === 'default'){
+      options = [
+        ...fields[index].value.map((item, i) => {
+          const value = item.split(' - ')[0];
+          const label = item.split(' - ')[1];
+          return { value, label };
+        }),
+      ];
+    } else if(typeOptions === 'json'){
+      options = [
+        ...JSON.parse(fields[index].options).map((item, i) => {
+          return { value: item[Object.keys(item)[0]], label: Object.keys(item)[0] };
+        })
+      ]
+    } else {
+      options = [
+        ...typeOptions
+      ]
+    }
+    return (
+      <Select className='select' placeholder={isMulti ? 'Seleccione una o mas opciones' : 'Seleccione una opción'} isClearable={true} isSearchable isMulti={isMulti} options={options} 
+      onChange={(item)=>{
+        console.log(item);
+        setData({
+          ...data,
+          form: {
+            ...data.form,
+            [fields[index].name]: isMulti ? item.map(option => option.value) : item ? item.value : '' 
+          }
+        })
+      }} defaultValue={
+        isMulti 
+        ? options.filter(option => data.form[fields[index].name].includes(option.value))
+        : options.find(option => option.value == data.form[fields[index].name])
+      }/>
+    )
   }
 
   return (
@@ -86,48 +127,50 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
                         <label htmlFor={fields[index].name}>{translatedFields}</label>
                         {
                           fields[index].type === 'OneToOneField' || fields[index].type === 'ForeignKey' 
-                          ? <select className='select' value={data?.form[fields[index]?.name]?.toString() || ''} name={fields[index].name} id={fields[index].name} onChange={(e) => {
-                            setData({
-                              ...data,
-                              form: {
-                                ...data.form,
-                                [fields[index].name]: e.target.value
-                              }
-                            })
-                          }}>
-                            <option value='' >Seleccione una opcion</option>
-                            { data &&
-                              fields[index].value.map((item, i) => {
-                                const value = item.split(' - ')[0];
-                                const label = item.split(' - ')[1];
-                                return (
-                                  <option key={i} value={value} >{label}</option>
-                                )
-                              })
-                            }
-                          </select>
+                          // ? <Select className='select' value={data?.form[fields[index]?.name]?.toString() || ''} name={fields[index].name} id={fields[index].name} onChange={(e) => {
+                          //   setData({
+                          //     ...data,
+                          //     form: {
+                          //       ...data.form,
+                          //       [fields[index].name]: e.target.value
+                          //     }
+                          //   })
+                          // }}>
+                          //   <option value='' >Seleccione una opcion</option>
+                          //   { data &&
+                          //     fields[index].value.map((item, i) => {
+                          //       const value = item.split(' - ')[0];
+                          //       const label = item.split(' - ')[1];
+                          //       return (
+                          //         <option key={i} value={value} >{label}</option>
+                          //       )
+                          //     })
+                          //   }
+                          // </Select>
+                          ? <CustomSelect index={index} />
                           : fields[index].type === 'ManyToManyField' 
-                            ? <select value={data?.form[fields[index]?.name]?.toString() || ''} multiple name={fields[index].name} id={fields[index].name} onChange={(e)=>{
-                              setData({
-                                ...data,
-                                form: {
-                                  ...data.form,
-                                  [fields[index].name]: [...e.target.options].filter(option => option.selected).map(option => option.value)
-                                }
-                              })
-                            }}>
-                              <option value='' >Seleccione una opción</option>
-                              {
-                                fields[index].value.map((item, i) => {
-                                  const value = item.split(' - ')[0];
-                                  const label = item.split(' - ')[1];
-                                  return (
-                                    <option key={i} value={value} >{label}</option>
-                                  )
-                                })
-                              }
-                            </select>
-                            : fields[index].type === 'PasswordField' && data.form.id
+                            // ? <select value={data?.form[fields[index]?.name]?.toString() || ''} multiple name={fields[index].name} id={fields[index].name} onChange={(e)=>{
+                            //   setData({
+                            //     ...data,
+                            //     form: {
+                            //       ...data.form,
+                            //       [fields[index].name]: [...e.target.options].filter(option => option.selected).map(option => option.value)
+                            //     }
+                            //   })
+                            // }}>
+                            //   <option value='' >Seleccione una opción</option>
+                            //   {
+                            //     fields[index].value.map((item, i) => {
+                            //       const value = item.split(' - ')[0];
+                            //       const label = item.split(' - ')[1];
+                            //       return (
+                            //         <option key={i} value={value} >{label}</option>
+                            //       )
+                            //     })
+                            //   }
+                            // </select>
+                            ? <CustomSelect index={index} isMulti={true} isClearable={true}/>
+                            : fields[index].name === 'password' && data.form.id
                               ? <input disabled value='**********'/>
                               : fields[index].type === 'FileField'
                                 ? <input type="file" name={fields[index].name} id={fields[index].name} onChange={(e) => {
@@ -140,17 +183,18 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
                                     })
                                   }}/>
                                 : fields[index].options?.length > 0
-                                  ? <select value={data?.form[fields[index]?.name]?.toString() || ''} name={fields[index].name} id={fields[index].name} onChange={(e) => 
-                                  setData({...data, form: {...data.form, [fields[index].name]: e.target.value}})} >
-                                    <option value='' >Seleccione una opción</option>
-                                    {
-                                      JSON.parse(fields[index].options).map((item, i) => {
-                                        return (
-                                          <option key={i} value={item[Object.keys(item)[0]]} >{Object.keys(item)[0]}</option>
-                                        )
-                                      })
-                                    }
-                                  </select>
+                                  // ? <select value={data?.form[fields[index]?.name]?.toString() || ''} name={fields[index].name} id={fields[index].name} onChange={(e) => 
+                                  // setData({...data, form: {...data.form, [fields[index].name]: e.target.value}})} >
+                                  //   <option value='' >Seleccione una opción</option>
+                                  //   {
+                                  //     JSON.parse(fields[index].options).map((item, i) => {
+                                  //       return (
+                                  //         <option key={i} value={item[Object.keys(item)[0]]} >{Object.keys(item)[0]}</option>
+                                  //       )
+                                  //     })
+                                  //   }
+                                  // </select>
+                                  ? <CustomSelect index={index} typeOptions='json' />
                                   :<input type={
                                   fields[index].type === "DateField" ? 'date' 
                                   : fields[index].type === "PasswordField" ? 'password' 
