@@ -149,19 +149,35 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+        const formData = new FormData();
+        for (const key in data.form) {
+            console.log(key, data.form[key]);
+            formData.append(key, data.form[key]);
+        }
         if(idItem){
             if(permissions.u.includes(typeUser)){
                 try {
                     const response = await axios.put(Apiurl + nameAPI + '/' + idItem + '/',
-                        data.form,
-                        { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } }
+                        formData,
+                        { headers: { 'Authorization': 'Token ' + token } }
                     )
                     alertSuccess('Actualización exitosa');
                     console.log(response.data);
-                    setLoading(false);
                 } catch (error) {
-                    alertError('Error: ' + error);
+                    let errorMessage = ''
+                    if (error.response.data.error) {
+                        errorMessage = error.response.data.error
+                    }else if (error.response.data) {
+                        Object.keys(error.response.data).forEach(key => {
+                            errorMessage += error.response.data[key] + '\n'  
+                        })
+                    }else{
+                        errorMessage = error.message
+                    }
+                    alertError('Error: ' + errorMessage);
                     console.log(error);
+                } finally {
+                    setLoading(false);
                 }
             }else{
                 alertError('No tiene permisos para realizar esta operación.');
@@ -171,15 +187,26 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
             if(permissions.c.includes(typeUser)){
                 try {
                     const response = await axios.post(Apiurl + nameAPI + '/',
-                        data.form,
-                        { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } }
+                        formData,
+                        { headers: { 'Authorization': 'Token ' + token } }
                     )
                     alertSuccess('Registro exitoso');
                     console.log(response.data);
-                    setLoading(false);
                 } catch (error) {
-                    alertError('Error: ' + error);
+                    let errorMessage = ''
+                    if (error.response.data.error) {
+                        errorMessage = error.response.data.error
+                    }else if (error.response.data) {
+                        Object.keys(error.response.data).forEach(key => {
+                            errorMessage += error.response.data[key] + '\n'  
+                        })
+                    }else{
+                        errorMessage = error.message
+                    }
+                    alertError('Error: ' + errorMessage);
                     console.log(error);
+                } finally {
+                    setLoading(false);
                 }
             }else{
                 alertError('No tiene permisos para realizar esta operación.');
@@ -213,7 +240,17 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
                     console.log(response.data);
                     setLoading(false);
                 } catch (error) {
-                    alertError('Error: ' + error);
+                    let errorMessage = ''
+                    if (error.response.data.error) {
+                        errorMessage = error.response.data.error
+                    }else if (error.response.data) {
+                        Object.keys(error.response.data).forEach(key => {
+                            errorMessage += error.response.data[key] + '\n'  
+                        })
+                    }else{
+                        errorMessage = error.message
+                    }
+                    alertError('Error: ' + errorMessage);
                     console.log(error);
                 }
             }

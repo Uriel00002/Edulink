@@ -66,6 +66,7 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
   }
 
   const CustomSelect = ({index, isMulti=false, isClearable=false, typeOptions='default'}) => {
+    const animatedComponents = makeAnimated();
     let options = [];
     if(typeOptions === 'default'){
       options = [
@@ -87,7 +88,9 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
       ]
     }
     return (
-      <Select className='select' placeholder={isMulti ? 'Seleccione una o mas opciones' : 'Seleccione una opción'} isClearable={true} isSearchable isMulti={isMulti} options={options} 
+      <Select className='select' components={animatedComponents} 
+      placeholder={isMulti ? 'Seleccione una o mas opciones' : 'Seleccione una opción'} isClearable={true} isSearchable 
+      isMulti={isMulti} options={options} 
       onChange={(item)=>{
         console.log(item);
         setData({
