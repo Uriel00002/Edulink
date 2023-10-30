@@ -56,12 +56,14 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
     }
   }
   
-  const handleCreateAccount = async (e) => {
+  const handleCreateAccount = async (e, type='') => {
     e.preventDefault();
     if(name.toLowerCase().includes('stud')){
       createAccount(data.form.id, 'student');
     }else if(name.toLowerCase().includes('pa')){
       createAccount(data.form.id, 'parent');
+    }else if(name.toLowerCase().includes('empl')){
+      createAccount('new', 'employee',type);
     }
   }
 
@@ -114,13 +116,27 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
         name.toLowerCase().includes('stud')
         ? (data.form?.enrollment === null || data.form?.enrollment === '')
           && <div className="float-end">
-            <button className="btn btn-outline-primary fs-4" onClick={handleCreateAccount}>Completar registro</button>
+            <button className="btn btn-outline-primary fs-4" onClick={(e) => handleCreateAccount(e)}>Completar registro</button>
           </div>
         : name.toLowerCase().includes('pa')
-        && (data.form?.user === null || data.form?.user === '')
-          && <div className="float-end">
-          <button className="btn btn-outline-primary fs-4" onClick={handleCreateAccount}>Crear cuenta</button>
-        </div>
+          ? (data.form?.user === null || data.form?.user === '')
+            && <div className="float-end">
+            <button className="btn btn-outline-primary fs-4" onClick={(e) => handleCreateAccount(e)}>Crear cuenta</button>
+          </div>
+          : name.toLowerCase().includes('empl')
+            && (data.form?.user === null || data.form?.user === '')
+              && <div className="">
+                <p>Si aun no existe una cuenta, crea una para:</p>
+                <div className='d-flex flex-wrap gap-3'>
+                  <button className="btn btn-outline-primary fs-4" onClick={(e) => handleCreateAccount(e,'2')}>Profesor</button>
+                  <button className="btn btn-outline-primary fs-4" onClick={(e) => handleCreateAccount(e,'3')}>Asistente</button>
+                  <button className="btn btn-outline-primary fs-4" onClick={(e) => handleCreateAccount(e,'4')}>Director de carrera</button>
+                  <button className="btn btn-outline-primary fs-4" onClick={(e) => handleCreateAccount(e,'5')}>Director academico</button>
+                  <button className="btn btn-outline-primary fs-4" onClick={(e) => handleCreateAccount(e,'6')}>Rector</button>
+                  <button className="btn btn-outline-primary fs-4" onClick={(e) => handleCreateAccount(e,'7')}>Control escolar</button>
+                  <button className="btn btn-outline-primary fs-4" onClick={(e) => handleCreateAccount(e,'8')}>Recursos humanos</button>
+                </div>
+              </div>
       }
       <form className="form" onSubmit={validateFields}>
         {

@@ -261,13 +261,14 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
         }
     }
 
-    const createAccount = async(idStudent,type) => {
+    const createAccount = async(idStudent,type,forType=null) => {
         setLoading(true);
         try {
             const response = await axios.post(Apiurl + 'users/createAccount/',
             {
                 id: idStudent,
-                type: type
+                type: type,
+                forType: forType
             },
             {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
             console.log(response);
@@ -277,9 +278,17 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
                 alert('Credenciales de acceso copiadas al portapapeles');
             })
             .catch(function(err) {
-                alert('Error al copiar al portapapeles');
+                alert('Error al copiar al portapapeles, intentando de nuevo...');
+                navigator.clipboard.writeText("Usuario: " + response.data.account.username + "\nContraseña: " + response.data.account.password)
+                .then(function() {
+                    alert('Credenciales de acceso copiadas al portapapeles');
+                })
+                .catch(function(err) {
+                    alert('Error al copiar al portapapeles, ...');
+                    createAccount(idStudent,type,forType);
+                });
             });
-            console.log('Credenciales de acceso:\nUsuario: ' + response.data.account.username + '\nContraseña: ' + response.data.account.password);
+            // console.log('Credenciales de acceso:\nUsuario: ' + response.data.account.username + '\nContraseña: ' + response.data.account.password);
 
             setLoading(false);
             window.location.reload();
