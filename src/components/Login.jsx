@@ -27,6 +27,7 @@ export const Login = () => {
         error: false,
         errorMsg: ""
     })
+    const [view, setView] = useState('login')
 
     const manejadorSubmit = e => {
         e.preventDefault();
@@ -44,29 +45,78 @@ export const Login = () => {
 
     const manejadorBoton = async () => {
         setLoading(true);
-        let url = Apiurl + "users/login/";
-        try {
-            const response = await axios.post(url, data?.form);
-            if(response?.data){
-                const newType = encriptar_desencriptar(response.data.type, "e");
-                newType && setAuth({
-                    type: newType,
-                    token: response.data.token,
-                    user: {...response.data.user, type: 'Por que estas viendo esto? -_-'},
-                    isAuth: true,
-                    isTokenActive: true
+        if(view === 'login'){
+            let url = Apiurl + "users/login/";
+            try {
+                const response = await axios.post(url, data?.form);
+                if(response?.data){
+                    const newType = encriptar_desencriptar(response.data.type, "e");
+                    newType && setAuth({
+                        type: newType,
+                        token: response.data.token,
+                        user: {...response.data.user, type: 'Por que estas viendo esto? -_-'},
+                        isAuth: true,
+                        isTokenActive: true
+                    });
+                }
+                console.log(response.data);
+            } catch (error) {
+                console.log(error);
+                setData({
+                    ...data,
+                    error: true,
+                    errorMsg: error.response.data.error
                 });
+            } finally {
+                setLoading(false);
             }
-            console.log(response.data);
-        } catch (error) {
-            console.log(error);
-            setData({
-                ...data,
-                error: true,
-                errorMsg: error.response.data.error
-            });
-        } finally {
-            setLoading(false);
+        } else if(view === 'recuperar'){
+            const username = data.form.username.trim();
+            const email = data.form.email.trim();
+            const new_password = data.form.new_password.trim();
+            const confirm_password = data.form.confirm_password.trim();
+            let url = Apiurl + "users/newpass/";
+            if(!username || !email || !new_password){
+                setData({
+                    ...data,
+                    error: true,
+                    errorMsg: "Todos los campos son obligatorios"
+                });
+                setLoading(false);
+                return;
+            }
+            if(new_password !== confirm_password){
+                setData({
+                    ...data,
+                    error: true,
+                    errorMsg: "Las contraseñas no coinciden"
+                });
+                setLoading(false);
+                return;
+            }
+            try {
+                const response = await axios.post(url, {
+                    username,
+                    new_password,
+                    recovery_password: '1',
+                    email,
+                });
+                console.log(response.data);
+                setData({
+                    ...data,
+                    error: false,
+                    errorMsg: "Se ha enviado un correo con la nueva contraseña, puede iniciar sesión con la nueva contraseña"
+                });
+            } catch (error) {
+                console.log(error);
+                setData({
+                    ...data,
+                    error: true,
+                    errorMsg: error.response.data.error
+                });
+            } finally {
+                setLoading(false);
+            }
         }
     }
 
@@ -81,14 +131,41 @@ export const Login = () => {
                             <img src={Logo} alt="Logo" />
                         </div>
 
-                        <form onSubmit={manejadorSubmit}>
-                            <input type="text" id="login" className="fadeIn second" name="username" placeholder="Usuario" onChange={manejadorChange} />
-                            <input type="password" id="password" className="fadeIn third" name="password" placeholder="Contraseña" onChange={manejadorChange} />
-                            <input type="submit" className="fadeIn fourth" value="Log In" onClick={manejadorBoton} />
-                        </form>
+                        {
+                            view === 'login' && <>
+                            <form onSubmit={manejadorSubmit}>
+                                <input type="text" id="login" className="fadeIn second" name="username" placeholder="Usuario" onChange={manejadorChange} />
+                                <input type="password" id="password" className="fadeIn third" name="password" placeholder="Contraseña" onChange={manejadorChange} />
+                                <div className="d-flex flex-column">
+                                    <input type="submit" className="fadeIn fourth" value="Log In" onClick={manejadorBoton} />
+                                    <button type="button" className="btn" onClick={() => setView('recuperar')}>Olvidaste tu contraseña?</button>
+                                </div>
+                            </form>
+                            </>
+                        }
+                        {
+                            view === 'recuperar' && <>
+                            <form onSubmit={manejadorSubmit}>
+                                <input type="text" id="username" className="fadeIn second" name="username" placeholder="Usuario" onChange={manejadorChange} required />
+                                <input type="text" id="email" className="fadeIn third" name="email" placeholder="Email" onChange={manejadorChange} required />
+                                <input type="password" id="new_password" className="fadeIn third" name="new_password" placeholder="Nueva contraseña" onChange={manejadorChange} required />
+                                <input type="password" id="confirm_password" className="fadeIn third" name="confirm_password" placeholder="Confirmar contraseña" onChange={manejadorChange} required />
+                                <div className="d-flex flex-column">
+                                    <input type="submit" className="fadeIn fourth" value="Enviar" onClick={manejadorBoton} />
+                                    <button type="button" className="btn" onClick={() => setView('login')}>Volver</button>
+                                </div>
+                            </form>
+                            </>
+                        }
 
                         {data.error === true &&
                             <div className="alert alert-danger" role="alert">
+                                {data.errorMsg}
+                            </div>
+                        }
+                        {
+                            data.error === false &&	data.errorMsg &&
+                            <div className="alert alert-success" role="alert">
                                 {data.errorMsg}
                             </div>
                         }

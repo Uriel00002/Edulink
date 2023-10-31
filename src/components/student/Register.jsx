@@ -14,6 +14,7 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     const navigate = useNavigate();
     const typeUser = parseInt(encriptar_desencriptar(storeEdulink(state => state.auth.type), "d")); //tipo de usuario
     const token = storeEdulink(state => state.auth.token);
+    const setLoading = storeEdulink(state => state.setLoading)
     const [dataType, setDataType] = useState('#home')
     const [fields, setFields] = useState(null)
     const [studentId, setStudentId] = useState(null)
@@ -76,7 +77,7 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     const getDataCareers = async() => {
         try {
             const response = await axios.get(Apiurl + 'careers/',{headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
-            console.log(response.data);
+            // console.log(response.data);
             setCareers(response.data)
         } catch (error) {
             console.log(error);
@@ -85,23 +86,30 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
 
     const handleSubmitPersonal = async(e) => {
         e.preventDefault();
+        setLoading(true);
         try {
             const response = await axios.post(Apiurl + 'students/',
             {
+                name: data.form.name,
+                last_name_1: data.form.last_name_1,
+                last_name_2: data.form.last_name_2,
+                curp: data.form.curp,
                 career: data.form.career,
+                generation: new Date().getFullYear(),
             },
             {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
+            console.log(response.data);
             setStudentId(response.data.id)
             ///////////////////////////
             const formData = new FormData();
-            formData.append('student', studentId);
+            formData.append('student', parseInt(response.data.id));
             formData.append('photo', data.form.photo);
-            formData.append('name', data.form.name);
-            formData.append('last_name_1', data.form.last_name_1);
-            formData.append('last_name_2', data.form.last_name_2);
+            // formData.append('name', data.form.name);
+            // formData.append('last_name_1', data.form.last_name_1);
+            // formData.append('last_name_2', data.form.last_name_2);
             formData.append('birthdate', data.form.birthdate);
             formData.append('civil_status', data.form.civil_status);
-            formData.append('curp', data.form.curp);
+            // formData.append('curp', data.form.curp);
             formData.append('blood_type', data.form.blood_type);
             formData.append('gender', data.form.gender);
             formData.append('personal_phone', data.form.personal_phone);
@@ -127,47 +135,58 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                 alertSuccess('Registro exitoso de datos personales');
                 setDataType('#school_info');
                 setCount(count + 1);
+                window.scrollTo(0, 0);
             }
         } catch (error) {
             console.log(error);
+        } finally {
+            setLoading(false);
         }
     }
 
     const handleSubmitSchool = async(e) => {
         e.preventDefault();
+        setLoading(true);
         try {
             const response = await axios.post(Apiurl + 'highschools/',
             {
                 ...data.form,
-                student: studentId
+                student: parseInt(studentId)
             },
             {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
             if(response.status === 201){
-                alert('Registro exitoso de datos de escuela');
+                alertSuccess('Registro exitoso de datos de escuela');
                 setDataType('#fam_data');
                 setCount(count + 1);
+                window.scrollTo(0, 0);
             }
         } catch (error) {
             console.log(error);
+        } finally {
+            setLoading(false);
         }
     }
 
     const handleSubmitTutor = async(e) => {
         e.preventDefault();
+        setLoading(true);
         try {
             const response = await axios.post(Apiurl + 'parents/',
             {
                 ...data.form,
-                student: studentId
+                student: parseInt(studentId)
             },
             {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
             if(response.status === 201){
-                alert('Registro exitoso de datos de tutor');
+                alertSuccess('Registro exitoso de datos de tutor');
                 setDataType('');
                 setCount(count + 1);
+                window.scrollTo(0, 0);
             }
         } catch (error) {
             console.log(error);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -235,7 +254,7 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                                                                     <label htmlFor={field.name}>{field.verbose}</label>
                                                                     {
                                                                         field.name === 'career' 
-                                                                        ? <select className="form-control fs-5" name={field.name} id={field.name} onChange={(e) => setData({ ...data, form: { ...data.form, [field.name]: e.target.value } })}>
+                                                                        ? <select required className="form-control fs-5" name={field.name} id={field.name} onChange={(e) => setData({ ...data, form: { ...data.form, [field.name]: e.target.value } })}>
                                                                             <option value="">Selecciona una opción</option>
                                                                             {
                                                                                 careers && careers.map((career, index) => {
@@ -245,7 +264,19 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                                                                                 })
                                                                             }
                                                                         </select>
-                                                                        : <input type={
+                                                                        : fields[index].options?.length > 0
+                                                                        ? <select className="form-control fs-5" name={fields[index].name} id={fields[index].name} onChange={(e) => 
+                                                                        setData({...data, form: {...data.form, [fields.name]: e.target.value}})} >
+                                                                          <option value='' >Seleccione una opción</option>
+                                                                          {
+                                                                            JSON.parse(fields[index]?.options)?.map((item, i) => {
+                                                                              return (
+                                                                                <option key={i} value={item[Object.keys(item)[0]]} >{Object.keys(item)[0]}</option>
+                                                                              )
+                                                                            })
+                                                                          }
+                                                                        </select>
+                                                                        : <input required className="form-control fs-5" type={
                                                                             field.type === "DateField" ? 'date' : 
                                                                             field.type === 'FileField' ? 'file' : 
                                                                             'text'
@@ -288,7 +319,7 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                                                                     field.name !== 'enrollment' && field.name !== 'generation' &&
                                                                     <div className="">
                                                                         <label htmlFor={field.name}>{field.verbose}</label>
-                                                                        <input type={
+                                                                        <input required type={
                                                                             field.type === "DateField" ? 'date' : 
                                                                             field.type === 'FileField' ? 'file' : 
                                                                             'text'
@@ -329,7 +360,7 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                                                                     field.name !== 'enrollment' && field.name !== 'generation' &&
                                                                     <div className="">
                                                                         <label htmlFor={field.name}>{field.verbose}</label>
-                                                                        <input type={
+                                                                        <input required type={
                                                                             field.type === "DateField" ? 'date' : 
                                                                             field.type === 'FileField' ? 'file' : 
                                                                             'text'

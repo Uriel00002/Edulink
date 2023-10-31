@@ -184,6 +184,14 @@ a {
   .wrapper .carousel {
     grid-auto-columns: 100%;
   }
+  .carousel .card .circle{
+    width: 110px;
+    height: 110px;
+  }
+  
+  .carousel .card .circle i{
+    font-size: 60px;
+  }
 }
 
 /*Estilos del menu de SICAH*/

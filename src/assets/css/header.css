@@ -5,29 +5,29 @@
     width: 100vw;
     height: 12vh;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    align-items: center;
-    justify-items: center;
 }
 
 .header_logo{
     float: left;
     width: 19%;
     height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .header_logo img{
     width: 100%;
     height: 80%;
-    margin-top: 2%;
     margin-left: 20px;
 }
 
 .info-page{
     width: 60%;
     height: 100%;
-    font-size: 40px;
+    font-size: 6vh;
     font-weight: 600;
     text-align: center;
+    padding: 1vh;
     background: linear-gradient(to right, var(--secondary) , var(--primary) );
     background-clip: text;
     color: transparent;
@@ -40,7 +40,6 @@
 
 .header_icon{
     cursor: pointer;
-    width: 30%;
     float: right;
     width: 10%;
     height: 100%;
@@ -99,7 +98,7 @@
     position: relative;
     display:flex;
     flex-wrap: wrap;
-    gap: 25px;
+    gap: 30px;
 }
 
 .contact_us ul li{
@@ -186,6 +185,19 @@
 }
 
 
+.history{
+    background-color: var(--dark);
+    height: 40px;
+    justify-content: center;
+}
+
+.history p{
+    color: var(--light);
+    font-size: 20px;
+    padding: 0 auto;
+    margin: 0 auto;
+}
+
 @media (width < 500px){
 
     .header{
@@ -195,7 +207,7 @@
     .info-page{
         width: 80%;
         height: 100%;
-        font-size: 40px;
+        font-size: 4vh;
         font-weight: 500;
         text-align: center;
         padding-left: 20%;
@@ -205,7 +217,7 @@
         float: right;
         width: 20%;
         height: 100%;
-        margin-top: 20px;
+        margin-top: 10px;
     }
 
     .header_logo{
@@ -213,8 +225,17 @@
         width: 0%;
     }
 
-    .contact_us ul li i{
-        font-size: .8cm ;
+    .contact_us ul{
+        display:inline-flex;
+        justify-content: center;
     }
+    .contact_us ul li i{
+        font-size: .6cm ;
+    }
+
+    .history p{
+        font-size: 10px;
+    }
+
 
 }

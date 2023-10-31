@@ -105,7 +105,7 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
 
     const getFields = async () => {
         try {
-            const response = await axios.get(Apiurl + nameAPI + '/fields?token=' + token, { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } })
+            const response = await axios.get(Apiurl + nameAPI + '/fields', { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } })
             setFields(response.data)
         } catch (error) {
             console.log(error);
@@ -149,19 +149,35 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+        const formData = new FormData();
+        for (const key in data.form) {
+            console.log(key, data.form[key]);
+            formData.append(key, data.form[key]);
+        }
         if(idItem){
             if(permissions.u.includes(typeUser)){
                 try {
                     const response = await axios.put(Apiurl + nameAPI + '/' + idItem + '/',
-                        data.form,
-                        { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } }
+                        formData,
+                        { headers: { 'Authorization': 'Token ' + token } }
                     )
                     alertSuccess('Actualización exitosa');
                     console.log(response.data);
-                    setLoading(false);
                 } catch (error) {
-                    alertError('Error: ' + error);
+                    let errorMessage = ''
+                    if (error.response.data.error) {
+                        errorMessage = error.response.data.error
+                    }else if (error.response.data) {
+                        Object.keys(error.response.data).forEach(key => {
+                            errorMessage += error.response.data[key] + '\n'  
+                        })
+                    }else{
+                        errorMessage = error.message
+                    }
+                    alertError('Error: ' + errorMessage);
                     console.log(error);
+                } finally {
+                    setLoading(false);
                 }
             }else{
                 alertError('No tiene permisos para realizar esta operación.');
@@ -171,15 +187,26 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
             if(permissions.c.includes(typeUser)){
                 try {
                     const response = await axios.post(Apiurl + nameAPI + '/',
-                        data.form,
-                        { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } }
+                        formData,
+                        { headers: { 'Authorization': 'Token ' + token } }
                     )
                     alertSuccess('Registro exitoso');
                     console.log(response.data);
-                    setLoading(false);
                 } catch (error) {
-                    alertError('Error: ' + error);
+                    let errorMessage = ''
+                    if (error.response.data.error) {
+                        errorMessage = error.response.data.error
+                    }else if (error.response.data) {
+                        Object.keys(error.response.data).forEach(key => {
+                            errorMessage += error.response.data[key] + '\n'  
+                        })
+                    }else{
+                        errorMessage = error.message
+                    }
+                    alertError('Error: ' + errorMessage);
                     console.log(error);
+                } finally {
+                    setLoading(false);
                 }
             }else{
                 alertError('No tiene permisos para realizar esta operación.');
@@ -213,7 +240,17 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
                     console.log(response.data);
                     setLoading(false);
                 } catch (error) {
-                    alertError('Error: ' + error);
+                    let errorMessage = ''
+                    if (error.response.data.error) {
+                        errorMessage = error.response.data.error
+                    }else if (error.response.data) {
+                        Object.keys(error.response.data).forEach(key => {
+                            errorMessage += error.response.data[key] + '\n'  
+                        })
+                    }else{
+                        errorMessage = error.message
+                    }
+                    alertError('Error: ' + errorMessage);
                     console.log(error);
                 }
             }
@@ -224,9 +261,55 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
         }
     }
 
+    const createAccount = async(idStudent,type,forType=null) => {
+        setLoading(true);
+        try {
+            const response = await axios.post(Apiurl + 'users/createAccount/',
+            {
+                id: idStudent,
+                type: type,
+                forType: forType
+            },
+            {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
+            console.log(response);
+            alertSuccess('Registro exitoso de datos para cuenta');
+            navigator.clipboard.writeText("Usuario: " + response.data.account.username + "\nContraseña: " + response.data.account.password)
+            .then(function() {
+                alert('Credenciales de acceso copiadas al portapapeles');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            })
+            .catch(function(err) {
+                alert('Error al copiar al portapapeles, intentando de nuevo...');
+                navigator.clipboard.writeText("Usuario: " + response.data.account.username + "\nContraseña: " + response.data.account.password)
+                .then(function() {
+                    alert('Credenciales de acceso copiadas al portapapeles');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
+                })
+                .catch(function(err) {
+                    alert('Error al copiar al portapapeles, ...');
+                    createAccount(idStudent,type,forType);
+                });
+            });
+            // console.log('Credenciales de acceso:\nUsuario: ' + response.data.account.username + '\nContraseña: ' + response.data.account.password);
+
+            setLoading(false);
+        } catch (error) {
+            alertError(error.response.data.error)
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
     return (
         <Fragment>
-            <CRUD permissions={permissions} typeUser={typeUser} name={nameView} fields={fields} handleSubmit={handleSubmit} handleDelete={handleDelete} setData={setData} data={data} view={view} setView={setView} action={action} setAction={setAction} setIdItem={setIdItem} />
+            <CRUD permissions={permissions} typeUser={typeUser} name={nameView} fields={fields} handleSubmit={handleSubmit} 
+                handleDelete={handleDelete} setData={setData} data={data} view={view} setView={setView} action={action} 
+                setAction={setAction} setIdItem={setIdItem} createAccount={createAccount} />
         </Fragment>
     )
 }

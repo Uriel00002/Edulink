@@ -40,6 +40,9 @@ const Footer = () => {
         </li>
       </ul>
     </div>
+    <div className="history">
+      <p>Todos los derechos reservados por la Universidad Tecnologica de Tlaxcala y desarrollada por Malinche Software</p>
+    </div>
 
   </section>
 
