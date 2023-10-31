@@ -94,7 +94,6 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
       placeholder={isMulti ? 'Seleccione una o mas opciones' : 'Seleccione una opción'} isClearable={true} isSearchable 
       isMulti={isMulti} options={options} 
       onChange={(item)=>{
-        console.log(item);
         setData({
           ...data,
           form: {
@@ -104,7 +103,7 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
         })
       }} defaultValue={
         isMulti 
-        ? options.filter(option => data.form[fields[index].name].includes(option.value))
+        ? options.filter(option => data.form[fields[index].name]?.includes(option.value))
         : options.find(option => option.value == data.form[fields[index].name])
       }/>
     )
