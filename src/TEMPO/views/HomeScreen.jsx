@@ -1,6 +1,6 @@
 import React from 'react';
-import Navigation  from '../../tempo/Navigation';
-import '../../../assets/css/tempo.css';
+import Navigation  from '../../components/tempo/Navigation';
+import '../../src/assets/css/tempo.css';
 import 'font-awesome/css/font-awesome.css';
 
 export const HomeScreen = () =>  {
