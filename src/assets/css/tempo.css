@@ -1,0 +1,54 @@
+.home_main {
+    width: 100vw;
+    height: 88vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    color: black;
+    text-align: center;
+}
+.card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.card {
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+    width: 400px;
+    height: 450px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+.card .title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.card .card-icon {
+    font-size: 15em;
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    width: 100%; /* Ocupar el ancho completo de la tarjeta */
+    height: 50%; /* Ocupar la altura completa de la tarjeta */
+  }
+  
+
+
+

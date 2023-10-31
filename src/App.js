@@ -192,9 +192,9 @@ export function App() {
                       {/* TEMPO */}
                       <Route path="/tempo/*" element={<Routes>
                         <Route path="/" element={<HomeView />} />
-                        <Route path="/createSchedules" element={<IndexCRUD nameAPI="createSchedules" nameView="Crear horario" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
-                        <Route path="/editSchedules" element={<IndexCRUD nameAPI="editSchedules" nameView="Editar horario" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
-                        <Route path="/seeSchedules" element={<IndexCRUD nameAPI="seeSchedules" nameView="" permissions={{c:[128],r:[128],rbid:[128],u:[128],d:[128]}} />} />
+                        <Route path="/createSchedules" />
+                        <Route path="/editSchedules" />
+                        <Route path="/seeSchedules" />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
         
