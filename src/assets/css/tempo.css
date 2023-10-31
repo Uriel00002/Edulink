@@ -14,7 +14,7 @@
     justify-content: center;
 }
 
-.card {
+.card-tempo {
     border: 1px solid #e0e0e0;
     border-radius: 5px;
     padding: 20px;
@@ -28,19 +28,19 @@
     cursor: pointer;
 }
 
-.card:hover {
+.card-tempo:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 
-.card .title {
+.card-tempo .title {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 8px;
 }
 
-.card .card-icon {
+.card-tempo .card-icon {
     font-size: 15em;
     display: flex;
     justify-content: center; /* Centrar horizontalmente */

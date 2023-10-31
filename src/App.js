@@ -13,7 +13,7 @@ import {Login} from './components/Login';
 import {Dashboard} from './components/Dashboard';
 import {Register} from './components/student/Register';
 import {Calif} from './components/grade/Calif';
-import {PerfilUsuario} from './components/views/PerfilUsuario';
+import {PerfilUsuario} from './components/PerfilUsuario';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { Apiurl } from './services/apirest';
@@ -25,6 +25,7 @@ import { Index } from './SICAH/views/Index';
 import { IndexUsers } from './components/users/IndexUsers';
 import { HomeView } from './TEMPO/views/HomeView';
 import { FormReport } from './components/reports/FormReport';
+import HomeScreen from './TEMPO/views/HomeScreen';
 
 
 
@@ -140,7 +141,6 @@ export function App() {
                       <Route path="/" element={<Dashboard />} />
                       <Route path="/calif" element={<Calif permissions={{c:[],r:[128],rbid:[128,0],u:[128],d:[]}} />} />
                       <Route path="/sicah" element={<Index permissions={{c:[],r:[128],rbid:[],u:[],d:[]}} />} />
-                      <Route path="/tempo" element={<HomeView permissions={{c:[],r:[128],rbid:[],u:[],d:[]}} />} />
                       <Route path="/perfilusuario" element={<PerfilUsuario permissions={{c:[],r:[],rbid:[128],u:[],d:[]}} />} />
                       <Route path="/users/*" element={<Routes>
                         <Route path="/" element={<IndexUsers permissions={{c:[],r:[128,3,4,5,6,7],rbid:[],u:[],d:[]}}  />} />
@@ -196,7 +196,7 @@ export function App() {
 
                       {/* TEMPO */}
                       <Route path="/tempo/*" element={<Routes>
-                        <Route path="/" element={<HomeView />} />
+                        <Route path="/" element={<HomeScreen />} />
                         <Route path="/createSchedules" />
                         <Route path="/editSchedules" />
                         <Route path="/seeSchedules" />

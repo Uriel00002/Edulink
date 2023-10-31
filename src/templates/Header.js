@@ -40,7 +40,7 @@ const Header = ({name}) => {
               <ul> 
                   <li onClick={()=>{navigate('/perfilusuario')}}><i className="fa-duotone fa-user"></i> Ver perfil</li>
                   <li onClick={()=>{navigate('/')}}><i className="fa-duotone fa-user-graduate"></i> EDULINK</li>
-                  <li onClick={()=>{}}><i className="fa-duotone fa-table"></i> TEMPO</li>
+                  <li onClick={()=>{navigate('/tempo')}}><i className="fa-duotone fa-table"></i> TEMPO</li>
                   <li onClick={()=>{navigate('/sicah')}}><i className="fa-duotone fa-clock"></i> SICAH</li>
                   <li onClick={()=>{}}><i className="fa-duotone fa-user-police"></i> SIPECS</li>
                   <li onClick={logout}><i className="fa-duotone fa-arrow-right-from-bracket"></i> Cerrar Sesión</li>
