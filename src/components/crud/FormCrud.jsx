@@ -63,7 +63,7 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
     }else if(name.toLowerCase().includes('pa')){
       createAccount(data.form.id, 'parent');
     }else if(name.toLowerCase().includes('empl')){
-      createAccount('new', 'employee',type);
+      createAccount(data.form.id, 'employee',type);
     }
   }
 

@@ -276,12 +276,18 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
             navigator.clipboard.writeText("Usuario: " + response.data.account.username + "\nContraseña: " + response.data.account.password)
             .then(function() {
                 alert('Credenciales de acceso copiadas al portapapeles');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
             })
             .catch(function(err) {
                 alert('Error al copiar al portapapeles, intentando de nuevo...');
                 navigator.clipboard.writeText("Usuario: " + response.data.account.username + "\nContraseña: " + response.data.account.password)
                 .then(function() {
                     alert('Credenciales de acceso copiadas al portapapeles');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
                 })
                 .catch(function(err) {
                     alert('Error al copiar al portapapeles, ...');
@@ -291,8 +297,8 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
             // console.log('Credenciales de acceso:\nUsuario: ' + response.data.account.username + '\nContraseña: ' + response.data.account.password);
 
             setLoading(false);
-            window.location.reload();
         } catch (error) {
+            alertError(error.response.data.error)
             console.log(error);
         } finally {
             setLoading(false);
