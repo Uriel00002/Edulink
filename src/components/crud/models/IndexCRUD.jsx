@@ -112,13 +112,35 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
         }
     }
 
+    function eliminarTextoDespuesDelGuion(cadena) {
+        const partes = cadena.split(' - ');
+        return partes.length > 0 ? partes[0] : cadena;
+    }
+    function procesarPropiedad(prop) {
+        if (typeof prop === 'string') {
+            return eliminarTextoDespuesDelGuion(prop);
+        } else if (Array.isArray(prop)) {
+            return prop.map(el => {
+                if (typeof el === 'string') {
+                    return eliminarTextoDespuesDelGuion(el);
+                }
+                return el;
+            });
+        }
+        return prop;
+    }
+
     const getDataById = async () => {
         if(permissions.rbid.includes(typeUser)){
             try {
                 const response = await axios.get(Apiurl + nameAPI + '/' + idItem + '/', { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } })
+                let formatedData = response.data;
+                for (var key in formatedData) {
+                    formatedData[key] = procesarPropiedad(formatedData[key]);
+                }
                 setData({
                     ...data,
-                    form: response.data
+                    form: formatedData
                 })
             } catch (error) {
                 console.log(error);

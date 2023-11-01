@@ -62,13 +62,16 @@ export const storeEdulink = create(persist((set, get) => ({
             token: token,
         },
     })),
-    setLoading: (loading) => set(state => ({
+    setLoading: (loading) => {
+      window.scrollTo(0, 0);
+      return set(state => ({
         ...state,
         ui: {
             ...state.ui,
             loading: loading,
         },
-    })),
+    }))
+    },
     logout: async() => {
         get().setLoading(true);
         try {

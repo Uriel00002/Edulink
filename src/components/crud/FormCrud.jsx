@@ -104,7 +104,8 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
       }} defaultValue={
         isMulti 
         ? options.filter(option => data.form[fields[index].name]?.includes(option.value))
-        : options.find(option => option.value == data.form[fields[index].name])
+        // : options.find(option => option.value == data.form[fields[index].name])
+        : options.find(option => data.form[fields[index].name]?.includes(option.value))
       }/>
     )
   }
