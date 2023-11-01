@@ -219,9 +219,10 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
                                   : fields[index].type === "PasswordField" ? 'password' 
                                   : fields[index].type === "EmailField" ? 'email' 
                                   : fields[index].type === "BooleanField" ? 'checkbox'
-                                  : fields[index].type === "IntegerField" ? 'number' 
+                                  : fields[index].type === "IntegerField" ? 'number'
+                                  : fields[index].type === "FloatField" ? 'number' 
                                   : 'text'
-                                  }name={fields[index].name} id={fields[index].name} onChange={(e) => {
+                                  }name={fields[index].name} id={fields[index].name} pattern={fields[index].type === "IntegerField" ? '[0-9]+' : fields[index].type === "FloatField" ? '[0-9]*[.,]?[0-9]+' : ''} onChange={(e) => {
                                     if (e.target.name === 'enrollment') {
                                       e.target.value = data.form[fields[index].name] || ''
                                     }
