@@ -89,6 +89,7 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
         ...typeOptions
       ]
     }
+    console.log(options.find(option => option.value == data.form[fields[index].name]));
     return (
       <Select className='select' components={animatedComponents} 
       placeholder={isMulti ? 'Seleccione una o mas opciones' : 'Seleccione una opción'} isClearable={true} isSearchable 
@@ -105,7 +106,7 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
         isMulti 
         ? options.filter(option => data.form[fields[index].name]?.includes(option.value))
         // : options.find(option => option.value == data.form[fields[index].name])
-        : options.find(option => data.form[fields[index].name]?.includes(option.value))
+        : options.find(option => option.value == data.form[fields[index].name])
       }/>
     )
   }
@@ -222,7 +223,8 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
                                   : fields[index].type === "IntegerField" ? 'number'
                                   : fields[index].type === "FloatField" ? 'number' 
                                   : 'text'
-                                  }name={fields[index].name} id={fields[index].name} pattern={fields[index].type === "IntegerField" ? '[0-9]+' : fields[index].type === "FloatField" ? '[0-9]*[.,]?[0-9]+' : ''} onChange={(e) => {
+                                  // eslint-disable-next-line no-useless-escape
+                                  }name={fields[index].name} id={fields[index].name} onChange={(e) => {
                                     if (e.target.name === 'enrollment') {
                                       e.target.value = data.form[fields[index].name] || ''
                                     }

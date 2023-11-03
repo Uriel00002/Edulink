@@ -85,6 +85,7 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     }
 
     const handleSubmitPersonal = async(e) => {
+        console.log(data);
         e.preventDefault();
         setLoading(true);
         try {
@@ -265,8 +266,8 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                                                                             }
                                                                         </select>
                                                                         : fields[index].options?.length > 0
-                                                                        ? <select className="form-control fs-5" name={fields[index].name} id={fields[index].name} onChange={(e) => 
-                                                                        setData({...data, form: {...data.form, [fields.name]: e.target.value}})} >
+                                                                        ? <select required className="form-control fs-5" name={fields[index].name} id={fields[index].name} onChange={(e) => 
+                                                                        setData({...data, form: {...data.form, [fields[index].name]: e.target.value}})} >
                                                                           <option value='' >Seleccione una opción</option>
                                                                           {
                                                                             JSON.parse(fields[index]?.options)?.map((item, i) => {
