@@ -171,10 +171,15 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        const formData = new FormData();
-        for (const key in data.form) {
-            console.log(key, data.form[key]);
-            formData.append(key, data.form[key]);
+        let formData
+        if(data.form.photo){
+            formData = new FormData();
+            for (const key in data.form) {
+                // console.log(key, data.form[key]);
+                formData.append(key, data.form[key]);
+            }
+        } else {
+            formData = data.form;
         }
         if(idItem){
             if(permissions.u.includes(typeUser)){
@@ -207,6 +212,8 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
             }
         }else{
             if(permissions.c.includes(typeUser)){
+                typeof formData === 'object' ? console.log(formData) : 
+                formData.forEach((value, key) => console.log(key + ' ' + value))
                 try {
                     const response = await axios.post(Apiurl + nameAPI + '/',
                         formData,

@@ -73,7 +73,7 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
     if(typeOptions === 'default'){
       options = [
         ...fields[index].value.map((item, i) => {
-          const value = item.split(' - ')[0];
+          const value = parseInt(item.split(' - ')[0]);
           const label = item.split(' - ')[1];
           return { value, label };
         }),
@@ -89,7 +89,6 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
         ...typeOptions
       ]
     }
-    console.log(options.find(option => option.value == data.form[fields[index].name]));
     return (
       <Select className='select' components={animatedComponents} 
       placeholder={isMulti ? 'Seleccione una o mas opciones' : 'Seleccione una opción'} isClearable={true} isSearchable 
@@ -104,8 +103,11 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
         })
       }} defaultValue={
         isMulti 
-        ? options.filter(option => data.form[fields[index].name]?.includes(option.value))
-        // : options.find(option => option.value == data.form[fields[index].name])
+        ? (Array.isArray(data.form[fields[index].name])
+          ? options.filter(option =>
+              data.form[fields[index].name].map(texto => parseInt(texto, 10))?.includes(option.value)
+            )
+          : [])
         : options.find(option => option.value == data.form[fields[index].name])
       }/>
     )

@@ -110,7 +110,9 @@ export const TableCrud = ({permissions, typeUser, data, setAction, handleDelete}
                                                 }
                                             </td>
                                         ) : (
-                                            <td key={index}>{item[field]}</td>
+                                            <td key={index}>{
+                                              typeof item[field] === 'boolean' ? (item[field] ? 'Si' : 'No') : item[field].toString().length > 60 ? item[field].toString().substring(0, 60) + '...' : item[field]
+                                            }</td>
                                         )
                                     }</>
                                 ))
