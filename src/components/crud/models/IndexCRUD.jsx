@@ -212,8 +212,6 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
             }
         }else{
             if(permissions.c.includes(typeUser)){
-                typeof formData === 'object' ? console.log(formData) : 
-                formData.forEach((value, key) => console.log(key + ' ' + value))
                 try {
                     const response = await axios.post(Apiurl + nameAPI + '/',
                         formData,
