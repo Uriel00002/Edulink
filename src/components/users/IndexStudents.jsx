@@ -14,6 +14,7 @@ export const IndexStudents = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     {
       name: 'Estudiantes',
       link: [
+        {name: 'Registrar', link: '/students/register', permissions: [128,7]},
         {name: 'Datos academicos', link: '/students/students', permissions: [128,2,3,4,5,6,7]},
         {name: 'Preparatorias', link: '/students/highschools',permissions: [128,2,3,4,5,6,7]},
         {name: 'Perfiles', link: '/students/profiles', permissions: [128,2,3,4,5,6,7]},

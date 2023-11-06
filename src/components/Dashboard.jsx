@@ -79,6 +79,18 @@ export const Dashboard = () => {
             carousel.addEventListener("scroll", infiniteScroll);
             wrapper.addEventListener("mouseenter", () => clearTimeout(timeoutId));
             wrapper.addEventListener("mouseleave", autoPlay);
+
+            //other code
+            const numElements = carouselChildrens.length;
+            if (numElements < 4) {
+                // Si hay menos de 4 elementos, cambia la propiedad grid-auto-columns
+                document.querySelector(".wrapper .carousel").style.gridAutoColumns = "calc((100% / 2) - 9px)";
+                
+                if (numElements < 3) {
+                    // Si hay menos de 3 elementos, cambia la propiedad grid-auto-columns nuevamente
+                    document.querySelector(".wrapper .carousel").style.gridAutoColumns = "100%";
+                }
+            }
         } catch (error) {
             console.log(error);
         }
@@ -92,17 +104,9 @@ export const Dashboard = () => {
             </section>
             <section className="dash_main">
                 <div className="dash_menu">
-
                     <div className="wrapper">
                         <i id="left" className="arrow fa-solid fa-angle-left"></i>
                         <ul className="carousel">
-                            {
-                                (typeUser == 128 || typeUser == 7) &&
-                                <Link className="card" to="/users/students/register">
-                                    <div className="circle"><i className="fa-solid fa-graduation-cap fa-bounce"></i></div>
-                                    <h2>Inscripcion</h2>
-                                </Link>
-                            }
                             {
                                 (typeUser == 128 || typeUser == 7 || typeUser == 8) &&
                                 <Link className="card" to="/users/">
@@ -120,60 +124,11 @@ export const Dashboard = () => {
                             
                             {
                                 (typeUser == 128 || typeUser == 8) &&
-                                <Link className="card" to="/students">
+                                <Link className="card" to="/employees">
                                     <div className="circle"><i className="fa-solid fa-helmet-safety fa-bounce"></i></div>
                                     <h2>Empleados</h2>
                                 </Link>
                             }
-                            {/* {
-                                (typeUser == 128) &&
-                                <Link className="card" to="/students/">
-                                    <div className="circle"><i className="fa-solid fa-file-user fa-bounce"></i></div>
-                                    <h2>Estudiantes</h2>
-                                </Link>
-                            }
-                            {
-                                (typeUser == 128) &&
-                                <Link className="card" to="/highschools/">
-                                    <div className="circle"><i className="fa-solid fa-school fa-bounce"></i></div>
-                                    <h2>Preparatorias</h2>
-                                </Link>
-                            }
-                            {
-                                (typeUser == 128) &&
-                                <Link className="card" to="/parents/">
-                                    <div className="circle"><i className="fa-solid fa-family-pants fa-bounce"></i></div>
-                                    <h2>Padres</h2>
-                                </Link>
-                            }
-                            {
-                                (typeUser == 128) &&
-                                <Link className="card" to="/profiles/">
-                                    <div className="circle"><i className="fa-solid fa-user fa-bounce"></i></div>
-                                    <h2>Perfiles</h2>
-                                </Link>
-                            }
-                            {
-                                (typeUser == 128) &&
-                                <Link className="card" to="/positions/">
-                                    <div className="circle"><i className="fa-solid fa-crosshairs-simple fa-bounce"></i></div>
-                                    <h2>Posicion</h2>
-                                </Link>
-                            }
-                            {
-                                (typeUser == 128) &&
-                                <Link className="card" to="/employees/">
-                                    <div className="circle"><i className="fa-solid fa-chalkboard-user fa-bounce"></i></div>
-                                    <h2>Empleados</h2>
-                                </Link>
-                            }
-                            {
-                                (typeUser == 128) &&
-                                <Link className="card" to="/addresses/">
-                                    <div className="circle"><i className="fa-solid fa-address-card fa-bounce"></i></div>
-                                    <h2>Direcciones</h2>
-                                </Link>
-                            } */}
                             {
                                 (typeUser == 128 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
                                 <Link className="card" to="/subjects/">
