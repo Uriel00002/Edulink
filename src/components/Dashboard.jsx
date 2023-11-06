@@ -104,10 +104,25 @@ export const Dashboard = () => {
                                 </Link>
                             }
                             {
-                                (typeUser == 128 || typeUser == 3 || typeUser == 4 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
+                                (typeUser == 128 || typeUser == 7 || typeUser == 8) &&
                                 <Link className="card" to="/users/">
                                     <div className="circle"><i className="fa-solid fa-user fa-bounce"></i></div>
                                     <h2>Usuarios</h2>
+                                </Link>
+                            }
+                            {
+                                (typeUser == 128 || typeUser == 3 || typeUser == 4 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
+                                <Link className="card" to="/students">
+                                    <div className="circle"><i className="fa-solid fa-graduation-cap fa-bounce"></i></div>
+                                    <h2>Estudiantes</h2>
+                                </Link>
+                            }
+                            
+                            {
+                                (typeUser == 128 || typeUser == 8) &&
+                                <Link className="card" to="/students">
+                                    <div className="circle"><i className="fa-solid fa-helmet-safety fa-bounce"></i></div>
+                                    <h2>Empleados</h2>
                                 </Link>
                             }
                             {/* {
@@ -209,7 +224,7 @@ export const Dashboard = () => {
                                 </Link>
                             }
                             {
-                                (typeUser == 128) &&
+                                (typeUser == 128 || typeUser == 3 || typeUser == 4 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
                                 <Link className="card" to="/reports/">
                                     <div className="circle"><i className="fa-solid fa-file fa-bounce"></i></div>
                                     <h2>Reportes</h2>

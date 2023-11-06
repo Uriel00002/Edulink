@@ -249,42 +249,43 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
         console.log(id);
         if(permissions.d.includes(typeUser)){
             setLoading(true);
-        Swal.fire({
-            title: 'Eliminar?',
-            text: "Esta accion no se puede deshacer!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, eliminar!',
-            cancelButtonText: 'Cancelar'
-        }).then(async(result) => {
-            if (result.isConfirmed) {
-                try {
-                    const response = await axios.delete(Apiurl + nameAPI + '/' + id + '/',
-                        { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } })
-                    alertSuccess(response.data.message);
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 2000);
-                    console.log(response.data);
-                    setLoading(false);
-                } catch (error) {
-                    let errorMessage = ''
-                    if (error.response.data.error) {
-                        errorMessage = error.response.data.error
-                    }else if (error.response.data) {
-                        Object.keys(error.response.data).forEach(key => {
-                            errorMessage += error.response.data[key] + '\n'  
-                        })
-                    }else{
-                        errorMessage = error.message
+            Swal.fire({
+                title: 'Eliminar?',
+                text: "Esta accion no se puede deshacer!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then(async(result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const response = await axios.delete(Apiurl + nameAPI + '/' + id + '/',
+                            { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } })
+                        alertSuccess(response.data.message);
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                        console.log(response.data);
+                    } catch (error) {
+                        let errorMessage = ''
+                        if (error.response.data.error) {
+                            errorMessage = error.response.data.error
+                        }else if (error.response.data) {
+                            Object.keys(error.response.data).forEach(key => {
+                                errorMessage += error.response.data[key] + '\n'  
+                            })
+                        }else{
+                            errorMessage = error.message
+                        }
+                        alertError('Error: ' + errorMessage);
+                        console.log(error);
+                    } finally {
+                        setLoading(false);
                     }
-                    alertError('Error: ' + errorMessage);
-                    console.log(error);
-                }
-            }
-        })
+                } else setLoading(false);
+            })
         }else{
             alertError('No tiene permisos para eliminar');
             setLoading(false);

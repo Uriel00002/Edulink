@@ -10,6 +10,7 @@ import { validateUserInView } from "../helpers/funtionsGlobals";
 import axios from "axios";
 import { Apiurl } from "../services/apirest";
 
+// 0: tutor 1: estudiante 2: docentes 3: asistentes 4: director 5: director academico 6: rector 7: control escolar 8: Recursos humanos  128: TODO
 export const PerfilUsuario = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     const navigate = useNavigate();
     const {user} = storeEdulink(state => state.auth)
@@ -24,6 +25,18 @@ export const PerfilUsuario = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
         name: user.name || '',
         email: user.email || '',
     })
+    const perfiles = {
+        0: 'Tutor',
+        1: 'Estudiante',
+        2: 'Docente',
+        3: 'Asistente de carrera',
+        4: 'Director de carrera',
+        5: 'Director academico',
+        6: 'Rector',
+        7: 'Control escolar',
+        8: 'Recursos humanos',
+        128: 'TODO, usuario de prueba',
+    }
 
     const handleChangePassword = async(e) => {
         e.preventDefault()
@@ -121,7 +134,7 @@ export const PerfilUsuario = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                         </div>
                         <div className="detail">
                             <label for="email">Rol:</label>
-                            <span id="email">{typeUser === 0 ? 'Tutor' : typeUser === 1 ? 'Estudiante' : 'Empleado'}</span>
+                            <span id="email">{perfiles[typeUser]}</span>
                         </div>
                         </>
                     }
