@@ -172,14 +172,17 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
         e.preventDefault();
         setLoading(true);
         let formData
-        if(data.form.photo){
+        if(data.form.photo instanceof File || data.form.photo instanceof Blob) {
             formData = new FormData();
             for (const key in data.form) {
-                // console.log(key, data.form[key]);
+                console.log(key, data.form[key]);
                 formData.append(key, data.form[key]);
             }
         } else {
             formData = data.form;
+            //eliminar photo de formData
+            delete formData.photo;
+            console.log(formData);
         }
         if(idItem){
             if(permissions.u.includes(typeUser)){

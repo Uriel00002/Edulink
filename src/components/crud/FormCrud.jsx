@@ -9,6 +9,7 @@ import makeAnimated from 'react-select/animated';
 
 export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, data, name, createAccount}) => {
   const [translatedFields, setTranslatedFields] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
   useEffect(() => {
     // Función asincrónica para traducir los campos
     const translateFields = async () => {
@@ -145,77 +146,45 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
         {
             translatedFields?.map((translatedFields, index) => {
                 return (
-                    <div key={index} className='element'>
+                    <div key={index} className='element mb-4'>
                         <label htmlFor={fields[index].name}>{translatedFields}</label>
                         {
-                          fields[index].type === 'OneToOneField' || fields[index].type === 'ForeignKey' 
-                          // ? <Select className='select' value={data?.form[fields[index]?.name]?.toString() || ''} name={fields[index].name} id={fields[index].name} onChange={(e) => {
-                          //   setData({
-                          //     ...data,
-                          //     form: {
-                          //       ...data.form,
-                          //       [fields[index].name]: e.target.value
-                          //     }
-                          //   })
-                          // }}>
-                          //   <option value='' >Seleccione una opcion</option>
-                          //   { data &&
-                          //     fields[index].value.map((item, i) => {
-                          //       const value = item.split(' - ')[0];
-                          //       const label = item.split(' - ')[1];
-                          //       return (
-                          //         <option key={i} value={value} >{label}</option>
-                          //       )
-                          //     })
-                          //   }
-                          // </Select>
+                          fields[index].type === 'OneToOneField' || fields[index].type === 'ForeignKey'
                           ? <CustomSelect index={index} />
-                          : fields[index].type === 'ManyToManyField' 
-                            // ? <select value={data?.form[fields[index]?.name]?.toString() || ''} multiple name={fields[index].name} id={fields[index].name} onChange={(e)=>{
-                            //   setData({
-                            //     ...data,
-                            //     form: {
-                            //       ...data.form,
-                            //       [fields[index].name]: [...e.target.options].filter(option => option.selected).map(option => option.value)
-                            //     }
-                            //   })
-                            // }}>
-                            //   <option value='' >Seleccione una opción</option>
-                            //   {
-                            //     fields[index].value.map((item, i) => {
-                            //       const value = item.split(' - ')[0];
-                            //       const label = item.split(' - ')[1];
-                            //       return (
-                            //         <option key={i} value={value} >{label}</option>
-                            //       )
-                            //     })
-                            //   }
-                            // </select>
+                          : fields[index].type === 'ManyToManyField'
                             ? <CustomSelect index={index} isMulti={true} isClearable={true}/>
                             : fields[index].name === 'password' && data.form.id
                               ? <input disabled value='**********'/>
                               : fields[index].type === 'FileField'
-                                ? <input type="file" name={fields[index].name} id={fields[index].name} onChange={(e) => {
-                                    setData({
-                                      ...data,
-                                      form: {
-                                        ...data.form,
-                                        [fields[index].name]: e.target.files[0]
+                                ? <div className='d-flex'>
+                                    <input type="file" name={fields[index].name} id={fields[index].name} accept='image/png, image/jpeg, image/jpg' onChange={(e) => {
+                                      if(e.target.files[0]?.size > 10000000 ){//10mb
+                                        e.target.classList.add('error');
+                                        setErrorMessage('EL archivo supera los 10mb');
+                                      }else{
+                                        e.target.classList.remove('error');
+                                        setErrorMessage('');
                                       }
-                                    })
-                                  }}/>
+                                      setData({
+                                        ...data,
+                                        form: {
+                                          ...data.form,
+                                          [fields[index].name]: e.target.files[0]
+                                        }
+                                      })
+                                    }}/>
+                                    {
+                                      data.form[fields[index].name] 
+                                      ? <a className='mx-2' href={typeof data.form[fields[index].name] === 'string' ? data.form[fields[index].name] : URL.createObjectURL(data.form[fields[index].name])} target="_blank" rel="noopener noreferrer">
+                                          <img width={50} height={50} src={typeof data.form[fields[index].name] === 'string' ? data.form[fields[index].name] : URL.createObjectURL(data.form[fields[index].name])} alt="Imagen" />
+                                        </a>
+                                      : ''
+                                    }
+                                    {
+                                      errorMessage && <p className='text-danger fs-6'>{errorMessage}</p>
+                                    }
+                                  </div>
                                 : fields[index].options?.length > 0
-                                  // ? <select value={data?.form[fields[index]?.name]?.toString() || ''} name={fields[index].name} id={fields[index].name} onChange={(e) => 
-                                  // setData({...data, form: {...data.form, [fields[index].name]: e.target.value}})} >
-                                  //   <option value='' >Seleccione una opción</option>
-                                  //   {
-                                  //     JSON.parse(fields[index].options).map((item, i) => {
-                                  //       return (
-                                  //         <option key={i} value={item[Object.keys(item)[0]]} >{Object.keys(item)[0]}</option>
-                                  //       )
-                                  //     })
-                                  //   }
-                                  // </select>
                                   ? <CustomSelect index={index} typeOptions='json' />
                                   :<input type={
                                   fields[index].type === "DateField" ? 'date' 
