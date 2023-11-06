@@ -141,7 +141,7 @@ export function App() {
                       <Route path="/" element={<Dashboard />} />
                       <Route path="/calif" element={<Calif permissions={{c:[],r:[128],rbid:[128,0],u:[128],d:[]}} />} />
                       <Route path="/sicah" element={<Index permissions={{c:[],r:[128],rbid:[],u:[],d:[]}} />} />
-                      <Route path="/perfilusuario" element={<PerfilUsuario permissions={{c:[],r:[],rbid:[128],u:[],d:[]}} />} />
+                      <Route path="/perfilusuario" element={<PerfilUsuario permissions={{c:[],r:[],rbid:[],u:[],d:[]}} />} />
                       <Route path="/users/*" element={<Routes>
                         <Route path="/" element={<IndexUsers permissions={{c:[],r:[128,3,4,5,6,7],rbid:[],u:[],d:[]}}  />} />
                         <Route path="/users" element={<IndexCRUD nameAPI="users" nameView="Usuarios" permissions={{c:[128,7,8],r:[128,7,8],rbid:[128,7,8],u:[128,7,8],d:[128,7,8]}} />} />

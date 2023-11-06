@@ -37,13 +37,13 @@ const Header = ({name}) => {
         
         <div className="d-flex w-100 justify-content-end">
           <div style={{transform: togleOptions ? 'translateY(0%)' : 'translateY(-1000%)'}} className="header_options">
-              <ul> 
-                  <li onClick={()=>{navigate('/perfilusuario')}}><i className="fa-duotone fa-user"></i> Ver perfil</li>
-                  <li onClick={()=>{navigate('/')}}><i className="fa-duotone fa-user-graduate"></i> EDULINK</li>
-                  <li onClick={()=>{navigate('/tempo')}}><i className="fa-duotone fa-table"></i> TEMPO</li>
-                  <li onClick={()=>{navigate('/sicah')}}><i className="fa-duotone fa-clock"></i> SICAH</li>
-                  <li onClick={()=>{}}><i className="fa-duotone fa-user-police"></i> SIPECS</li>
-                  <li onClick={logout}><i className="fa-duotone fa-arrow-right-from-bracket"></i> Cerrar Sesión</li>
+              <ul>
+                <Link to="/perfilusuario"><i className="fa-duotone fa-user"></i> Ver perfil</Link>
+                <Link to="/"><i className="fa-duotone fa-user-graduate"></i> EDULINK</Link>
+                <Link to="/tempo"><i className="fa-duotone fa-table"></i> TEMPO</Link>
+                <Link to="/sicah"><i className="fa-duotone fa-clock"></i> SICAH</Link>
+                <Link to="/sipecs"><i className="fa-duotone fa-user-police"></i> SIPECS</Link>
+                <li onClick={logout}><i className="fa-duotone fa-arrow-right-from-bracket"></i> Cerrar Sesión</li>
               </ul>
           </div>
         </div>

@@ -25,10 +25,6 @@ export const PerfilUsuario = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
         email: user.email || '',
     })
 
-    useEffect(() => {
-        !validateUserInView(typeUser, permissions) && navigate('/');
-    }, [])
-
     const handleChangePassword = async(e) => {
         e.preventDefault()
         setLoading(true)

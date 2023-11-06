@@ -68,14 +68,17 @@
     padding: 0;
     width: 100%;
 }
-.header_options ul li{
+.header_options ul a,.header_options ul li{
+    width: 100%;
+    color: black;
+    text-decoration: none;
     text-align: center;
     list-style: none;
     padding: 10px;
     cursor: pointer;
 
 }
-.header_options ul li:hover{
+.header_options ul a:hover, .header_options ul li:hover{
     transition: all .5s ease-in-out;
     background: linear-gradient(to right, var(--secondary) , var(--primary) );
 
