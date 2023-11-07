@@ -172,7 +172,7 @@ export const Dashboard = () => {
                                 </Link>
                             }
                             {
-                                (typeUser == 128 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
+                                (typeUser == 128 || typeUser == 3 || typeUser == 4 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
                                 <Link className="card" to="/groups/">
                                     <div className="circle"><i className="fa-solid fa-layer-group fa-bounce"></i></div>
                                     <h2>Grupos</h2>

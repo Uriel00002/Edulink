@@ -193,7 +193,7 @@ export function App() {
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
                       <Route path="/groups/*" element={<Routes>
-                        <Route path="/" element={<IndexCRUD nameAPI="groups" nameView="Grupos" permissions={{c:[128,4,7],r:[128,3,4,5,6,7],rbid:[128,3,4,5,6,7],u:[128,4,7],d:[128,7]}} />} />
+                        <Route path="/" element={<IndexCRUD nameAPI="groups" nameView="Grupos" permissions={{c:[128,7],r:[128,3,4,5,6,7],rbid:[128,3,4,5,6,7],u:[128,7],d:[128,7]}} />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
                       <Route path="/reports/*" element={<Routes>
