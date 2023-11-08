@@ -22,14 +22,14 @@ export const Index = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
             <section className="dash_main">
                 <div className="dash_menu">
                     {
-                        typeUser == 128 &&
+                        (typeUser == 128 || typeUser == 4) &&
                         <Link className="sicah_card" to="/sicah/academiccharges/">
                             <div className="circle"><i className="fa-solid fa-table-cells fa-bounce"></i></div>
                             <h2>Carga horaria</h2>
                         </Link>
                     }
                     {
-                        typeUser == 128 &&
+                        (typeUser == 128 || typeUser == 2 || typeUser == 4) &&
                         <Link className="sicah_card" to="/sicah/">
                             <div className="circle"><i className="fa-solid fa-file fa-bounce"></i></div>
                             <h2>Reportes</h2>

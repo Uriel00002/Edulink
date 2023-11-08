@@ -23,7 +23,6 @@ import Swal from 'sweetalert2';
 import { IndexCRUD } from './components/crud/models/IndexCRUD';
 import { Index } from './SICAH/views/Index';
 import { IndexUsers } from './components/users/IndexUsers';
-import { HomeView } from './TEMPO/views/HomeView';
 import { FormReport } from './components/reports/FormReport';
 import HomeScreen from './TEMPO/views/HomeScreen';
 import { IndexEmployees } from './components/users/IndexEmployees';
@@ -142,7 +141,6 @@ export function App() {
                     <Routes>
                       <Route path="/" element={<Dashboard />} />
                       <Route path="/calif" element={<Calif permissions={{c:[],r:[128],rbid:[128,0],u:[128],d:[]}} />} />
-                      <Route path="/sicah" element={<Index permissions={{c:[],r:[128],rbid:[],u:[],d:[]}} />} />
                       <Route path="/perfilusuario" element={<PerfilUsuario permissions={{c:[],r:[],rbid:[],u:[],d:[]}} />} />
                       <Route path="/users/*" element={<Routes>
                         <Route path="/" element={<IndexCRUD nameAPI="users" nameView="Usuarios" permissions={{c:[128,7,8],r:[128,7,8],rbid:[128,7,8],u:[128,7,8],d:[128,7,8]}} />} />
@@ -202,8 +200,9 @@ export function App() {
                       </Routes>} />
 
                       {/* SICAH */}
-                      <Route path="/sicah/academiccharges/*" element={<Routes>
-                        <Route path="/" element={<IndexCRUD nameAPI="academiccharges" nameView="Carga horaria" permissions={{c:[128,4],r:[128,4],rbid:[128,4],u:[128,4],d:[128,4]}} />} />
+                      <Route path="/sicah/*" element={<Routes>
+                        <Route path="/" element={<Index permissions={{c:[],r:[128,4],rbid:[],u:[],d:[]}} />} />
+                        <Route path="/academiccharges" element={<IndexCRUD nameAPI="academiccharges" nameView="Carga horaria" permissions={{c:[128,4],r:[128,4],rbid:[128,4],u:[128,4],d:[128,4]}} />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
 
