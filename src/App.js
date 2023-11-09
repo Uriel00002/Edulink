@@ -27,6 +27,7 @@ import { FormReport } from './components/reports/FormReport';
 import HomeScreen from './TEMPO/views/HomeScreen';
 import { IndexEmployees } from './components/users/IndexEmployees';
 import { IndexStudents } from './components/users/IndexStudents';
+import { Reports } from './SICAH/views/Reports';
 
 
 
@@ -203,6 +204,7 @@ export function App() {
                       <Route path="/sicah/*" element={<Routes>
                         <Route path="/" element={<Index permissions={{c:[],r:[128,4],rbid:[],u:[],d:[]}} />} />
                         <Route path="/academiccharges" element={<IndexCRUD nameAPI="academiccharges" nameView="Carga horaria" permissions={{c:[128,4],r:[128,4],rbid:[128,4],u:[128,4],d:[128,4]}} />} />
+                        <Route path='/reports' element={<Reports permissions={{c:[128,4],r:[],rbid:[],u:[],d:[]}} />} />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
 

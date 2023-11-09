@@ -30,7 +30,7 @@ export const Index = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                     }
                     {
                         (typeUser == 128 || typeUser == 2 || typeUser == 4) &&
-                        <Link className="sicah_card" to="/sicah/">
+                        <Link className="sicah_card" to="/sicah/reports">
                             <div className="circle"><i className="fa-solid fa-file fa-bounce"></i></div>
                             <h2>Reportes</h2>
                         </Link>
