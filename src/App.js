@@ -28,6 +28,8 @@ import HomeScreen from './TEMPO/views/HomeScreen';
 import { IndexEmployees } from './components/users/IndexEmployees';
 import { IndexStudents } from './components/users/IndexStudents';
 import { Reports } from './SICAH/views/Reports';
+import CreateScreen from './TEMPO/views/CreateScreen';
+import ViewScreen from './TEMPO/views/ViewScreen';
 
 
 
@@ -210,10 +212,9 @@ export function App() {
 
                       {/* TEMPO */}
                       <Route path="/tempo/*" element={<Routes>
-                        <Route path="/" element={<HomeScreen />} />
-                        <Route path="/createSchedules" />
-                        <Route path="/editSchedules" />
-                        <Route path="/seeSchedules" />
+                        {/* <Route path="/" element={<HomeScreen />} /> */}
+                        <Route path="/" element={<CreateScreen />} />
+                        <Route path="/tempo/view" element={<ViewScreen /> } />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
         

@@ -11,7 +11,7 @@ export function Navigation () {
             title="Crear Horario"
             description="Crea un nuevo horario."
             icon="fa-cog"
-            to="/create"
+            to="/tempo/create"
           />
 
           <Card
@@ -25,7 +25,7 @@ export function Navigation () {
             title="Ver Horario"
             description="Visualiza tu horario actual."
             icon="fa-window-maximize"
-            to="/view"
+            to="/tempo/view"
           />
         
       </div>

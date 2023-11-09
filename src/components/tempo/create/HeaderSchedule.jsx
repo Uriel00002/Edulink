@@ -3,7 +3,7 @@ import React from 'react';
 export const HeaderSchedule = () => {
   return (
     <header className='header-tempo'>
-      <h1>Crear Horios</h1>
+      <h1>Crear Horaios</h1>
     </header>
   );
 }

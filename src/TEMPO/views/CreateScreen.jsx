@@ -20,11 +20,12 @@ export const CreateScreen = () => {
   return (
     <React.Fragment>
       <HeaderSchedule className='create-header' />
-      <div className='dropdowns-container'>
+      
+      <section className='create-tempo flex-column py-5'>
+        <div className='dropdowns-container mb-3'>
         <Dropdown label='Dropdown 1' options={dropdownOptions1} id='dropdown1' name='dropdown1' />
         <Dropdown label='Dropdown 2' options={dropdownOptions2} id='dropdown2' name='dropdown2' />
       </div>
-      <section className='create-tempo'>
         <TableSchedule/>
       </section>
     </React.Fragment>
