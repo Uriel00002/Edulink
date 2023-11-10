@@ -32,13 +32,29 @@
 }
 
 .create-tempo {
-    width: 100vw;
     height: 88vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #FFFFFF;
     color: black;
+    text-align: center;
+}
+
+.schedule-item{
+    border: 1px solid #000000;
+    border-radius: 5px;
+    height: 30px;
+    text-align: center;
+    padding: 5px;
+    margin-top: 10px;
+    cursor: grab;
+}
+
+.schedule-item-header{
+    font-weight: bold;
+    margin-top: 10px;
+    border-bottom: 1px solid #000000;
     text-align: center;
 }
 
@@ -76,7 +92,6 @@
     border-collapse: raise;
     width: 70%; 
     text-align: center;
-    margin-left: 250px; 
 }
   
 .schedule-table th,

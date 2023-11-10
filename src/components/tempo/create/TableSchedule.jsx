@@ -19,7 +19,7 @@ export const TableSchedule = () => {
         {
           horas.map((hora, index) => {
             return <tr key={index}>
-              <td>{hora}</td>
+              <td>{parseInt(hora.split('-')[0]) < 11 ? hora + ' am' : hora + ' pm'}</td>
               <td></td>
               <td></td>
               <td></td>

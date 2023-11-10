@@ -212,8 +212,8 @@ export function App() {
 
                       {/* TEMPO */}
                       <Route path="/tempo/*" element={<Routes>
-                        {/* <Route path="/" element={<HomeScreen />} /> */}
-                        <Route path="/" element={<CreateScreen />} />
+                        <Route path="/" element={<HomeScreen />} />
+                        <Route path="/create" element={<CreateScreen />} />
                         <Route path="/tempo/view" element={<ViewScreen /> } />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
