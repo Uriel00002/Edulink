@@ -20,12 +20,26 @@ export const Index = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                 <Header name={"SICAH"} />
             </section>
             <section className="dash_main">
-                <div className="dash_menu">
+                <div className="dash_menu flex-wrap py-5">
                     {
                         (typeUser == 128 || typeUser == 4) &&
                         <Link className="sicah_card" to="/sicah/academiccharges/">
                             <div className="circle"><i className="fa-solid fa-table-cells fa-bounce"></i></div>
                             <h2>Carga horaria</h2>
+                        </Link>
+                    }
+                    {
+                        (typeUser == 128 || typeUser == 3 || typeUser == 4 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
+                        <Link className="sicah_card" to="/groups/">
+                            <div className="circle"><i className="fa-solid fa-layer-group fa-bounce"></i></div>
+                            <h2>Grupos</h2>
+                        </Link>
+                    }
+                    {
+                        (typeUser == 128 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
+                        <Link className="sicah_card" to="/subjects/">
+                            <div className="circle"><i className="fa-solid fa-book fa-bounce"></i></div>
+                            <h2>Materias</h2>
                         </Link>
                     }
                     {

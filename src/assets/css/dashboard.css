@@ -196,12 +196,14 @@ a {
 
 /*Estilos del menu de SICAH*/
  .sicah_card{
-  width: 35%;
-  height: 55%;
+  width: 30%;
+  height: 30%;
   margin: 5%;
   border-radius: 5px;
   background-image: url(../img/unilarge.jpg);
   background-size: contain;
+  background-repeat: no-repeat;
+  background-size: cover;
   display:flex;
   justify-content: center;
   align-items: center;
