@@ -5,7 +5,6 @@ import Card from '../tempo/Card';
 export function Navigation () {
   return (
     <div>
-      <h2>Bienvenido a la Página de Inicio</h2>
       <div className='card-container'>
           <Card
             title="Crear Horario"
