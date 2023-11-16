@@ -28,6 +28,7 @@ export const FormReport = ({nameView, permissions={c:[],r:[],rbid:[],u:[],d:[]},
         e.preventDefault()
         const resp = new FormData(e.target)
         const params = Object.fromEntries(resp.entries())
+        console.log(params);
         // const {matricula, nombre, promedio, edad, carrera, cuatrimestre, sexo, grupo, municipio, generacion} = params
         try{
             setLoading(true)
