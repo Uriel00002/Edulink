@@ -26,7 +26,7 @@ export const Reports = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     const getGroups = async () => {
         try {
             const res = await axios.get(Apiurl + 'groups/', {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}});
-            setOptions({...options, groups: res.data});
+            setOptions({groups: res.data, ...options});
         } catch (error) {
             console.log(error);
         }
@@ -35,7 +35,7 @@ export const Reports = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     const getEmployees = async () => {
         try {
             const res = await axios.get(Apiurl + 'employees/', {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}});
-            setOptions({...options, employees: res.data});
+            setOptions({employees: res.data, ...options});
         } catch (error) {
             console.log(error);
         }
@@ -44,7 +44,7 @@ export const Reports = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     const getSubjects = async () => {
         try {
             const res = await axios.get(Apiurl + 'subjects/', {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}});
-            setOptions({...options, subjects: res.data});
+            setOptions({subjects: res.data, ...options});
         } catch (error) {
             console.log(error);
         }
@@ -53,8 +53,7 @@ export const Reports = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     const getClassrooms = async () => {
         try {
             const res = await axios.get(Apiurl + 'classrooms/', {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}});
-            setOptions({...options, classrooms: res.data});
-            console.log(res.data);
+            setOptions({classrooms: res.data, ...options});
         } catch (error) {
             console.log(error);
         }

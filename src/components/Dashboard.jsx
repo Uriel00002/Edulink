@@ -129,13 +129,13 @@ export const Dashboard = () => {
                                     <h2>Empleados</h2>
                                 </Link>
                             }
-                            {
+                            {/* {
                                 (typeUser == 128 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
                                 <Link className="card" to="/subjects/">
                                     <div className="circle"><i className="fa-solid fa-book fa-bounce"></i></div>
                                     <h2>Materias</h2>
                                 </Link>
-                            }
+                            } */}
                             {/* {
                                 (typeUser == 128 || typeUser == 0 || typeUser == 1 || typeUser == 2 || typeUser == 3 || typeUser == 4)  &&
                                 <Link className="card" to="/grades/">
@@ -171,13 +171,13 @@ export const Dashboard = () => {
                                     <h2>Edificios</h2>
                                 </Link>
                             }
-                            {
+                            {/* {
                                 (typeUser == 128 || typeUser == 3 || typeUser == 4 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
                                 <Link className="card" to="/groups/">
                                     <div className="circle"><i className="fa-solid fa-layer-group fa-bounce"></i></div>
                                     <h2>Grupos</h2>
                                 </Link>
-                            }
+                            } */}
                             {
                                 (typeUser == 128 || typeUser == 3 || typeUser == 4 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
                                 <Link className="card" to="/reports/">
