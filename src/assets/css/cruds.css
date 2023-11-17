@@ -62,7 +62,7 @@
 }
 
 .cruds_content .form .element {
-    height: 80px;
+    min-height: 80px;
 }
 
 .cruds_content .form .element label {

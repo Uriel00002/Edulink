@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react'
@@ -169,6 +170,7 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
     }
 
     const handleSubmit = async (e) => {
+        let prueba = false;
         e.preventDefault();
         setLoading(true);
         let formData
@@ -180,68 +182,80 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
             }
         } else {
             formData = data.form;
-            //eliminar photo de formData
+            if (formData.assignments){
+                formData.assignments = JSON.stringify(formData.assignments);
+            }
             delete formData.photo;
             console.log(formData);
         }
-        if(idItem){
-            if(permissions.u.includes(typeUser)){
-                try {
-                    const response = await axios.put(Apiurl + nameAPI + '/' + idItem + '/',
-                        formData,
-                        { headers: { 'Authorization': 'Token ' + token } }
-                    )
-                    alertSuccess('Actualización exitosa');
-                    console.log(response.data);
-                } catch (error) {
-                    let errorMessage = ''
-                    if (error.response.data.error) {
-                        errorMessage = error.response.data.error
-                    }else if (error.response.data) {
-                        Object.keys(error.response.data).forEach(key => {
-                            errorMessage += error.response.data[key] + '\n'  
-                        })
-                    }else{
-                        errorMessage = error.message
+        if (prueba == false) {
+            if(idItem){
+                if(permissions.u.includes(typeUser)){
+                    try {
+                        const response = await axios.put(Apiurl + nameAPI + '/' + idItem + '/',
+                            formData,
+                            { headers: { 'Authorization': 'Token ' + token } }
+                        )
+                        alertSuccess('Actualización exitosa');
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 3000);
+                        console.log(response.data);
+                    } catch (error) {
+                        let errorMessage = ''
+                        if (error.response.data.error) {
+                            errorMessage = error.response.data.error
+                        }else if (error.response.data) {
+                            Object.keys(error.response.data).forEach(key => {
+                                errorMessage += error.response.data[key] + '\n'  
+                            })
+                        }else{
+                            errorMessage = error.message
+                        }
+                        alertError('Error: ' + errorMessage);
+                        console.log(error);
+                    } finally {
+                        setLoading(false);
                     }
-                    alertError('Error: ' + errorMessage);
-                    console.log(error);
-                } finally {
+                }else{
+                    alertError('No tiene permisos para realizar esta operación.');
                     setLoading(false);
                 }
             }else{
-                alertError('No tiene permisos para realizar esta operación.');
-                setLoading(false);
+                if(permissions.c.includes(typeUser)){
+                    try {
+                        const response = await axios.post(Apiurl + nameAPI + '/',
+                            formData,
+                            { headers: { 'Authorization': 'Token ' + token } }
+                        )
+                        alertSuccess('Registro exitoso');
+                        console.log(response.data);
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 3000);
+                    } catch (error) {
+                        let errorMessage = ''
+                        if (error.response.data.error) {
+                            errorMessage = error.response.data.error
+                        }else if (error.response.data) {
+                            Object.keys(error.response.data).forEach(key => {
+                                errorMessage += error.response.data[key] + '\n'  
+                            })
+                        }else{
+                            errorMessage = error.message
+                        }
+                        alertError('Error: ' + errorMessage);
+                        console.log(error);
+                    } finally {
+                        setLoading(false);
+                    }
+                }else{
+                    alertError('No tiene permisos para realizar esta operación.');
+                    setLoading(false);
+                }
             }
         }else{
-            if(permissions.c.includes(typeUser)){
-                try {
-                    const response = await axios.post(Apiurl + nameAPI + '/',
-                        formData,
-                        { headers: { 'Authorization': 'Token ' + token } }
-                    )
-                    alertSuccess('Registro exitoso');
-                    console.log(response.data);
-                } catch (error) {
-                    let errorMessage = ''
-                    if (error.response.data.error) {
-                        errorMessage = error.response.data.error
-                    }else if (error.response.data) {
-                        Object.keys(error.response.data).forEach(key => {
-                            errorMessage += error.response.data[key] + '\n'  
-                        })
-                    }else{
-                        errorMessage = error.message
-                    }
-                    alertError('Error: ' + errorMessage);
-                    console.log(error);
-                } finally {
-                    setLoading(false);
-                }
-            }else{
-                alertError('No tiene permisos para realizar esta operación.');
-                setLoading(false);
-            }
+            setLoading(false);
         }
     }
 
@@ -336,11 +350,39 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
         }
     }
 
+    const getTeachers = async() => {
+        try {
+            const users = await axios.get(Apiurl + 'users/',{headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
+            let teachers = users.data.filter(user => user.type == '2')
+            let teachersIds = teachers.map(user => user.id.toString())
+            const employees = await axios.get(Apiurl + 'employees/',{headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
+            teachers = employees.data.filter(employee => teachersIds.includes(employee.user.split(' - ')[0]))
+            teachers = teachers.map(employee => {
+                return {
+                    id: employee.id,
+                    name: employee.full_name + ' ' + employee.number,
+                }
+            }); 
+            return teachers 
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getSubjects = async() => {
+        try {
+            const subjects = await axios.get(Apiurl + 'subjects/',{headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
+            return subjects.data
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <Fragment>
             <CRUD permissions={permissions} typeUser={typeUser} name={nameView} fields={fields} handleSubmit={handleSubmit} 
                 handleDelete={handleDelete} setData={setData} data={data} view={view} setView={setView} action={action} 
-                setAction={setAction} setIdItem={setIdItem} createAccount={createAccount} />
+                setAction={setAction} setIdItem={setIdItem} createAccount={createAccount} getTeachers={getTeachers} getSubjects={getSubjects} />
         </Fragment>
     )
 }

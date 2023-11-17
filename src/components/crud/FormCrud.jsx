@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable eqeqeq */
 import React, { useEffect, useState } from 'react'
 import translate from 'translate'; // Asegúrate de importar la biblioteca translate
@@ -7,9 +8,12 @@ import 'select2';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
-export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, data, name, createAccount}) => {
+export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, data, name, createAccount,
+            getTeachers, getSubjects}) => {
   const [translatedFields, setTranslatedFields] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
+  const [teachers, setTeachers] = useState([]);
+  const [subjects, setSubjects] = useState([]);
   useEffect(() => {
     // Función asincrónica para traducir los campos
     const translateFields = async () => {
@@ -32,6 +36,17 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
   // useEffect(() => {
   //   $('select').select2();
   // }, [fields, data]);
+
+  useEffect(() => {
+    getTeachersAndSubjects();
+  }, []);
+
+  const getTeachersAndSubjects = async() => {
+    const teachers = await getTeachers();
+    const subjects = await getSubjects();
+    setTeachers(teachers);
+    setSubjects(subjects);
+  }
 
   const validateFields = async(e) => {
     e.preventDefault();
@@ -68,7 +83,7 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
     }
   }
 
-  const CustomSelect = ({index, isMulti=false, isClearable=false, typeOptions='default'}) => {
+  const CustomSelect = ({index, isMulti=false, isClearable=true, typeOptions='default', onChange='default', value='default'}) => {
     const animatedComponents = makeAnimated();
     let options = [];
     if(typeOptions === 'default'){
@@ -86,34 +101,35 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
         })
       ]
     } else {
-      options = [
-        ...typeOptions
-      ]
+      options = typeOptions
     }
     return (
       <Select className='select' components={animatedComponents} 
-      placeholder={isMulti ? 'Seleccione una o mas opciones' : 'Seleccione una opción'} isClearable={true} isSearchable 
+      placeholder={isMulti ? 'Seleccione una o mas opciones' : 'Seleccione una opción'} isClearable={isClearable} isSearchable 
       isMulti={isMulti} options={options} 
       onChange={(item)=>{
-        setData({
+        onChange === 'default'
+        ? setData({
           ...data,
           form: {
             ...data.form,
             [fields[index].name]: isMulti ? item.map(option => option.value) : item ? item.value : '' 
           }
         })
+        : onChange(item)
       }} defaultValue={
-        isMulti 
-        ? (Array.isArray(data.form[fields[index].name])
-          ? options.filter(option =>
-              data.form[fields[index].name].map(texto => parseInt(texto, 10))?.includes(option.value)
-            )
-          : [])
-        : options.find(option => option.value == data.form[fields[index].name])
+        value === 'default'
+        ? isMulti 
+          ? (Array.isArray(data.form[fields[index]?.name])
+            ? options.filter(option =>
+                data.form[fields[index]?.name].map(texto => parseInt(texto, 10))?.includes(option.value)
+              )
+            : [])
+          : options.find(option => option.value == data.form[fields[index]?.name])
+        : value
       }/>
     )
   }
-
   return (
     <div className='my-4'>
       {
@@ -186,42 +202,154 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
                                   </div>
                                 : fields[index].options?.length > 0
                                   ? <CustomSelect index={index} typeOptions='json' />
-                                  :<input type={
-                                  fields[index].type === "DateField" ? 'date' 
-                                  : fields[index].type === "PasswordField" ? 'password' 
-                                  : fields[index].type === "EmailField" ? 'email' 
-                                  : fields[index].type === "BooleanField" ? 'checkbox'
-                                  : fields[index].type === "IntegerField" ? 'number'
-                                  : fields[index].type === "FloatField" ? 'number' 
-                                  : 'text'
-                                  // eslint-disable-next-line no-useless-escape
-                                  }name={fields[index].name} id={fields[index].name} onChange={(e) => {
-                                    if (e.target.name === 'enrollment') {
-                                      e.target.value = data.form[fields[index].name] || ''
-                                    }
-                                    if(e.target.value){
-                                      e.target.classList.remove('error');
-                                      e.target.classList.add('success');
-                                    }else {
-                                      e.target.classList.remove('success');
-                                      e.target.classList.remove('error');
-                                    }
-                                    fields[index].type === "BooleanField"
-                                    ?setData({
-                                      ...data,
-                                      form: {
-                                        ...data.form,
-                                        [fields[index].name]: e.target.checked
+                                  : fields[index].type === 'TextField'
+                                    ? fields[index].name === 'assignments'
+                                      ? <div class="card">
+                                          <div class="card-header">
+                                            <button class="btn btn-primary w-auto h-auto p-3 float-end" type="button" onClick={(e) => {
+                                              e.target.disabled = true;
+                                              const fieldName = fields[index].name;
+                                              const currentFieldData = Array.isArray(data.form[fieldName]) ? data.form[fieldName] : [];
+                                              setData({
+                                                ...data,
+                                                form: {
+                                                  ...data.form,
+                                                  [fieldName]: [
+                                                    ...currentFieldData,
+                                                    {
+                                                      id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+                                                      teacher: '',
+                                                      subject: '',
+                                                    },
+                                                  ],
+                                                },
+                                              });
+                                              setTimeout(() => {
+                                                e.target.disabled = false;
+                                              }, 1000);
+                                            }}>
+                                              <i class="fas fa-plus"></i>
+                                            </button>
+                                          </div>
+                                          {/* <div class="card-body">
+                                            <h5 class="card-title">Special title treatment</h5>
+                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                          </div> */}
+                                          {
+                                            data.form[fields[index].name]?.length > 0
+                                            ? <div class="card-body">
+                                                {
+                                                  Array.isArray(data.form[fields[index].name]) && data.form[fields[index].name]?.map((assignment, i) => {
+                                                    const optionsTeachers = teachers.map((teacher) => {
+                                                      return {
+                                                        id: assignment.id,
+                                                        value: teacher.id,
+                                                        label: teacher.name,
+                                                      }
+                                                    })
+                                                    const optionsSubjects = subjects.map((subject) => {
+                                                      return {
+                                                        id: assignment.id,
+                                                        value: subject.id,
+                                                        label: subject.name,
+                                                      }
+                                                    })
+                                                    return (
+                                                      <div class="form-group row" key={i}>
+                                                        <div class="col-6">
+                                                          <CustomSelect index={i} typeOptions={optionsTeachers} isClearable={false} onChange={(item) => {
+                                                            setData({
+                                                              ...data,
+                                                              form: {
+                                                                ...data.form,
+                                                                [fields[index].name]: item ? data.form[fields[index]?.name]?.map((assignment) => {
+                                                                  if(assignment.id === item.id){
+                                                                    return {
+                                                                      ...assignment,
+                                                                      teacher: item.value
+                                                                    }
+                                                                  }else{
+                                                                    return assignment
+                                                                  }
+                                                                }) : ''
+                                                              }
+                                                            })
+                                                          }} value={
+                                                            optionsTeachers.find((teacher) => {
+                                                              return teacher.value === assignment.teacher
+                                                            })
+                                                          } />
+                                                        </div>
+                                                        <div class="col-6">
+                                                          <CustomSelect index={i} typeOptions={optionsSubjects} isClearable={false} onChange={(item) => {
+                                                            setData({
+                                                              ...data,
+                                                              form: {
+                                                                ...data.form,
+                                                                [fields[index].name]: item ? data.form[fields[index]?.name]?.map((assignment) => {
+                                                                  if(assignment.id === item.id){
+                                                                    return {
+                                                                      ...assignment,
+                                                                      subject: item.value
+                                                                    }
+                                                                  }else{
+                                                                    return assignment
+                                                                  }
+                                                                }) : ''
+                                                              }
+                                                            })
+                                                          }} value={
+                                                            optionsSubjects.find((subject) => {
+                                                              return subject.value === assignment.subject
+                                                            })
+                                                          } />
+                                                        </div>
+                                                      </div>
+                                                    )
+                                                  })
+                                                }
+                                              </div>
+                                            : null
+                                          }
+                                        </div>
+                                      : null 
+                                    : <input type={
+                                    fields[index].type === "DateField" ? 'date' 
+                                    : fields[index].type === "PasswordField" ? 'password' 
+                                    : fields[index].type === "EmailField" ? 'email' 
+                                    : fields[index].type === "BooleanField" ? 'checkbox'
+                                    : fields[index].type === "IntegerField" ? 'number'
+                                    : fields[index].type === "FloatField" ? 'number' 
+                                    : 'text'
+                                    // eslint-disable-next-line no-useless-escape
+                                    }name={fields[index].name} id={fields[index].name} onChange={(e) => {
+                                      if (e.target.name === 'enrollment') {
+                                        e.target.value = data.form[fields[index].name] || ''
                                       }
-                                    })
-                                    :setData({
-                                      ...data,
-                                      form: {
-                                        ...data.form,
-                                        [fields[index].name]: e.target.value
+                                      if(e.target.value){
+                                        e.target.classList.remove('error');
+                                        e.target.classList.add('success');
+                                      }else {
+                                        e.target.classList.remove('success');
+                                        e.target.classList.remove('error');
                                       }
-                                    })
-                                  }} value={data.form[fields[index].name] || ''} checked={data.form[fields[index].name] || ''} />
+                                      fields[index].type === "BooleanField"
+                                      ?setData({
+                                        ...data,
+                                        form: {
+                                          ...data.form,
+                                          [fields[index].name]: e.target.checked
+                                        }
+                                      })
+                                      :setData({
+                                        ...data,
+                                        form: {
+                                          ...data.form,
+                                          [fields[index].name]: e.target.value
+                                        }
+                                      })
+                                    }} value={data.form[fields[index].name] || ''} checked={data.form[fields[index].name] || ''} />
                         }
                     </div>
                 )

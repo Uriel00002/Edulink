@@ -9,7 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 
 export const CRUD = ({permissions, typeUser, name, fields, handleSubmit, handleDelete, setData, data, view, setView, 
-    action, setAction, setIdItem, createAccount}) => {
+    action, setAction, setIdItem, createAccount, getTeachers, getSubjects}) => {
   const history = useNavigate();
   const location = useLocation();
   const handleRemoveIdFromURL = () => {
@@ -41,7 +41,8 @@ export const CRUD = ({permissions, typeUser, name, fields, handleSubmit, handleD
 
                 { action === 'registrar' && permissions.c.includes(typeUser) &&	
                     <FormCrud permissions={permissions} typeUser={typeUser} fields={fields} handleSubmit={handleSubmit} 
-                      setData={setData} data={data} name={name} createAccount={createAccount} />
+                      setData={setData} data={data} name={name} createAccount={createAccount} getTeachers={getTeachers}
+                      getSubjects={getSubjects} />
                 }
 
                 { action === 'ver' &&	 permissions.r.includes(typeUser) &&
