@@ -117,7 +117,10 @@ export const TableCrud = ({permissions, typeUser, data, setAction, handleDelete}
                                                 ? <a href={item[field]} target="_blank" rel="noopener noreferrer">
                                                     <img width={70} height={70} src={item[field]} alt="Imagen" />
                                                   </a>
-                                                :item[field]?.toString().length > 60 ? item[field]?.toString().substring(0, 60) + '...' : item[field]
+                                                //primeras 2 letras
+                                                : item[field]?.toString().slice(0, 2) === '[{'
+                                                  ? 'El resultado puede ser muy largo, reviselo aparte'
+                                                  : item[field]?.toString().length > 60 ? item[field]?.toString().substring(0, 60) + '...' : item[field]
                                             }</td>
                                         )
                                     }</>
