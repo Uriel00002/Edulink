@@ -137,7 +137,9 @@ export const FormReport = ({nameView, permissions={c:[],r:[],rbid:[],u:[],d:[]},
                             </thead>
                             <tbody>
                                 {
-                                    data?.map(student => {
+                                    data && 
+                                    Array.isArray(data) 
+                                    ?data?.map(student => {
                                         return <tr>
                                             <td>{student.matricula}</td>
                                             <td>{student.nombre}</td>
@@ -157,6 +159,9 @@ export const FormReport = ({nameView, permissions={c:[],r:[],rbid:[],u:[],d:[]},
                                             }}>Eliminar de la lista</button></td>
                                         </tr>
                                     })
+                                    :<tr>
+                                        <td colSpan={13}>{data?.message}</td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>

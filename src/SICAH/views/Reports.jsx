@@ -15,6 +15,7 @@ export const Reports = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     const token = storeEdulink(state => state.auth.token);
     const setLoading = storeEdulink(state => state.setLoading);
     const [options, setOptions] = useState({})
+    const [data, setData] = useState(null)
     useEffect(() => {
         !validateUserInView(typeUser, permissions) && navigate('/');
         getGroups();
@@ -26,7 +27,7 @@ export const Reports = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     const getGroups = async () => {
         try {
             const res = await axios.get(Apiurl + 'groups/', {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}});
-            setOptions({groups: res.data, ...options});
+            setOptions(prev => ({...prev, groups: res.data}));
         } catch (error) {
             console.log(error);
         }
@@ -35,7 +36,7 @@ export const Reports = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     const getEmployees = async () => {
         try {
             const res = await axios.get(Apiurl + 'employees/', {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}});
-            setOptions({employees: res.data, ...options});
+            setOptions(prev => ({...prev, employees: res.data}));
         } catch (error) {
             console.log(error);
         }
@@ -44,7 +45,7 @@ export const Reports = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     const getSubjects = async () => {
         try {
             const res = await axios.get(Apiurl + 'subjects/', {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}});
-            setOptions({subjects: res.data, ...options});
+            setOptions(prev => ({...prev, subjects: res.data}));
         } catch (error) {
             console.log(error);
         }
@@ -53,7 +54,7 @@ export const Reports = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     const getClassrooms = async () => {
         try {
             const res = await axios.get(Apiurl + 'classrooms/', {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}});
-            setOptions({classrooms: res.data, ...options});
+            setOptions(prev => ({...prev, classrooms: res.data}));
         } catch (error) {
             console.log(error);
         }
@@ -69,6 +70,7 @@ export const Reports = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
             setLoading(true);
             const res = await axios.post(Apiurl + 'reports/academiccharge/', params, {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}});
             console.log(res.data);
+            setData(res.data);
         } catch (error) {
             alertError(error.response.data.error);
             console.log(error);
@@ -134,25 +136,44 @@ export const Reports = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                     <button className="btn btn-outline-dark fs-3 w-100">Buscar <i className="fa fa-solid fa-search"></i></button>
                 </div>
             </form>
-            <div className="d-flex justify-content-around w-100">
-                <button className="btn btn-outline-success border-0 fs-1"><i className="fa fa-solid fa-file"></i></button>
-                <button className="btn btn-outline-primary border-0 fs-1"><i className="fa fa-solid fa-chart-area"></i></button>
-            </div>
+            {
+                data && (
+                    <div className="d-flex justify-content-around w-100">
+                        <button className="btn btn-outline-success border-0 fs-1"><i className="fa fa-solid fa-file"></i></button>
+                        {/* <button className="btn btn-outline-primary border-0 fs-1"><i className="fa fa-solid fa-chart-area"></i></button> */}
+                    </div>
+                )
+            }
             <div className='table-responsive row col-12'>
                 <table className="table table-bordered w-100">
                     <thead>
                         <tr>
                             <th>Grupo/s</th>
                             <th>Tutor/es</th>
-                            <th>Profesor/es</th>
-                            <th>Materia/s</th>
+                            <th>Asignacion/es</th>
                             <th>Salon/es</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        </tr>
+                        {
+                            data && 
+                            Array.isArray(data) 
+                            ? data?.map((item, index) => (
+                                <tr key={index}>
+                                    <td>{item.group}</td>
+                                    <td>{item.tutor}</td>
+                                    <td>{item.assignments}</td>
+                                    <td>{item.classrooms}</td>
+                                    <td>
+                                        <button className="btn btn-outline-primary border-0 fs-1"><i className="fa fa-solid fa-file"></i></button>
+                                    </td>
+                                </tr>
+                            ))
+                            : (<tr>
+                                <td colSpan={5}>{data?.message}</td>
+                            </tr>)
+                        }
                     </tbody>
                 </table>
             </div>
