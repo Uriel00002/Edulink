@@ -5,12 +5,14 @@ import axios from 'axios'
 import { Apiurl } from '../../services/apirest'
 import { alertError, storeEdulink } from '../../store/EdulinkStore'
 import { generatePDF } from '../../helpers/reportsPDF'
+import { Diagrama } from './Diagrama'
 
 export const FormReport = ({nameView, permissions={c:[],r:[],rbid:[],u:[],d:[]}, }) => {
     const token = storeEdulink(state => state.auth.token)
     const setLoading = storeEdulink(state => state.setLoading)
     const [data, setData] = useState(null)
     const [careers, setCareers] = useState(null)
+    const [chart, setChart] = useState(false)
 
     useEffect(() => {
         getCareers()
@@ -110,7 +112,7 @@ export const FormReport = ({nameView, permissions={c:[],r:[],rbid:[],u:[],d:[]},
                         data && (
                             <div className="d-flex justify-content-around w-100">
                                 <button className="btn btn-outline-success border-0 fs-1" onClick={() => generatePDF(data,'reporte_estudiantil')}><i className="fa fa-solid fa-file"></i></button>
-                                <button className="btn btn-outline-primary border-0 fs-1"><i className="fa fa-solid fa-chart-area"></i></button>
+                                {/* <button className="btn btn-outline-primary border-0 fs-1" onAbort={() => setChart(!chart)}><i className="fa fa-solid fa-chart-area"></i></button> */}
                             </div>
                         )
                     }
