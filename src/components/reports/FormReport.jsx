@@ -4,6 +4,7 @@ import Header from '../../templates/Header'
 import axios from 'axios'
 import { Apiurl } from '../../services/apirest'
 import { alertError, storeEdulink } from '../../store/EdulinkStore'
+import { generatePDF } from '../../helpers/reportsPDF'
 
 export const FormReport = ({nameView, permissions={c:[],r:[],rbid:[],u:[],d:[]}, }) => {
     const token = storeEdulink(state => state.auth.token)
@@ -33,6 +34,7 @@ export const FormReport = ({nameView, permissions={c:[],r:[],rbid:[],u:[],d:[]},
         try{
             setLoading(true)
             const res = await axios.post(Apiurl + 'reports/students/', params, {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
+            setData(res.data)
             console.log(res.data)
         } catch (error) {
             alertError(error.response.data.error)
@@ -77,8 +79,8 @@ export const FormReport = ({nameView, permissions={c:[],r:[],rbid:[],u:[],d:[]},
                             <label for="carrera">Carrera</label>
                         </div>
                         <div className="form-floating mb-3 col-6">
-                            <input type="number" className="form-control fs-5" id="semestre" name='semestre' placeholder="-" style={{ height: '50px' }} />
-                            <label for="semestre">Semestre</label>
+                            <input type="number" className="form-control fs-5" id="cuatrimestre" name='cuatrimestre' placeholder="-" style={{ height: '50px' }} />
+                            <label for="cuatrimestre">Cuatrimestre</label>
                         </div>
                         <div className="form-floating mb-3 col-6">
                             <select className="form-select fs-5" id="sexo" name='sexo' style={{ height: '50px' }}>
@@ -104,10 +106,14 @@ export const FormReport = ({nameView, permissions={c:[],r:[],rbid:[],u:[],d:[]},
                             <button className="btn btn-outline-dark fs-3 w-100">Buscar <i className="fa fa-solid fa-search"></i></button>
                         </div>
                     </form>
-                    <div className="d-flex justify-content-around w-100">
-                        <button className="btn btn-outline-success border-0 fs-1"><i className="fa fa-solid fa-file"></i></button>
-                        <button className="btn btn-outline-primary border-0 fs-1"><i className="fa fa-solid fa-chart-area"></i></button>
-                    </div>
+                    {
+                        data && (
+                            <div className="d-flex justify-content-around w-100">
+                                <button className="btn btn-outline-success border-0 fs-1" onClick={() => generatePDF(data,'reporte_estudiantil')}><i className="fa fa-solid fa-file"></i></button>
+                                <button className="btn btn-outline-primary border-0 fs-1"><i className="fa fa-solid fa-chart-area"></i></button>
+                            </div>
+                        )
+                    }
                     <div className='table-responsive row col-12'>
                         <table className="table table-bordered w-100">
                             <thead>
@@ -119,16 +125,37 @@ export const FormReport = ({nameView, permissions={c:[],r:[],rbid:[],u:[],d:[]},
                                     <th>Carrera</th>
                                     <th>Edad</th>
                                     <th>Sexo</th>
-                                    <th>Semestre</th>
+                                    <th>Cuatrimestre</th>
                                     <th>Grupo</th>
                                     <th>Municipio</th>
                                     <th>Generacion</th>
+                                    <th>Promedio actual</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                </tr>
+                                {
+                                    data?.map(student => {
+                                        return <tr>
+                                            <td>{student.matricula}</td>
+                                            <td>{student.nombre}</td>
+                                            <td>{student.paterno}</td>
+                                            <td>{student.materno}</td>
+                                            <td>{student.carrera}</td>
+                                            <td>{student.edad}</td>
+                                            <td>{student.sexo}</td>
+                                            <td>{student.cuatrimestre}</td>
+                                            <td>{student.grupo}</td>
+                                            <td>{student.municipio}</td>
+                                            <td>{student.generacion}</td>
+                                            <td>{student.promedio}</td>
+                                            <td><button className="btn btn-outline-danger" onClick={(e)=>{
+                                                e.preventDefault()
+                                                setData(data.filter(item => item.id !== student.id))
+                                            }}>Eliminar de la lista</button></td>
+                                        </tr>
+                                    })
+                                }
                             </tbody>
                         </table>
                     </div>
