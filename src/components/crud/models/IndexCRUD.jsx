@@ -183,7 +183,7 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
         } else {
             formData = data.form;
             if (formData.assignments){
-                formData.assignments = JSON.stringify(formData.assignments);
+                formData.assignments = JSON.stringify(formData.assignments).trim();
             }
             delete formData.photo;
             console.log(formData);
@@ -197,9 +197,9 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
                             { headers: { 'Authorization': 'Token ' + token } }
                         )
                         alertSuccess('Actualización exitosa');
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 3000);
+                        // setTimeout(() => {
+                        //     window.location.reload();
+                        // }, 3000);
                         console.log(response.data);
                     } catch (error) {
                         let errorMessage = ''
@@ -230,9 +230,9 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
                         )
                         alertSuccess('Registro exitoso');
                         console.log(response.data);
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 3000);
+                        // setTimeout(() => {
+                        //     window.location.reload();
+                        // }, 3000);
                     } catch (error) {
                         let errorMessage = ''
                         if (error.response.data.error) {

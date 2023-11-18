@@ -71,6 +71,16 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
       handleSubmit(e);
     }
   }
+
+  const convertAndValidateJson = (value) => {
+    if (typeof value === 'string') {
+      return JSON.parse(value);
+    } else if (typeof value === 'object') {
+      return value;
+    } else {
+      return "El valor no es un string ni un objeto JSON";
+    }
+  }
   
   const handleCreateAccount = async (e, type='') => {
     e.preventDefault();
@@ -204,12 +214,12 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
                                   ? <CustomSelect index={index} typeOptions='json' />
                                   : fields[index].type === 'TextField'
                                     ? fields[index].name === 'assignments'
-                                      ? <div class="card">
-                                          <div class="card-header">
-                                            <button class="btn btn-primary w-auto h-auto p-3 float-end" type="button" onClick={(e) => {
+                                      ? <div className="card">
+                                          <div className="card-header">
+                                            <button className="btn btn-primary w-auto h-auto p-3 float-end" type="button" onClick={(e) => {
                                               e.target.disabled = true;
                                               const fieldName = fields[index].name;
-                                              const currentFieldData = Array.isArray(data.form[fieldName]) ? data.form[fieldName] : [];
+                                              const currentFieldData = Array.isArray(convertAndValidateJson(data.form[fieldName])) ? convertAndValidateJson(data.form[fieldName]) : [];
                                               setData({
                                                 ...data,
                                                 form: {
@@ -228,19 +238,18 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
                                                 e.target.disabled = false;
                                               }, 1000);
                                             }}>
-                                              <i class="fas fa-plus"></i>
+                                              <i className="fas fa-plus"></i>
                                             </button>
                                           </div>
-                                          {/* <div class="card-body">
-                                            <h5 class="card-title">Special title treatment</h5>
-                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                                          </div> */}
                                           {
                                             data.form[fields[index].name]?.length > 0
-                                            ? <div class="card-body">
+                                            ? <div className="card-body">
+                                              {
+                                                console.log(data.form[fields[index].name])
+                                              }
                                                 {
-                                                  Array.isArray(data.form[fields[index].name]) && data.form[fields[index].name]?.map((assignment, i) => {
+                                                  Array.isArray(convertAndValidateJson(data.form[fields[index].name])) && convertAndValidateJson(data.form[fields[index].name])?.map((assignment, i) => {
+                                                    console.log(convertAndValidateJson(data.form[fields[index].name]));
                                                     const optionsTeachers = teachers.map((teacher) => {
                                                       return {
                                                         id: assignment.id,
@@ -256,14 +265,15 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
                                                       }
                                                     })
                                                     return (
-                                                      <div class="form-group row" key={i}>
-                                                        <div class="col-6">
+                                                      <div className="form-group row" key={i}>
+                                                        <div className="col-5">
                                                           <CustomSelect index={i} typeOptions={optionsTeachers} isClearable={false} onChange={(item) => {
+                                                            console.log(data.form[fields[index]?.name]);
                                                             setData({
                                                               ...data,
                                                               form: {
                                                                 ...data.form,
-                                                                [fields[index].name]: item ? data.form[fields[index]?.name]?.map((assignment) => {
+                                                                [fields[index].name]: item ? convertAndValidateJson(data.form[fields[index]?.name])?.map((assignment) => {
                                                                   if(assignment.id === item.id){
                                                                     return {
                                                                       ...assignment,
@@ -281,7 +291,7 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
                                                             })
                                                           } />
                                                         </div>
-                                                        <div class="col-6">
+                                                        <div className="col-5">
                                                           <CustomSelect index={i} typeOptions={optionsSubjects} isClearable={false} onChange={(item) => {
                                                             setData({
                                                               ...data,
@@ -304,6 +314,21 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
                                                               return subject.value === assignment.subject
                                                             })
                                                           } />
+                                                        </div>
+                                                        <div className="col-2">
+                                                          <div className="btn btn-danger w-auto h-auto p-3" type="button" onClick={() => {
+                                                            setData({
+                                                              ...data,
+                                                              form: {
+                                                                ...data.form,
+                                                                [fields[index].name]: convertAndValidateJson(data.form[fields[index]?.name])?.filter((assig) => {
+                                                                  return assig.id !== assignment.id
+                                                                })
+                                                              }
+                                                            })
+                                                          }}>
+                                                            <i className="fas fa-trash"></i>
+                                                          </div>
                                                         </div>
                                                       </div>
                                                     )
