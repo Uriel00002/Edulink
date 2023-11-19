@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import Header from '../../templates/Header'
@@ -35,9 +36,25 @@ export const Reports = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     }
 
     const getEmployees = async () => {
+        // try {
+        //     const res = await axios.get(Apiurl + 'employees/', {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}});
+        //     setOptions(prev => ({...prev, employees: res.data}));
+        // } catch (error) {
+        //     console.log(error);
+        // }
         try {
-            const res = await axios.get(Apiurl + 'employees/', {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}});
-            setOptions(prev => ({...prev, employees: res.data}));
+            const users = await axios.get(Apiurl + 'users/',{headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
+            let teachers = users.data.filter(user => user.type == '2')
+            let teachersIds = teachers.map(user => user.id.toString())
+            const employees = await axios.get(Apiurl + 'employees/',{headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
+            teachers = employees.data.filter(employee => teachersIds.includes(employee.user.split(' - ')[0]))
+            teachers = teachers.map(employee => {
+                return {
+                    id: employee.id,
+                    name: employee.full_name + ' ' + employee.number,
+                }
+            }); 
+            setOptions(prev => ({...prev, employees: teachers})); 
         } catch (error) {
             console.log(error);
         }
@@ -101,7 +118,7 @@ export const Reports = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                     <select className="form-select fs-5" id="tutor" name='tutor' style={{ height: '50px' }}>
                         <option value="">Seleccionar el tutor</option>
                         {
-                            options?.employees?.map(employee => <option key={employee.id} value={employee.id}>{employee.full_name + ' ' + employee.number}</option>)
+                            options?.employees?.map(employee => <option key={employee.id} value={employee.id}>{employee.name}</option>)
                         }
                     </select>
                     <label for="tutor">Tutor</label>
@@ -110,7 +127,7 @@ export const Reports = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                     <select className="form-select fs-5" id="profesor" name='profesor' style={{ height: '50px' }}>
                         <option value="">Seleccionar el profesor</option>
                         {
-                            options?.employees?.map(employee => <option key={employee.id} value={employee.id}>{employee.full_name + ' ' + employee.number}</option>)
+                            options?.employees?.map(employee => <option key={employee.id} value={employee.id}>{employee.name}</option>)
                         }
                     </select>
                     <label for="profesor">Profesor</label>
