@@ -244,20 +244,16 @@ export const FormCrud = ({permissions, typeUser, fields, handleSubmit, setData, 
                                           {
                                             data.form[fields[index].name]?.length > 0
                                             ? <div className="card-body">
-                                              {
-                                                console.log(data.form[fields[index].name])
-                                              }
                                                 {
                                                   Array.isArray(convertAndValidateJson(data.form[fields[index].name])) && convertAndValidateJson(data.form[fields[index].name])?.map((assignment, i) => {
-                                                    console.log(convertAndValidateJson(data.form[fields[index].name]));
-                                                    const optionsTeachers = teachers.map((teacher) => {
+                                                    const optionsTeachers = [{id: '', name: 'Seleccione un profesor'},...teachers].map((teacher) => {
                                                       return {
                                                         id: assignment.id,
                                                         value: teacher.id,
                                                         label: teacher.name,
                                                       }
                                                     })
-                                                    const optionsSubjects = subjects.map((subject) => {
+                                                    const optionsSubjects = [{id: '', name: 'Seleccione una asignatura'},...subjects].map((subject) => {
                                                       return {
                                                         id: assignment.id,
                                                         value: subject.id,

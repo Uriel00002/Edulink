@@ -109,7 +109,7 @@ export const FormReport = ({nameView, permissions={c:[],r:[],rbid:[],u:[],d:[]},
                         </div>
                     </form>
                     {
-                        data && (
+                        data?.length > 0 && (
                             <div className="d-flex justify-content-around w-100">
                                 <button className="btn btn-outline-success border-0 fs-1" onClick={() => generatePDF(data,'reporte_estudiantil')}><i className="fa fa-solid fa-file"></i></button>
                                 {/* <button className="btn btn-outline-primary border-0 fs-1" onAbort={() => setChart(!chart)}><i className="fa fa-solid fa-chart-area"></i></button> */}

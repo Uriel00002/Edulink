@@ -8,6 +8,7 @@ import { alertError, storeEdulink } from '../../store/EdulinkStore';
 import { validateUserInView } from '../../helpers/funtionsGlobals';
 import axios from 'axios';
 import { Apiurl } from '../../services/apirest';
+import { generatePDF } from '../../helpers/reportsPDF';
 
 export const Reports = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
     const navigate = useNavigate();
@@ -137,9 +138,9 @@ export const Reports = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                 </div>
             </form>
             {
-                data && (
+                data?.length > 0 && (
                     <div className="d-flex justify-content-around w-100">
-                        <button className="btn btn-outline-success border-0 fs-1"><i className="fa fa-solid fa-file"></i></button>
+                        <button className="btn btn-outline-success border-0 fs-1" onClick={() => generatePDF(data, 'SICAH')}><i className="fa fa-solid fa-file"></i></button>
                         {/* <button className="btn btn-outline-primary border-0 fs-1"><i className="fa fa-solid fa-chart-area"></i></button> */}
                     </div>
                 )
@@ -150,7 +151,7 @@ export const Reports = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                         <tr>
                             <th>Grupo/s</th>
                             <th>Tutor/es</th>
-                            <th>Asignacion/es</th>
+                            <th>Asignacion/es profesor -&gt; materia</th>
                             <th>Salon/es</th>
                             <th>Acciones</th>
                         </tr>
@@ -161,12 +162,17 @@ export const Reports = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                             Array.isArray(data) 
                             ? data?.map((item, index) => (
                                 <tr key={index}>
-                                    <td>{item.group}</td>
+                                    <td>{item.grupo}</td>
                                     <td>{item.tutor}</td>
-                                    <td>{item.assignments}</td>
-                                    <td>{item.classrooms}</td>
+                                    <td>{item.asignaciones?.map((asignacion, index) => 
+                                        <p key={index}>{asignacion.teacher} -&gt; {asignacion.subject}</p>)}
+                                    </td>
+                                    <td>{item.salones?.map((salon, index) => <p key={index}>{salon}</p>)}</td>
                                     <td>
-                                        <button className="btn btn-outline-primary border-0 fs-1"><i className="fa fa-solid fa-file"></i></button>
+                                        <button className="btn btn-outline-danger" onClick={(e) => {
+                                            e.preventDefault();
+                                            setData(data.filter((i) => i.id !== item.id));
+                                        }}>Eliminar de la lista</button>
                                     </td>
                                 </tr>
                             ))
