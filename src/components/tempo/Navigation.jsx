@@ -13,12 +13,12 @@ export function Navigation () {
             to="/tempo/create"
           />
 
-          <Card
+          {/* <Card
             title="Editar Horario"
             description="Edita tu horario actual."
             icon="fa-edit"
             to="/edit"
-          />
+          /> */}
         
           <Card
             title="Ver Horario"

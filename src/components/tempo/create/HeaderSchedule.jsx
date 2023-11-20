@@ -1,8 +1,8 @@
 import React from 'react';
 
-export const HeaderSchedule = () => {
+export const HeaderSchedule = ({...props}) => {
   return (
-    <header className='header-tempo'>
+    <header {...props}>
       <h1>Crear Horaios</h1>
     </header>
   );

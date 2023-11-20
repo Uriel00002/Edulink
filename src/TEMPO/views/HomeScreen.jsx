@@ -13,12 +13,12 @@ export const HomeScreen = () => {
       </section>
       <section className="dash_main">
         <div className='dash_menu'>
-        <Navigation />
+          <Navigation />
         </div>
       </section>
       <section className="footer_main">
-                <Footer />
-            </section>
+          <Footer />
+      </section>
     </React.Fragment>
   );
 }

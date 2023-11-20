@@ -33,9 +33,6 @@
 
 .create-tempo {
     height: 88vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background: #FFFFFF;
     color: black;
     text-align: center;
@@ -44,7 +41,7 @@
 .schedule-item{
     border: 1px solid #000000;
     border-radius: 5px;
-    height: 30px;
+    min-height: 30px;
     text-align: center;
     padding: 5px;
     margin-top: 10px;
@@ -114,4 +111,5 @@
 .schedule-table tbody td {
     background-color: #fff;
     color: #333;
+    width: 40px;
 }
