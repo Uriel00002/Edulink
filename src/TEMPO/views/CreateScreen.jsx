@@ -5,18 +5,29 @@ import HeaderSchedule from '../../components/tempo/create/HeaderSchedule';
 import TableSchedule from '../../components/tempo/create/TableSchedule';
 import Dropdown from '../../components/tempo/create/DropDown';
 import '../../assets/css/create_schedule.css';
-import { storeEdulink } from '../../store/EdulinkStore';
+import { alertError, storeEdulink } from '../../store/EdulinkStore';
 import axios from 'axios';
 import { Apiurl } from '../../services/apirest';
+import Swal from 'sweetalert2';
 
 export const CreateScreen = () => {
   const token = storeEdulink(state => state.auth.token)
+  const setLoading = storeEdulink(state => state.setLoading)
   const [optionsSICAH, setOptionsSICAH] = useState(null)
   const [academiccharges, setAcademiccharges] = useState(null)
   const [academiccharge, setAcademiccharge] = useState(null)
   const [teachersAndSubjects, setTeachersAndSubjects] = useState([])
   const [draggedItem, setDraggedItem] = useState(null);
-
+  const initialData = new Array(5).fill(null).map(() =>
+    new Array(13).fill(null).map(() => ({
+      id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+      teacher: '',
+      subject: '',
+      classroom: ''
+    }))
+  );
+  const [data, setData] = useState(initialData);
+  const [name, setName] = useState('')
 
 
   useEffect(() => {
@@ -47,6 +58,14 @@ export const CreateScreen = () => {
   }
 
   const handleOnChangeDropdown = (e) => {
+    setData(initialData)
+    document.querySelectorAll('.schedule-cell').forEach((item, i) => {
+      item.classList.remove('border-1');
+      item.classList.remove('border-success');
+      item.classList.remove('border-warning');
+      item.classList.remove('border-info');
+    });
+    
     const value = e.target.value
     if (value) {
       setAcademiccharge(academiccharges.find(sicah => sicah.id == value))
@@ -67,15 +86,13 @@ export const CreateScreen = () => {
   }
 
   const handleDragStart = (e, item,type) => {
-    // Aquí puedes manejar el evento de arrastre para iniciar el arrastre del elemento.
     setDraggedItem({data:item,type:type});
   };
   
-  const handleDragOver = (e, itemID, totalIndex) => {
-    // Aquí puedes manejar el evento de arrastre sobre la tabla para permitir el soltar.
+  const handleDragOver = (e, id) => {
     e.preventDefault();
     document.querySelectorAll('.schedule-cell').forEach((item, i) => {
-      if (i == itemID) {
+      if (item.id == id) {
         item.classList.add('border-1');
         item.classList.add('border-info');
       } else {
@@ -86,41 +103,84 @@ export const CreateScreen = () => {
   };
   
   const handleDrop = (e, id) => {
-    // Aquí puedes manejar el evento de soltar el elemento arrastrado en la tabla.
-    // Puedes usar el estado draggedItem para obtener los datos que se están soltando.
-    const item = document.getElementById(id);
-    const divSubject = item.childNodes[0];
-    const divClassroom = item.childNodes[1];
-    if(draggedItem.type === 'subject'){
-      divSubject.innerText = draggedItem.data;
-    }else if(draggedItem.type === 'classroom'){
-      divClassroom.innerText = draggedItem.data.split(' - ')[1].split(';')[0];
-    }
-    e.target.classList.remove('border-1');
-    e.target.classList.remove('border-info');
+    document.querySelectorAll('.schedule-cell').forEach((item, i) => {
+      item.classList.remove('border-1');
+      item.classList.remove('border-info');
+    });
+    const td = document.getElementById(id);
+    const indexHorizontal = parseInt(id.split('-')[0]);
+    const indexVertical = parseInt(id.split('-')[1]);
+    setData(
+      data.map((row, i) => {
+        if (i == indexHorizontal) {
+          return row.map((cell, j) => {
+            if (j == indexVertical) {
+              if(draggedItem.type == 'subject'){
+                if(cell.classroom){
+                  td.classList.add('border-1');
+                  td.classList.add('border-success');
+                  td.classList.remove('border-warning');
+                }else{
+                  td.classList.add('border-1');
+                  td.classList.add('border-warning');
+                  td.classList.remove('border-success');
+                }
+                return { ...cell, teacher: draggedItem.data.split(' - ')[0], subject: draggedItem.data.split(' - ')[1] }
+              }
+              if(draggedItem.type == 'classroom'){
+                if(cell.subject && cell.teacher){
+                  td.classList.add('border-1');
+                  td.classList.add('border-success');
+                  td.classList.remove('border-warning');
+                }else{
+                  td.classList.add('border-1');
+                  td.classList.add('border-warning');
+                  td.classList.remove('border-success');
+                }
+                return { ...cell, classroom: draggedItem.data.split(' - ')[1].split(';')[0] }
+              }
+            }
+            return cell;
+          });
+        }
+        return row;
+      })
+    )
     setDraggedItem(null);
   };
 
-  const handleSubmit = () => {
-    const table = document.getElementById('schedule-table'); // Obtener la referencia a la tabla por su ID
-
-    const tableData = []; // Arreglo para almacenar los datos de la tabla
-
-    // Recorrer las filas del cuerpo de la tabla
-    for (let i = 0; i < table.rows.length; i++) {
-      const row = table.rows[i]; // Obtener la referencia a la fila actual
-      const rowData = []; // Arreglo para almacenar los datos de la fila actual
-
-      // Recorrer las celdas de la fila actual
-      for (let j = 0; j < row.cells.length; j++) {
-        const cell = row.cells[j]; // Obtener la referencia a la celda actual
-        rowData.push(cell.innerText); // Agregar el texto de la celda al arreglo de datos de la fila
+  const handleSubmit = async() => {
+    const json = JSON.stringify(data)
+    Swal.fire({
+      title: 'Guardando...',
+      text: '¿Deseas guardar el horario?',
+      icon: 'info',
+      showCancelButton: true,
+      showConfirmButton: true,
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        try {
+          setLoading(true);
+          const res = await axios.post(Apiurl + 'schedules/', {
+            name: name,
+            data: json,
+            academic_charge: academiccharge.id
+          }, {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}});
+          console.log(res.data);
+        } catch (error) {
+          error.response.data.error 
+          ? alertError(error.response.data.error)
+          : error.response.data.academic_charge ? alertError(error.response.data.academic_charge) : alertError(error.response.data)
+          console.log(error);
+        } finally {
+          setLoading(false);
+        }
       }
-
-      tableData.push(rowData); // Agregar los datos de la fila al arreglo de datos de la tabla
-    }
-
-    console.log(tableData);
+    })
   }
 
   return (
@@ -154,14 +214,18 @@ export const CreateScreen = () => {
           </div>
         </div>
         <div className="create-tempo flex-column col col-8">
-          <div className='dropdowns-container w-75 mb-3'>
+          <div className='dropdowns-container mb-3 d-flex justify-content-around align-items-center'>
             <Dropdown label='Carga Horaria' options={optionsSICAH} id='sicah' name='sicah' onChange={handleOnChangeDropdown} />
             {
               academiccharge &&
-                <button className='btn btn-primary' onClick={handleSubmit}>Guardar</button>
+              <button className='btn btn-primary' onClick={handleSubmit}>Guardar</button>
             }
           </div>
-          <TableSchedule handleDragOver={handleDragOver} handleDrop={handleDrop} />
+          {
+            academiccharge &&
+              <input type="text" placeholder='Nombre del horario' className='w-75 m-0 mb-1' onChange={(e) => setName(e.target.value)} value={name} />
+          }
+          <TableSchedule data={data}  handleDragOver={handleDragOver} handleDrop={handleDrop} />
         </div>
       </section>
     </React.Fragment>

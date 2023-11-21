@@ -58,11 +58,9 @@
 .dropdowns-container {
     display: flex;
     justify-content: space-around;
-    margin-top: 20px;
 }
   
 .dropdown {
-    margin-right: 20px;
 }
   
 .dropdown label {
@@ -72,7 +70,6 @@
 }
   
 .dropdown select {
-    width: 150px;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
