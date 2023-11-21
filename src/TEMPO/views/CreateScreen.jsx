@@ -185,7 +185,7 @@ export const CreateScreen = () => {
 
   return (
     <React.Fragment>
-      <HeaderSchedule className='header-tempo' />
+      <HeaderSchedule name='Crear Horario' className='header-tempo' />
       <section className='row px-3'>
         <div className="col col-4 row">
           <div className="schedule-items-subject col col-6">

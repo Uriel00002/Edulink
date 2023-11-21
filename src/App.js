@@ -214,7 +214,7 @@ export function App() {
                       <Route path="/tempo/*" element={<Routes>
                         <Route path="/" element={<HomeScreen />} />
                         <Route path="/create" element={<CreateScreen />} />
-                        <Route path="/tempo/view" element={<ViewScreen /> } />
+                        <Route path="/view" element={<ViewScreen /> } />
                         <Route path="*" element={<Navigate to="/" />} />
                       </Routes>} />
         
