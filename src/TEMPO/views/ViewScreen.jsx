@@ -66,6 +66,8 @@ export const ViewScreen = () => {
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Carga Academica</th>
+                    <th>Fecha Creacion</th>
+                    <th>Fecha Actualizacion</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -77,6 +79,8 @@ export const ViewScreen = () => {
                           <td>{item?.id}</td>
                           <td>{item?.name}</td>
                           <td>{item?.academic_charge}</td>
+                          <td>{item?.create_at}</td>
+                          <td>{item?.update_at}</td>
                           <td className='d-flex gap-2'>
                             <button className='btn btn-primary' onClick={() => generatePdf(JSON.parse(item?.data), item?.name, item?.academic_charge)}><i className='fas fa-eyes'></i></button>
                             <Link to={`/tempo/create?id=${item?.id}`} className='btn btn-warning'><i className='fas fa-edit'></i></Link>

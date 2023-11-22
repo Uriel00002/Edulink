@@ -80,7 +80,12 @@
     border-color: #007bff;
     outline: none;
 }
-  
+
+.contenedor-tabla-schedule{
+    height: 350px;
+    overflow-y: scroll;
+    border: 1px solid #000000;
+}
 
 .schedule-table {
     border-collapse: raise;
@@ -109,4 +114,7 @@
     background-color: #fff;
     color: #333;
     width: 40px;
+}
+.schedule-cell{
+    cursor: pointer;
 }

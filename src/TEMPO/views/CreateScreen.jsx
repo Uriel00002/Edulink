@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable eqeqeq */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
@@ -173,9 +174,20 @@ export const CreateScreen = () => {
 
   const handleSubmit = async() => {
     const json = JSON.stringify(data)
+    let texto = '¿Deseas guardar el horario?'
+    if(idLocation){
+      texto = '¿Deseas actualizar el horario?'
+    }
+    data?.map((row, i) => {
+      row?.map((cell, j) => {
+        if((cell.classroom && !cell.subject)||(cell.classroom && !cell.teacher)||(cell.teacher && !cell.subject)){
+          texto = 'Existen campos incompletos, aun asi deseas guardar el horario?'
+        }
+      })
+    })
     Swal.fire({
       title: 'Guardando...',
-      text: '¿Deseas guardar el horario?',
+      text: texto,
       icon: 'info',
       showCancelButton: true,
       showConfirmButton: true,
@@ -268,7 +280,9 @@ export const CreateScreen = () => {
             academiccharge &&
               <input type="text" placeholder='Nombre del horario' className='w-75 m-0 mb-1' onChange={(e) => setName(e.target.value)} value={name} />
           }
-          <TableSchedule data={data} setData={setData}  handleDragOver={handleDragOver} handleDrop={handleDrop} />
+          <div className="contenedor-tabla-schedule p-1">
+            <TableSchedule data={data} setData={setData}  handleDragOver={handleDragOver} handleDrop={handleDrop} />
+          </div>
         </div>
       </section>
     </React.Fragment>
