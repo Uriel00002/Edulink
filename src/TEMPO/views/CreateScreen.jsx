@@ -5,12 +5,15 @@ import HeaderSchedule from '../../components/tempo/create/HeaderSchedule';
 import TableSchedule from '../../components/tempo/create/TableSchedule';
 import Dropdown from '../../components/tempo/create/DropDown';
 import '../../assets/css/create_schedule.css';
-import { alertError, storeEdulink } from '../../store/EdulinkStore';
+import { alertError, alertSuccess, storeEdulink } from '../../store/EdulinkStore';
 import axios from 'axios';
 import { Apiurl } from '../../services/apirest';
 import Swal from 'sweetalert2';
+import { useLocation } from 'react-router-dom';
 
 export const CreateScreen = () => {
+  const location = useLocation()
+  const idLocation = location.search.split('=')[1]
   const token = storeEdulink(state => state.auth.token)
   const setLoading = storeEdulink(state => state.setLoading)
   const [optionsSICAH, setOptionsSICAH] = useState(null)
@@ -42,6 +45,12 @@ export const CreateScreen = () => {
     }
   }, [academiccharge])
 
+  useEffect(() => {
+    if (idLocation) {
+      getScheduleById(idLocation)
+    }
+  }, [idLocation, academiccharges])
+
   const getSICAH = async () => {
     try {
       const res = await axios.get(Apiurl + 'academiccharges/', {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
@@ -57,7 +66,21 @@ export const CreateScreen = () => {
     }
   }
 
-  const handleOnChangeDropdown = (e) => {
+  const getScheduleById = async (id) => {
+    try {
+      const res = await axios.get(Apiurl + 'schedules/' + id + '/', {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
+      handleOnChangeDropdown(res.data.academic_charge)
+      setData(JSON.parse(res.data.data))
+      setName(res.data.name)
+      setAcademiccharge(academiccharges?.find(sicah => sicah?.id == res.data.academic_charge))
+      return res.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleOnChangeDropdown = (value) => {
+    document.getElementById('sicah').value = value
     setData(initialData)
     document.querySelectorAll('.schedule-cell').forEach((item, i) => {
       item.classList.remove('border-1');
@@ -66,9 +89,8 @@ export const CreateScreen = () => {
       item.classList.remove('border-info');
     });
     
-    const value = e.target.value
     if (value) {
-      setAcademiccharge(academiccharges.find(sicah => sicah.id == value))
+      setAcademiccharge(academiccharges?.find(sicah => sicah?.id == value))
     }else{
       setAcademiccharge(null)
       setTeachersAndSubjects([])
@@ -111,7 +133,7 @@ export const CreateScreen = () => {
     const indexHorizontal = parseInt(id.split('-')[0]);
     const indexVertical = parseInt(id.split('-')[1]);
     setData(
-      data.map((row, i) => {
+      data?.map((row, i) => {
         if (i == indexHorizontal) {
           return row.map((cell, j) => {
             if (j == indexVertical) {
@@ -163,21 +185,42 @@ export const CreateScreen = () => {
       cancelButtonColor: '#d33',
     }).then(async(result) => {
       if (result.isConfirmed) {
-        try {
-          setLoading(true);
-          const res = await axios.post(Apiurl + 'schedules/', {
-            name: name,
-            data: json,
-            academic_charge: academiccharge.id
-          }, {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}});
-          console.log(res.data);
-        } catch (error) {
-          error.response.data.error 
-          ? alertError(error.response.data.error)
-          : error.response.data.academic_charge ? alertError(error.response.data.academic_charge) : alertError(error.response.data)
-          console.log(error);
-        } finally {
-          setLoading(false);
+        if(idLocation){
+          try {
+            setLoading(true);
+            const res = await axios.put(Apiurl + 'schedules/' + idLocation + '/', {
+              name: name,
+              data: json,
+              academic_charge: academiccharge.id
+            }, {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}});
+            console.log(res.data);
+            alertSuccess('Horario actualizado con exito')
+          } catch (error) {
+            error.response.data.error 
+            ? alertError(error.response.data.error)
+            : error.response.data.academic_charge ? alertError(error.response.data.academic_charge) : alertError(error.response.data)
+            console.log(error);
+          } finally {
+            setLoading(false);
+          }
+        }else{
+          try {
+            setLoading(true);
+            const res = await axios.post(Apiurl + 'schedules/', {
+              name: name,
+              data: json,
+              academic_charge: academiccharge.id
+            }, {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}});
+            console.log(res.data);
+            alertSuccess('Horario creado con exito')
+          } catch (error) {
+            error.response.data.error 
+            ? alertError(error.response.data.error)
+            : error.response.data.academic_charge ? alertError(error.response.data.academic_charge) : alertError(error.response.data)
+            console.log(error);
+          } finally {
+            setLoading(false);
+          }
         }
       }
     })
@@ -215,7 +258,7 @@ export const CreateScreen = () => {
         </div>
         <div className="create-tempo flex-column col col-8">
           <div className='dropdowns-container mb-3 d-flex justify-content-around align-items-center'>
-            <Dropdown label='Carga Horaria' options={optionsSICAH} id='sicah' name='sicah' onChange={handleOnChangeDropdown} />
+            <Dropdown label='Carga Horaria' options={optionsSICAH} id='sicah' name='sicah' onChange={(e)=>handleOnChangeDropdown(e.target.value)} />
             {
               academiccharge &&
               <button className='btn btn-primary' onClick={handleSubmit}>Guardar</button>
@@ -225,7 +268,7 @@ export const CreateScreen = () => {
             academiccharge &&
               <input type="text" placeholder='Nombre del horario' className='w-75 m-0 mb-1' onChange={(e) => setName(e.target.value)} value={name} />
           }
-          <TableSchedule data={data}  handleDragOver={handleDragOver} handleDrop={handleDrop} />
+          <TableSchedule data={data} setData={setData}  handleDragOver={handleDragOver} handleDrop={handleDrop} />
         </div>
       </section>
     </React.Fragment>

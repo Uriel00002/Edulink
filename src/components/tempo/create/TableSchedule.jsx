@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const TableSchedule = ({data, handleDragOver=() => {}, handleDrop=() => {}}) => {
+export const TableSchedule = ({data, setData, handleDragOver=() => {}, handleDrop=() => {}}) => {
   const dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"];
   const horas = ["7-8", "8-9", "9-10", "10-11", "11-12", "12-13", "13-14", "14-15", "15-16", "16-17", "17-18", "18-19", "19-20"];
   return (
@@ -47,6 +47,24 @@ export const TableSchedule = ({data, handleDragOver=() => {}, handleDrop=() => {
             className="schedule-cell"
             onDragOver={(e) => handleDragOver(e, diaIndex + '-' + horaIndex,)}
             onDrop={(e) => handleDrop(e, diaIndex + '-' + horaIndex)}
+            onClick={(e) => {
+              setData(
+                [
+                  ...data.slice(0, diaIndex),
+                  [
+                    ...data[diaIndex].slice(0, horaIndex),
+                    {
+                      ...data[diaIndex][horaIndex],
+                      subject: '',
+                      teacher: '',
+                      classroom: '',
+                    },
+                    ...data[diaIndex].slice(horaIndex + 1),
+                  ],
+                  ...data.slice(diaIndex + 1),
+                ]
+              )
+            }}
             >
               <div className="subject child">{data[diaIndex][horaIndex].teacher + ' - ' + data[diaIndex][horaIndex].subject}</div>
               <div className="classroom child">{data[diaIndex][horaIndex].classroom}</div>
