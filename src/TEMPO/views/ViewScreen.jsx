@@ -5,15 +5,25 @@ import TableSchedule from '../../components/tempo/create/TableSchedule';
 import { alertSuccess, storeEdulink } from '../../store/EdulinkStore';
 import axios from 'axios';
 import { Apiurl } from '../../services/apirest';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { generatePDFSchedule } from '../../helpers/reportsPDF';
 import Swal from 'sweetalert2';
-
+import $ from 'jquery'
+import "datatables.net-dt/js/dataTables.dataTables";
+import "datatables.net-dt/css/jquery.dataTables.min.css";
+import "datatables.net-buttons/js/dataTables.buttons.js";
+import "datatables.net-buttons/js/buttons.colVis.js";
+import "datatables.net-buttons/js/buttons.flash.js";
+import "datatables.net-buttons/js/buttons.html5.js";
+import "datatables.net-buttons/js/buttons.print.js";
 export const ViewScreen = () => {
+    const location = useLocation() 
     const token = storeEdulink(state => state.auth.token)
+    const setLoading = storeEdulink(state => state.setLoading)
     const [data, setData] = useState([])
 
     useEffect(() => {
+      setLoading(true)
         getShedules()
     }, [])
 
@@ -53,6 +63,35 @@ export const ViewScreen = () => {
         })
     }
 
+    setTimeout(() => {
+      try {
+          $("#table").dataTable().fnDestroy();
+          let table = $( '#table' ).dataTable( {
+          "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+              // Bold the grade for all 'A' grade browsers
+              if ( aData[4] === "A" )
+              {
+              $('td:eq(4)', nRow).html( '<b>A</b>' );
+              }
+          },
+          scrollX: true,
+          "order": [[ 0, "desc" ]],
+          "pageLength": 10,
+          } );
+
+          table.on('error.dt', function(e, settings, techNote, message) {
+            if (message.indexOf('Incorrect column count') !== -1) {
+              // Si el mensaje de error contiene "Incorrect column count", recarga la página
+              location.reload();
+            }
+          });
+      } catch (error) {
+          console.log(error);
+      } finally {
+          setLoading(false)
+      }
+    },2000)
+
     return (
         <React.Fragment>
       <HeaderSchedule name='Ver Horarios' className='header-tempo' />
@@ -60,7 +99,7 @@ export const ViewScreen = () => {
         <div className="col col-12 row">
           <div className="schedule-items-subject col col-12">
             <div className="schedule-item table-responsive" style={{cursor: 'default'}}>
-              <table className='table'>
+              <table className='table table-striped table-bordered' id='table'>
                 <thead>
                   <tr>
                     <th>ID</th>

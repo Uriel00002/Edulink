@@ -48,6 +48,10 @@
     cursor: grab;
 }
 
+.schedule-item table tbody tr{
+    border: 0;
+}
+
 .schedule-item-header{
     font-weight: bold;
     margin-top: 10px;

@@ -36,13 +36,24 @@ export const CreateScreen = () => {
 
   useEffect(() => {
     getSICAH()
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
   }, [])
 
   useEffect(() => {
     if (academiccharge) {
+      setLoading(true);
+      let teachers = []
+      let subjects = []
       JSON.parse(academiccharge.assignments)?.map(assignment => {
-        GetEmployeAndSubjectById({idE: assignment.teacher, idS: assignment.subject})
+        teachers.push(assignment.teacher)
+        subjects.push(assignment.subject)
       })
+      teachers = [...new Set(teachers)]
+      subjects = [...new Set(subjects)]
+      GetEmployeAndSubjectById(teachers, subjects)
     }
   }, [academiccharge])
 
@@ -81,6 +92,7 @@ export const CreateScreen = () => {
   }
 
   const handleOnChangeDropdown = (value) => {
+    setTeachersAndSubjects([])
     document.getElementById('sicah').value = value
     setData(initialData)
     document.querySelectorAll('.schedule-cell').forEach((item, i) => {
@@ -94,18 +106,35 @@ export const CreateScreen = () => {
       setAcademiccharge(academiccharges?.find(sicah => sicah?.id == value))
     }else{
       setAcademiccharge(null)
-      setTeachersAndSubjects([])
     }
   }
 
-  const GetEmployeAndSubjectById = async({idE, idS}) => {
-    try {
-      const resE = await axios.get(Apiurl + 'employees/' + idE + '/', {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
-      const resS = await axios.get(Apiurl + 'subjects/' + idS + '/', {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
-      setTeachersAndSubjects([...teachersAndSubjects, `${resE.data.full_name} - ${resS.data.name}`])
-    } catch (error) {
-      console.log(error)
+  const GetEmployeAndSubjectById = async(idEmployees=[], idSubjects=[]) => {
+    const resp = []
+    if(idEmployees.length == idSubjects.length){
+      try {
+        const promises = idEmployees.map(async (idE, index) => {
+          try {
+            const resE = await axios.get(Apiurl + 'employees/' + idE + '/', { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } });
+            const resS = await axios.get(Apiurl + 'subjects/' + idSubjects[index] + '/', { headers: { 'Content-Type': 'application/json', 'Authorization': 'Token ' + token } });
+            return `${resE.data.full_name} - ${resS.data.name}`;
+          } catch (error) {
+            console.log(error);
+            return ''; // O manejar el error según sea necesario
+          }
+        });
+    
+        const results = await Promise.all(promises);
+    
+        setTeachersAndSubjects(results);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    } else {
+      alertError('Los datos de los docentes y asignaturas no coinciden, revice la carga horaria')
+      return
     }
+    setLoading(false);
   }
 
   const handleDragStart = (e, item,type) => {
@@ -175,20 +204,22 @@ export const CreateScreen = () => {
   const handleSubmit = async() => {
     const json = JSON.stringify(data)
     let texto = '¿Deseas guardar el horario?'
+    let icon = 'info'
     if(idLocation){
       texto = '¿Deseas actualizar el horario?'
     }
     data?.map((row, i) => {
       row?.map((cell, j) => {
-        if((cell.classroom && !cell.subject)||(cell.classroom && !cell.teacher)||(cell.teacher && !cell.subject)){
+        if((cell.classroom && !cell.subject)||(cell.subject && !cell.classroom)){
           texto = 'Existen campos incompletos, aun asi deseas guardar el horario?'
+          icon = 'warning'
         }
       })
     })
     Swal.fire({
       title: 'Guardando...',
       text: texto,
-      icon: 'info',
+      icon: icon,
       showCancelButton: true,
       showConfirmButton: true,
       confirmButtonText: 'Si',
