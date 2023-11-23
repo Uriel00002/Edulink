@@ -201,12 +201,13 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
 
 
                 <section className="profile">
-                <Header name={"Registrar"} />
-                <hr/>
-                <div className="container bootstrap snippet">
+                    <Header name={"Registrar"} />
+                </section>
+
+                <section className="register_main">
 
                     <div className="row">
-                        <div className="col-sm-3">
+                        <div className="col-sm-3 mt-3">
                             <div className="text-center">
                                 <img src={photo} className="avatar img-circle img-thumbnail" alt="avatar"/>
                                 <h6>...</h6>
@@ -220,7 +221,7 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                             </div> */}
                         </div>
 
-                        <div className="col-sm-9 mb-3">
+                        <div className="col-sm-9 mb-3 mt-3">
                             
                                     <ul className="nav nav-tabs">
                                         <li className={dataType === '#home' ? 'active' : ''} ><a data-toggle="tab" href="#" >Datos Personales</a></li>
@@ -395,9 +396,8 @@ export const Register = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
 
                     </div>
 
-                </div>
-
                 </section>
+
 
         </React.Fragment>
 

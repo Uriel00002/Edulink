@@ -20,7 +20,7 @@ export function Navigation () {
             to="/edit"
           /> */}
         
-          <Card
+          <Card className="cardTempo"
             title="Ver Horario"
             description="Visualiza tu horario actual."
             icon="fa-window-maximize"
