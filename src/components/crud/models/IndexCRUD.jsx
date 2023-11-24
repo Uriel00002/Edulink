@@ -182,7 +182,7 @@ export const IndexCRUD = ({nameAPI='', nameView='', permissions={c:[],r:[],rbid:
             }
         } else {
             formData = data.form;
-            if (formData.assignments){
+            if (formData.assignments && typeof formData.assignments === 'object') {
                 formData.assignments = JSON.stringify(formData.assignments).trim();
             }
             delete formData.photo;
