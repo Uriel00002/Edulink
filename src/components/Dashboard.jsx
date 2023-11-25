@@ -144,6 +144,13 @@ export const Dashboard = () => {
                                 </Link>
                             }
                             {
+                                (typeUser == 128 || typeUser == 0 || typeUser == 1)  &&
+                                <Link className="card" to="/status">
+                                    <div className="circle"><i className="fa-solid fa-signal-bars fa-bounce"></i></div>
+                                    <h2>Estado academico</h2>
+                                </Link>
+                            }
+                            {
                                 (typeUser == 128 || typeUser == 2)  &&
                                 <Link className="card" to="/grades/update">
                                     <div className="circle"><i className="fa-solid fa-objects-align-bottom fa-bounce"></i></div>
