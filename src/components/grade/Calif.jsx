@@ -13,8 +13,8 @@ import { storeEdulink } from "../../store/EdulinkStore";
 
 
 export const Calif = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
-    const token = localStorage.getItem("token");
     const navigate = useNavigate();
+    const token = storeEdulink(state => state.auth.token);
     const typeUser = parseInt(encriptar_desencriptar(storeEdulink(state => state.auth.type), "d")); //tipo de usuario
 
 

@@ -109,7 +109,7 @@ export const Reports = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                     <select className="form-select fs-5" id="grupo" name='grupo' style={{ height: '50px' }}>
                         <option value="">Seleccionar el grupo</option>
                         {
-                            options?.groups?.map(group => <option key={group.id} value={group.id}>{group.name}</option>)
+                            options?.groups?.map(group => <option key={group.id} value={group.id}>{group.period} {group.name} {group.career.split(' - ')[1]}</option>)
                         }
                     </select>
                     <label for="grupo">Grupo</label>

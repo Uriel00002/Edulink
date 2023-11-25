@@ -31,6 +31,7 @@ import { Reports } from './SICAH/views/Reports';
 import CreateScreen from './TEMPO/views/CreateScreen';
 import ViewScreen from './TEMPO/views/ViewScreen';
 import { Error404 } from './components/Error404';
+import { UpdateCalif } from './components/grade/UpdateCalif';
 
 
 
@@ -145,7 +146,6 @@ export function App() {
                     //rutas para logueados
                     <Routes>
                       <Route path="/" element={<Dashboard />} />
-                      <Route path="/calif" element={<Calif permissions={{c:[],r:[128],rbid:[128,0],u:[128],d:[]}} />} />
                       <Route path="/perfilusuario" element={<PerfilUsuario permissions={{c:[],r:[],rbid:[],u:[],d:[]}} />} />
                       <Route path="/users/*" element={<Routes>
                         <Route path="/" element={<IndexCRUD nameAPI="users" nameView="Usuarios" permissions={{c:[128,7,8],r:[128,7,8],rbid:[128,7,8],u:[128,7,8],d:[128,7,8]}} />} />
@@ -175,10 +175,12 @@ export function App() {
                         <Route path="/" element={<IndexCRUD nameAPI="subjects" nameView="Materias" permissions={{c:[128,4,7],r:[128,3,4,5,6,7],rbid:[128,3,4,5,6,7],u:[128,4,7],d:[128,7]}} />} />
                         <Route path="*" element={<Navigate to="/error404" />} />
                       </Routes>} />
-                      {/* <Route path="/grades/*" element={<Routes>
-                        <Route path="/" element={<IndexCRUD nameAPI="grades" nameView="Calificaciones" permissions={{c:[128,7],r:[128,3,4,5,6,7],rbid:[128,3,4,5,6,7],u:[128,2,7],d:[128,7]}} />} />
+                      <Route path="/grades/*" element={<Routes>
+                        {/* <Route path="/" element={<IndexCRUD nameAPI="grades" nameView="Calificaciones" permissions={{c:[128,7],r:[128,3,4,5,6,7],rbid:[128,3,4,5,6,7],u:[128,2,7],d:[128,7]}} />} /> */}
+                        <Route path="/calif" element={<Calif permissions={{c:[],r:[128],rbid:[128,0,1],u:[128],d:[]}} />} />
+                        <Route path="/update/" element={<UpdateCalif permissions={{c:[],r:[128,2],rbid:[128],u:[128],d:[]}} />} />
                         <Route path="*" element={<Navigate to="/error404" />} />
-                      </Routes>} /> */}
+                      </Routes>} />
                       <Route path="/categories/*" element={<Routes>
                         <Route path="/" element={<IndexCRUD nameAPI="categories" nameView="Categorías de aulas" permissions={{c:[128,7],r:[128,4,5,6,7],rbid:[128,4,5,6,7],u:[128,7],d:[128,7]}} />} />
                         <Route path="*" element={<Navigate to="/error404" />} />

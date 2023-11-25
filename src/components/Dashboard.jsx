@@ -136,13 +136,27 @@ export const Dashboard = () => {
                                     <h2>Materias</h2>
                                 </Link>
                             } */}
-                            {/* {
-                                (typeUser == 128 || typeUser == 0 || typeUser == 1 || typeUser == 2 || typeUser == 3 || typeUser == 4)  &&
-                                <Link className="card" to="/grades/">
+                            {
+                                (typeUser == 128 || typeUser == 0 || typeUser == 1)  &&
+                                <Link className="card" to="/grades/calif">
                                     <div className="circle"><i className="fa-solid fa-objects-align-bottom fa-bounce"></i></div>
                                     <h2>Calificaciones</h2>
                                 </Link>
-                            } */}
+                            }
+                            {
+                                (typeUser == 128 || typeUser == 2)  &&
+                                <Link className="card" to="/grades/update">
+                                    <div className="circle"><i className="fa-solid fa-objects-align-bottom fa-bounce"></i></div>
+                                    <h2>Calificaciones</h2>
+                                </Link>
+                            }
+                            {
+                                (typeUser == 128 || typeUser == 2)  &&
+                                <Link className="card" to="/grades/report">
+                                    <div className="circle"><i className="fa-duotone fa-chart-tree-map fa-bounce"></i></div>
+                                    <h2>Reporte de calificaciones</h2>
+                                </Link>
+                            }
                             {
                                 (typeUser == 128 || typeUser == 5 || typeUser == 6 || typeUser == 7) &&
                                 <Link className="card" to="/categories/">
