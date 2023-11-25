@@ -10,7 +10,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { validateUserInView } from "../../helpers/funtionsGlobals";
 import { encriptar_desencriptar } from "../../helpers/criptografia";
-import { storeEdulink } from "../../store/EdulinkStore";
+import { alertError, alertSuccess, storeEdulink } from "../../store/EdulinkStore";
 
 
 export const UpdateCalif = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
@@ -100,7 +100,13 @@ export const UpdateCalif = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
         })
         setData({
           ...data,
-          search: res.data
+          update: {
+            ...data.update,
+            group: params.group,
+            subject: params.subject,
+            data: resp
+          },
+          search: resp
         })
       } catch (error) {
         console.log(error)
@@ -111,20 +117,27 @@ export const UpdateCalif = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
 
     const handleUpdate = async(e) => {
       e.preventDefault();
-      const resp = new FormData(e.target);
-      const params = Object.fromEntries(resp.entries());
-      console.log(params);
-      try {
+      const dataFormated = data.update.data.map(data => {
+        return {
+          id: data.id,
+          partial_1: data.partial_1,
+          partial_2: data.partial_2,
+          partial_3: data.partial_3,
+          partial_4: data.partial_4,
+        }
+      })
+      try{
         setLoading(true);
-        const res = await axios.put(Apiurl + 'grades/update/', params, {
+        const res = await axios.post(Apiurl + 'grades/update/', dataFormated, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Token ' + token
           }
         })
+        alertSuccess("Calificaciones registradas")
         console.log(res.data);
-        setData(res.data)
       } catch (error) {
+        alertError(error.response?.data?.error)
         console.log(error)
       } finally {
         setLoading(false);
@@ -147,24 +160,26 @@ export const UpdateCalif = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                 </div>
                 <img src={WarriorUTT} alt="" />
                 <div className="notes">
-                    <form onSubmit={handleSearch} className="d-flex flex-column gap-3 p-3">
-                      <select name="group" id="group">
-                        <option value="">Seleccione una opción</option>
-                        {
-                          groups.map((group, index) => (
-                            <option key={index} value={group.split(' - ')[0]}>{group.split(' - ')[1]}</option>
-                          ))
-                        }
-                      </select>
-                      <select name="subject" id="subject">
-                        <option value="">Seleccione una opción</option>
-                        {
-                          subjects.map((subject, index) => (
-                            <option key={index} value={subject.split(' - ')[0]}>{subject.split(' - ')[1]}</option>
-                          ))
-                        }
-                      </select>
-                      <button className="btn btn-primary">Buscar</button>
+                    <div className="d-flex flex-column gap-3 p-3">
+                      <form onSubmit={handleSearch} className="w-100 d-flex flex-column gap-3">
+                        <select name="group" id="group">
+                          <option value="">Seleccione una opción</option>
+                          {
+                            groups.map((group, index) => (
+                              <option key={index} value={group.split(' - ')[0]}>{group.split(' - ')[1]}</option>
+                            ))
+                          }
+                        </select>
+                        <select name="subject" id="subject">
+                          <option value="">Seleccione una opción</option>
+                          {
+                            subjects.map((subject, index) => (
+                              <option key={index} value={subject.split(' - ')[0]}>{subject.split(' - ')[1]}</option>
+                            ))
+                          }
+                        </select>
+                        <button className="btn btn-primary">Buscar</button>
+                      </form>
                       {
                         data?.search?.length > 0 &&
                         <table className="table table-striped">
@@ -184,22 +199,94 @@ export const UpdateCalif = ({permissions={c:[],r:[],rbid:[],u:[],d:[]}}) => {
                                 <tr key={index}>
                                   <td>{student.student.split(' - ')[1].split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</td>
                                   <td><input type="number" disabled={!parcial_mes[0].mes.includes(new Date().getMonth())} name="partial_1" id="partial_1" 
-                                      min="1" max="10" defaultValue={student.partial_1 == 0 ? 1 : student.partial_1}/></td>
+                                      min="1" max="10" defaultValue={student.partial_1 == 0 ? 1 : student.partial_1} onChange={e =>{
+                                        e.target.value = e.target.value > 10 ? 10 : e.target.value < 1 ? 1 : e.target.value;
+                                        setData({
+                                          ...data,
+                                          update: {
+                                            ...data.update,
+                                            data: data.update.data?.map((d,i) => {
+                                              if(i == index){
+                                                return {
+                                                  ...d,
+                                                  partial_1: parseInt(e.target.value)
+                                                }
+                                              }else{
+                                                return d
+                                              }
+                                            })
+                                          }
+                                        })
+                                      }}/></td>
                                   <td><input type="number" disabled={!parcial_mes[1].mes.includes(new Date().getMonth())} name="partial_2" id="partial_2" 
-                                      min="1" max="10" defaultValue={student.partial_2 == 0 ? 1 : student.partial_2}/></td>
+                                      min="1" max="10" defaultValue={student.partial_2 == 0 ? 1 : student.partial_2} onChange={e =>{
+                                        e.target.value = e.target.value > 10 ? 10 : e.target.value < 1 ? 1 : e.target.value;
+                                        setData({
+                                          ...data,
+                                          update: {
+                                            ...data.update,
+                                            data: data.update.data?.map((d,i) => {
+                                              if(i == index){
+                                                return {
+                                                  ...d,
+                                                  partial_2: parseInt(e.target.value)
+                                                }
+                                              }else{
+                                                return d
+                                              }
+                                            })
+                                          }
+                                        })
+                                      }}/></td>
                                   <td><input type="number" disabled={!parcial_mes[2].mes.includes(new Date().getMonth())} name="partial_3" id="partial_3" 
-                                      min="1" max="10" defaultValue={student.partial_3 == 0 ? 1 : student.partial_3}/></td>
+                                      min="1" max="10" defaultValue={student.partial_3 == 0 ? 1 : student.partial_3} onChange={e =>{
+                                        e.target.value = e.target.value > 10 ? 10 : e.target.value < 1 ? 1 : e.target.value;
+                                        setData({
+                                          ...data,
+                                          update: {
+                                            ...data.update,
+                                            data: data.update.data?.map((d,i) => {
+                                              if(i == index){
+                                                return {
+                                                  ...d,
+                                                  partial_3: parseInt(e.target.value)
+                                                }
+                                              }else{
+                                                return d
+                                              }
+                                            })
+                                          }
+                                        })
+                                      }}/></td>
                                   <td><input type="number" disabled={!parcial_mes[3].mes.includes(new Date().getMonth())} name="partial_4" id="partial_4" 
-                                      min="1" max="10" defaultValue={student.partial_4 == 0 ? 1 : student.partial_4}/></td>
+                                      min="1" max="10" defaultValue={student.partial_4 == 0 ? 1 : student.partial_4} onChange={e =>{
+                                        e.target.value = e.target.value > 10 ? 10 : e.target.value < 1 ? 1 : e.target.value;
+                                        setData({
+                                          ...data,
+                                          update: {
+                                            ...data.update,
+                                            data: data.update.data?.map((d,i) => {
+                                              if(i == index){
+                                                return {
+                                                  ...d,
+                                                  partial_4: parseInt(e.target.value)
+                                                }
+                                              }else{
+                                                return d
+                                              }
+                                            })
+                                          }
+                                        })
+                                      }}/></td>
                                   <td>{(student.partial_1 + student.partial_2 + student.partial_3 + student.partial_4)/4}</td>
                                 </tr>
                               ))
                             }
                           </tbody>
-                          <button type="button" className="btn btn-success w-100 mt-2">Registrar</button>
+                          <button type="button" className="btn btn-success w-100 mt-2" onClick={handleUpdate}>Registrar</button>
                         </table>
                       }
-                    </form>
+                    </div>
                 </div>
             </section>
             <section className="footer_main">
