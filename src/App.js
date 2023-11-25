@@ -32,6 +32,7 @@ import CreateScreen from './TEMPO/views/CreateScreen';
 import ViewScreen from './TEMPO/views/ViewScreen';
 import { Error404 } from './components/Error404';
 import { UpdateCalif } from './components/grade/UpdateCalif';
+import { AcademicStatus } from './components/student/AcademicStatus';
 
 
 
@@ -147,6 +148,7 @@ export function App() {
                     <Routes>
                       <Route path="/" element={<Dashboard />} />
                       <Route path="/perfilusuario" element={<PerfilUsuario permissions={{c:[],r:[],rbid:[],u:[],d:[]}} />} />
+                      <Route path="/status" element={<AcademicStatus permissions={{c:[128],r:[128],rbid:[128, 0, 1],u:[128],d:[128]}} />} />
                       <Route path="/users/*" element={<Routes>
                         <Route path="/" element={<IndexCRUD nameAPI="users" nameView="Usuarios" permissions={{c:[128,7,8],r:[128,7,8],rbid:[128,7,8],u:[128,7,8],d:[128,7,8]}} />} />
                         <Route path="*" element={<Navigate to="/error404" />} />
