@@ -1,0 +1,23 @@
+.main_error
+{
+    background: var(--gradient);
+}
+
+.msg_error
+{
+    font-size: 25vh;
+    color: var(--light);
+}
+
+.title_error
+{
+
+}
+
+.btn_back
+{
+    background: none;
+}
+
+.btn_play
+{}
