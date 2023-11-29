@@ -2,7 +2,7 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import HeaderSchedule from '../../components/tempo/create/HeaderSchedule'; 
+import Header from "../../templates/Header";
 import TableSchedule from '../../components/tempo/create/TableSchedule';
 import Dropdown from '../../components/tempo/create/DropDown';
 import '../../assets/css/create_schedule.css';
@@ -271,7 +271,9 @@ export const CreateScreen = () => {
 
   return (
     <React.Fragment>
-      <HeaderSchedule name='Crear Horario' className='header-tempo' />
+      <section className="header_main">
+        <Header name={"Crear Horario"} />
+      </section>
       <section className='row px-3'>
         <div className="col col-4 row">
           <div className="schedule-items-subject col col-6">

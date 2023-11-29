@@ -38,15 +38,27 @@
     text-align: center;
 }
 
-.schedule-item{
-    border: 1px solid #000000;
-    border-radius: 5px;
-    min-height: 30px;
+.schedule-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    min-height: 40px; 
     text-align: center;
-    padding: 5px;
+    padding: 15px;
     margin-top: 10px;
     cursor: grab;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
+
+.schedule-item:hover {
+    background-color: #f5f5f5; 
+}
+
+.schedule-item:active {
+    cursor: grabbing; 
+}
+
 
 .schedule-item table tbody tr{
     border: 0;
@@ -54,7 +66,6 @@
 
 .schedule-item-header{
     font-weight: bold;
-    margin-top: 10px;
     border-bottom: 1px solid #000000;
     text-align: center;
 }
@@ -63,9 +74,7 @@
     display: flex;
     justify-content: space-around;
 }
-  
-.dropdown {
-}
+
   
 .dropdown label {
     display: block;
@@ -84,6 +93,31 @@
     border-color: #007bff;
     outline: none;
 }
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+}
+
+.btn:active {
+    background-color: #1f6698;
+    border-color: #1f6698;
+}
+
 
 .contenedor-tabla-schedule{
     height: 350px;

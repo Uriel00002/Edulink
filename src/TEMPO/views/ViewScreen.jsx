@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import HeaderSchedule from '../../components/tempo/create/HeaderSchedule';
-import TableSchedule from '../../components/tempo/create/TableSchedule';
+import Header from "../../templates/Header";
 import { alertSuccess, storeEdulink } from '../../store/EdulinkStore';
 import axios from 'axios';
 import { Apiurl } from '../../services/apirest';
@@ -93,8 +92,10 @@ export const ViewScreen = () => {
     },2000)
 
     return (
-        <React.Fragment>
-      <HeaderSchedule name='Ver Horarios' className='header-tempo' />
+      <React.Fragment>
+      <section className="header_main">
+        <Header name={"Horarios"} />
+      </section>
       <section className='row px-3'>
         <div className="col col-12 row">
           <div className="schedule-items-subject col col-12">
@@ -121,7 +122,7 @@ export const ViewScreen = () => {
                           <td>{item?.create_at}</td>
                           <td>{item?.update_at}</td>
                           <td className='d-flex gap-2'>
-                            <button className='btn btn-primary' onClick={() => generatePdf(JSON.parse(item?.data), item?.name, item?.academic_charge)}><i className='fas fa-eyes'></i></button>
+                            <button className='btn btn-success' onClick={() => generatePdf(JSON.parse(item?.data), item?.name, item?.academic_charge)}><i className='fas fa-eyes'></i></button>
                             <Link to={`/tempo/create?id=${item?.id}`} className='btn btn-warning'><i className='fas fa-edit'></i></Link>
                             <button className='btn btn-danger' onClick={() => handleDelete(item?.id)}><i className='fas fa-trash'></i></button>
                           </td>
