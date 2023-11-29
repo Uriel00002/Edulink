@@ -55,6 +55,9 @@ export const ViewScreen = () => {
                 const res = await axios.delete(Apiurl + 'schedules/' + id + '/', {headers: {'Content-Type': 'application/json', 'Authorization': 'Token ' + token}})
                 getShedules()
                 alertSuccess('Horario eliminado con exito')
+                setTimeout(() => {
+                  window.location.reload()
+                }, 2000)
               } catch (error) {
                   console.log(error)
               }

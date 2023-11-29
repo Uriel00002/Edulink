@@ -15,20 +15,19 @@
 {
     color: var(--light);
     background: none;
-    border: none;
+    
 }
 
 .btn_play
 {
     color: var(--light);
     background: none;
-    border: none;
+    
 }
 
 .title_error{
     color: var(--light);
     background: none;
-    border: none;
     text-decoration: none;
 }
 
