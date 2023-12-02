@@ -1,0 +1,32 @@
+{
+  "short_name": "EDULINK",
+  "name": "EDULINK",
+  "description": "PWA contruido con React para el proyecto Edulink",
+  "version": "1.0.0",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "utt.png",
+      "type": "image/png",
+      "sizes": "124x52"
+    },
+    {
+      "src": "favicon.ico",
+      "type": "image/x-icon",
+      "sizes": "64x64"
+    },
+    {
+      "src": "utt192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "utt512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
