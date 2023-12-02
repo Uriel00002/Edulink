@@ -14,7 +14,7 @@ import {Dashboard} from './components/Dashboard';
 import {Register} from './components/student/Register';
 import {Calif} from './components/grade/Calif';
 import {PerfilUsuario} from './components/PerfilUsuario';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Routes, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { Apiurl } from './services/apirest';
 
@@ -122,7 +122,7 @@ export function App() {
             </div>
           ) : null
         }
-        <BrowserRouter>
+        <HashRouter>
         <Routes>
         <Route path="/error404/" element={<Error404 />} />
         <Route path="/auth/*" element={
@@ -231,7 +231,7 @@ export function App() {
               </>
             } />
         </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </div>
     </React.Fragment>
   );
