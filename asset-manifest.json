@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Edulink/static/css/main.65f34b8e.css",
-    "main.js": "/Edulink/static/js/main.d9288b21.js",
+    "main.js": "/Edulink/static/js/main.3c1d2498.js",
     "static/js/498.bf1b2ec9.chunk.js": "/Edulink/static/js/498.bf1b2ec9.chunk.js",
     "static/js/703.b5c528f4.chunk.js": "/Edulink/static/js/703.b5c528f4.chunk.js",
     "static/js/513.b13f3fc9.chunk.js": "/Edulink/static/js/513.b13f3fc9.chunk.js",
@@ -31,13 +31,13 @@
     "static/media/fa-v4compatibility.woff2": "/Edulink/static/media/fa-v4compatibility.0c36d6c273b2f5540753.woff2",
     "index.html": "/Edulink/index.html",
     "main.65f34b8e.css.map": "/Edulink/static/css/main.65f34b8e.css.map",
-    "main.d9288b21.js.map": "/Edulink/static/js/main.d9288b21.js.map",
+    "main.3c1d2498.js.map": "/Edulink/static/js/main.3c1d2498.js.map",
     "498.bf1b2ec9.chunk.js.map": "/Edulink/static/js/498.bf1b2ec9.chunk.js.map",
     "703.b5c528f4.chunk.js.map": "/Edulink/static/js/703.b5c528f4.chunk.js.map",
     "513.b13f3fc9.chunk.js.map": "/Edulink/static/js/513.b13f3fc9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.65f34b8e.css",
-    "static/js/main.d9288b21.js"
+    "static/js/main.3c1d2498.js"
   ]
 }
